@@ -1,353 +1,219 @@
-#include <p101_c/p101_stdlib.h>
-#include <p101_c/p101_string.h>
-#include <p101_convert/integer.h>
-#include <p101_fsm/fsm.h>
-#include <p101_posix/p101_string.h>
-#include <p101_unix/p101_getopt.h>
+#include <arpa/inet.h>
+#include <errno.h>
+#include <inttypes.h>
+#include <netinet/in.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <unistd.h>
 
-struct arguments
-{
-    int         argc;
-    const char *program_name;
-    const char *count;
-    const char *message;
-    char      **argv;
+static void parse_arguments(int argc, char *argv[], char **address, char **port,
+                            char **msg);
+static void handle_arguments(const char *binary_name, const char *address,
+                             const char *port_str, const char *message,
+                             in_port_t *port);
+static in_port_t parse_port(const char *binary_name, const char *port_str);
+_Noreturn static void usage(const char *program_name, int exit_code,
+                            const char *message);
+static void convert_address(const char *address, struct sockaddr_storage *addr,
+                            socklen_t *addr_len);
+static int create_socket(int domain, int type, int protocol);
+static void get_server_address(struct sockaddr_storage *addr, in_port_t port);
+static void send_message(int sockfd, const char *message,
+                         struct sockaddr_storage *addr, socklen_t addr_len);
+static void close_socket(int sockfd);
+
+enum {
+
+  UNKNOWN_OPTION_MESSAGE_LEN = 24,
+  BASE_TEN = 10,
 };
 
-struct settings
-{
-    unsigned int count;
-    const char  *message;
-};
+int main(int argc, char *argv[]) {
+  char *address;
+  char *port_str;
+  in_port_t port;
+  int sockfd;
 
-struct context
-{
-    struct arguments *arguments;
-    struct settings   settings;
-    int               exit_code;
-    char             *exit_message;
-};
+  struct sockaddr_storage addr;
+  socklen_t addr_len;
 
-static p101_fsm_state_t parse_arguments(const struct p101_env *env, struct p101_error *err, void *arg);
-static p101_fsm_state_t handle_arguments(const struct p101_env *env, struct p101_error *err, void *arg);
-static p101_fsm_state_t usage(const struct p101_env *env, struct p101_error *err, void *arg);
-static p101_fsm_state_t display_messages(const struct p101_env *env, struct p101_error *err, void *arg);
-static void             display_message(const struct p101_env *env, size_t iteration, const char *message);
-static p101_fsm_state_t cleanup(const struct p101_env *env, struct p101_error *err, void *arg);
+  char *message;
 
-enum states
-{
-    PARSE_ARGS = P101_FSM_USER_START,    // 2
-    HANDLE_ARGS,
-    USAGE,
-    DISPLAY_MESSAGES,
-    CLEANUP,
-};
+  address = NULL;
+  port_str = NULL;
+  message = NULL;
 
-#define UNKNOWN_OPTION_MESSAGE_LEN 24
+  parse_arguments(argc, argv, &address, &port_str, &message);
+  handle_arguments(argv[0], address, port_str, message, &port);
+  convert_address(address, &addr, &addr_len);
+  sockfd = create_socket(addr.ss_family, SOCK_DGRAM, 0);
+  get_server_address(&addr, port);
 
-int main(int argc, char *argv[])
-{
-    static struct p101_fsm_transition transitions[] = {
-        {P101_FSM_INIT,    PARSE_ARGS,       parse_arguments },
-        {PARSE_ARGS,       HANDLE_ARGS,      handle_arguments},
-        {PARSE_ARGS,       USAGE,            usage           },
-        {HANDLE_ARGS,      DISPLAY_MESSAGES, display_messages},
-        {HANDLE_ARGS,      USAGE,            usage           },
-        {USAGE,            CLEANUP,          cleanup         },
-        {DISPLAY_MESSAGES, CLEANUP,          cleanup         },
-        {CLEANUP,          P101_FSM_EXIT,    NULL            }
-    };
-    struct p101_error    *error;
-    struct p101_env      *env;
-    struct p101_fsm_info *fsm;
-    p101_fsm_state_t      from_state;
-    p101_fsm_state_t      to_state;
-    struct p101_error    *fsm_error;
-    struct p101_env      *fsm_env;
-    bool                  bad;
-    bool                  will;
-    bool                  did;
-    struct arguments      arguments;
-    struct context        context;
+  send_message(sockfd, message, &addr, addr_len);
 
-    error = p101_error_create(false);
+  close_socket(sockfd);
 
-    if(error == NULL)
-    {
-        context.exit_code = EXIT_FAILURE;
-        goto done;
-    }
-
-    env = p101_env_create(error, true, NULL);
-
-    if(p101_error_has_error(error))
-    {
-        context.exit_code = EXIT_FAILURE;
-        goto free_error;
-    }
-
-    p101_memset(env, &arguments, 0, sizeof(arguments));
-    p101_memset(env, &context, 0, sizeof(context));
-    context.arguments       = &arguments;
-    context.arguments->argc = argc;
-    context.arguments->argv = argv;
-    context.exit_code       = EXIT_SUCCESS;
-    fsm_error               = p101_error_create(false);
-
-    if(fsm_error == NULL)
-    {
-        context.exit_code = EXIT_FAILURE;
-        goto free_env;
-    }
-
-    fsm_env = p101_env_create(error, true, NULL);
-
-    if(p101_error_has_error(error))
-    {
-        context.exit_code = EXIT_FAILURE;
-        goto free_fsm_error;
-    }
-
-    fsm  = p101_fsm_info_create(env, error, "application-fsm", fsm_env, fsm_error, NULL);
-    bad  = false;
-    will = false;
-    did  = false;
-
-    if(bad)
-    {
-        p101_fsm_info_set_bad_change_state_notifier(fsm, p101_fsm_info_default_bad_change_state_notifier);
-    }
-
-    if(will)
-    {
-        p101_fsm_info_set_will_change_state_notifier(fsm, p101_fsm_info_default_will_change_state_notifier);
-    }
-
-    if(did)
-    {
-        p101_fsm_info_set_did_change_state_notifier(fsm, p101_fsm_info_default_did_change_state_notifier);
-    }
-
-    p101_fsm_run(fsm, &from_state, &to_state, &context, transitions, sizeof(transitions));
-    p101_fsm_info_destroy(env, &fsm);
-    free(fsm_env);
-
-free_fsm_error:
-    p101_error_reset(fsm_error);
-    p101_free(env, fsm_error);
-
-free_env:
-    p101_free(env, env);
-
-free_error:
-    p101_error_reset(error);
-    free(error);
-
-done:
-    return context.exit_code;
+  return EXIT_SUCCESS;
 }
 
-static p101_fsm_state_t parse_arguments(const struct p101_env *env, struct p101_error *err, void *arg)
-{
-    struct context  *context;
-    p101_fsm_state_t next_state;
-    int              opt;
+static void send_message(int sockfd, const char *message,
+                         // cppcheck-suppress constParameterPointer
+                         struct sockaddr_storage *addr, socklen_t addr_len) {
+  ssize_t bytes_sent;
 
-    P101_TRACE(env);
-    context                          = (struct context *)arg;
-    context->arguments->program_name = context->arguments->argv[0];
-    next_state                       = HANDLE_ARGS;
-    opterr                           = 0;
+  bytes_sent = sendto(sockfd, message, strlen(message) + 1, 0,
+                      (struct sockaddr *)addr, addr_len);
 
-    while((opt = getopt(context->arguments->argc, context->arguments->argv, "hc:")) != -1)
-    {
-        switch(opt)
-        {
-            case 'c':
-            {
-                context->arguments->count = optarg;
-                break;
-            }
-            case 'h':
-            {
-                next_state = USAGE;
-                break;
-            }
-            case '?':
-            {
-                if(optopt == 'c')
-                {
-                    context->exit_message = p101_strdup(env, err, "Option '-c' requires a value.");
-                }
-                else
-                {
-                    char message[UNKNOWN_OPTION_MESSAGE_LEN];
+  if (bytes_sent == -1) {
+    perror("sendto");
+    exit(EXIT_FAILURE);
+  }
 
-                    snprintf(message, sizeof(message), "Unknown option '-%c'.", optopt);
-                    context->exit_message = p101_strdup(env, err, message);
-                }
-
-                next_state = USAGE;
-                break;
-            }
-            default:
-            {
-                context->exit_message = p101_strdup(env, err, "Uknown error with getopt");
-                next_state            = USAGE;
-            }
-        }
-    }
-
-    if(next_state != USAGE)
-    {
-        if(optind >= context->arguments->argc)
-        {
-            context->exit_message = p101_strdup(env, err, "The message is required");
-            next_state            = USAGE;
-        }
-
-        if(optind < context->arguments->argc - 1)
-        {
-            context->exit_message = p101_strdup(env, err, "Too many arguments.");
-            next_state            = USAGE;
-        }
-
-        if(next_state != USAGE)
-        {
-            context->arguments->message = context->arguments->argv[optind];
-        }
-    }
-
-    return next_state;
+  printf("Sent %zu bytes: \"%s\"\n", (size_t)bytes_sent, message);
 }
 
-static p101_fsm_state_t handle_arguments(const struct p101_env *env, struct p101_error *err, void *arg)
-{
-    struct context  *context;
-    p101_fsm_state_t next_state;
+static void parse_arguments(int argc, char *argv[], char **address, char **port,
+                            char **msg) {
+  int opt;
 
-    P101_TRACE(env);
-    context    = (struct context *)arg;
-    next_state = DISPLAY_MESSAGES;
+  opterr = 0;
 
-    if(context->arguments->count == NULL)
-    {
-        context->settings.count = 1;
+  while ((opt = getopt(argc, argv, "h")) != -1) {
+    switch (opt) {
+    case 'h': {
+      usage(argv[0], EXIT_SUCCESS, NULL);
     }
-    else
-    {
-        context->settings.count = p101_parse_unsigned_int(env, err, context->arguments->count, 0);
+    case '?': {
+      char message[UNKNOWN_OPTION_MESSAGE_LEN];
 
-        if(p101_error_has_error(err))
-        {
-            context->exit_message = p101_strdup(env, err, "count must be a positive integer");
-            next_state            = USAGE;
-        }
-        else if(context->settings.count == 0)
-        {
-            context->exit_message = p101_strdup(env, err, "count must be greater than 0");
-            next_state            = USAGE;
-        }
+      snprintf(message, sizeof(message), "Unknown option '-%c'", optopt);
+      usage(argv[0], EXIT_FAILURE, message);
     }
-
-    if(next_state != USAGE)
-    {
-        if(context->arguments->message == NULL)
-        {
-            context->exit_message = p101_strdup(env, err, "<message> must be passed.");
-            next_state            = USAGE;
-        }
-
-        if(p101_strlen(env, context->arguments->message) == 0)
-        {
-            context->exit_message = p101_strdup(env, err, "<message> cannot be empty.");
-            next_state            = USAGE;
-        }
-
-        context->settings.message = context->arguments->message;
+    default: {
+      usage(argv[0], EXIT_FAILURE, NULL);
     }
+    }
+  }
 
-    return next_state;
+  if (optind + 1 >= argc) {
+    usage(argv[0], EXIT_FAILURE, "Too little arguments");
+  }
+
+  if (optind < argc - 3) {
+    usage(argv[0], EXIT_FAILURE, "Too many arguments");
+  }
+
+  *address = argv[optind];
+  *port = argv[optind + 1];
+  *msg = argv[optind + 2];
 }
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
+static void handle_arguments(const char *binary_name, const char *address,
+                             const char *port_str, const char *message,
+                             in_port_t *port) {
+  if (address == NULL) {
+    usage(binary_name, EXIT_FAILURE, "Address is required");
+  }
 
-static p101_fsm_state_t usage(const struct p101_env *env, struct p101_error *err, void *arg)
-{
-    struct context *context;
+  if (port_str == NULL) {
+    usage(binary_name, EXIT_FAILURE, "Port is required");
+  }
 
-    P101_TRACE(env);
-    context = (struct context *)arg;
+  if (message == NULL) {
+    usage(binary_name, EXIT_FAILURE, "Message is required");
+  }
 
-    if(context->exit_message != NULL)
-    {
-        context->exit_code = EXIT_FAILURE;
-        fprintf(stderr, "%s\n", context->exit_message);
-    }
-
-    fprintf(stderr, "Usage: %s [-h] [-c <count>] <message>\n", context->arguments->program_name);
-    fputs("Options:\n", stderr);
-    fputs("  -h  Display this help message\n", stderr);
-    fputs("  -c  The number of times to display the message\n", stderr);
-
-    return CLEANUP;
+  *port = parse_port(binary_name, port_str);
 }
 
-#pragma GCC diagnostic pop
+in_port_t parse_port(const char *binary_name, const char *str) {
+  char *endptr;
+  uintmax_t parsed_value;
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
+  errno = 0;
+  parsed_value = strtoumax(str, &endptr, BASE_TEN);
 
-static p101_fsm_state_t display_messages(const struct p101_env *env, struct p101_error *err, void *arg)
-{
-    struct context *context;
+  if (errno != 0) {
+    perror("Error parsing in_port_t");
+    exit(EXIT_FAILURE);
+  }
 
-    P101_TRACE(env);
-    context = (struct context *)arg;
+  if (*endptr != '\0') {
+    usage(binary_name, EXIT_FAILURE, "Invalid characters in input");
+  }
 
-    for(size_t i = 1; i <= context->settings.count; i++)
-    {
-        display_message(env, i, context->settings.message);
-    }
+  if (parsed_value > UINT16_MAX) {
+    usage(binary_name, EXIT_FAILURE, "in_port_t value out of range");
+  }
 
-    return CLEANUP;
+  return (in_port_t)parsed_value;
 }
 
-#pragma GCC diagnostic pop
+_Noreturn static void usage(const char *program_name, int exit_code,
+                            const char *message) {
+  if (message) {
+    fprintf(stderr, "%s\n", message);
+  }
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
-
-static void display_message(const struct p101_env *env, size_t iteration, const char *message)
-{
-    P101_TRACE(env);
-
-    printf("[%zu] %s\n", iteration, message);
+  fprintf(stderr, "Usage: %s [-h] <address> <port> <message>\n", program_name);
+  fputs("Options:\n", stderr);
+  fputs("  -h  Display this help message\n", stderr);
+  exit(exit_code);
 }
 
-#pragma GCC diagnostic pop
+static void convert_address(const char *address, struct sockaddr_storage *addr,
+                            socklen_t *addr_len) {
+  memset(addr, 0, sizeof(*addr));
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
-
-static p101_fsm_state_t cleanup(const struct p101_env *env, struct p101_error *err, void *arg)
-{
-    struct context *context;
-
-    P101_TRACE(env);
-    context = (struct context *)arg;
-
-    if(context->exit_message != NULL)
-    {
-        p101_free(env, context->exit_message);
-        context->exit_message = NULL;
-    }
-
-    return P101_FSM_EXIT;
+  if (inet_pton(AF_INET, address, &(((struct sockaddr_in *)addr)->sin_addr)) ==
+      1) {
+    addr->ss_family = AF_INET;
+    *addr_len = sizeof(struct sockaddr_in);
+  } else if (inet_pton(AF_INET6, address,
+                       &(((struct sockaddr_in6 *)addr)->sin6_addr)) == 1) {
+    addr->ss_family = AF_INET6;
+    *addr_len = sizeof(struct sockaddr_in6);
+  } else {
+    fprintf(stderr, "%s is not an IPv4 or an IPv6 address\n", address);
+    exit(EXIT_FAILURE);
+  }
 }
 
-#pragma GCC diagnostic pop
+static int create_socket(int domain, int type, int protocol) {
+  int sockfd;
+
+  sockfd = socket(domain, type, protocol);
+
+  if (sockfd == -1) {
+    perror("Socket creation failed");
+    exit(EXIT_FAILURE);
+  }
+
+  return sockfd;
+}
+
+static void get_server_address(struct sockaddr_storage *addr, in_port_t port) {
+  if (addr->ss_family == AF_INET) {
+    struct sockaddr_in *ipv4_addr;
+
+    ipv4_addr = (struct sockaddr_in *)addr;
+    ipv4_addr->sin_family = AF_INET;
+    ipv4_addr->sin_port = htons(port);
+  } else if (addr->ss_family == AF_INET6) {
+    struct sockaddr_in6 *ipv6_addr;
+
+    ipv6_addr = (struct sockaddr_in6 *)addr;
+    ipv6_addr->sin6_family = AF_INET6;
+    ipv6_addr->sin6_port = htons(port);
+  }
+}
+
+static void close_socket(int sockfd) {
+  if (close(sockfd) == -1) {
+    perror("Error closing socket");
+    exit(EXIT_FAILURE);
+  }
+}
