@@ -2,6 +2,7 @@
 #include <errno.h>
 #include <inttypes.h>
 #include <netinet/in.h>
+#include <signal.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,9 +29,14 @@ static void read_message(int sockfd, char *buffer, size_t buffer_size,
 static void handle_packet(int client_sockfd,
                           struct sockaddr_storage *client_addr,
                           const char *buffer, size_t bytes);
+static void setup_signal_handler(void);
+static void sigint_handler(int signum);
 static void close_socket(int sockfd);
 
 enum { UNKNOWN_OPTION_MESSAGE_LEN = 24, BUFFER_SIZE = 1024, BASE_TEN = 10 };
+
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
+static volatile sig_atomic_t exit_flag = 0;
 
 int main(int argc, char *argv[]) {
   char *address;
@@ -55,15 +61,20 @@ int main(int argc, char *argv[]) {
   sockfd = create_socket(addr.ss_family, SOCK_DGRAM, 0);
   bind_socket(sockfd, &addr, port);
 
-  read_message(sockfd, buffer, BUFFER_SIZE, &bytes_received, &client_addr,
-               &client_addr_len);
+  setup_signal_handler();
 
-  bytes_received = recvfrom(sockfd, buffer, sizeof(buffer) - 1, 0,
-                            (struct sockaddr *)&client_addr, &client_addr_len);
+  while (!exit_flag) {
+    read_message(sockfd, buffer, BUFFER_SIZE, &bytes_received, &client_addr,
+                 &client_addr_len);
 
-  handle_packet(sockfd, &client_addr, buffer, (size_t)bytes_received);
+    bytes_received =
+        recvfrom(sockfd, buffer, sizeof(buffer) - 1, 0,
+                 (struct sockaddr *)&client_addr, &client_addr_len);
+
+    handle_packet(sockfd, &client_addr, buffer, (size_t)bytes_received);
+  }
+
   close_socket(sockfd);
-
   return EXIT_SUCCESS;
 }
 
@@ -131,12 +142,10 @@ in_port_t parse_port(const char *binary_name, const char *str) {
     exit(EXIT_FAILURE);
   }
 
-  // Check if there are any non-numeric characters in the input string
   if (*endptr != '\0') {
     usage(binary_name, EXIT_FAILURE, "Invalid characters in input");
   }
 
-  // Check if the parsed value is within the valid range for in_port_t
   if (parsed_value > UINT16_MAX) {
     usage(binary_name, EXIT_FAILURE, "in_port_t value out of range");
   }
@@ -266,8 +275,34 @@ static void handle_packet(int client_sockfd,
   printf("%d read %zu characters: \"%s\" from\n", client_sockfd, bytes, buffer);
 }
 
-#pragma GCC diagnostic pop
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+static void sigint_handler(int signum) { exit_flag = 1; }
 
+static void setup_signal_handler(void) {
+  struct sigaction sa;
+
+  memset(&sa, 0, sizeof(sa));
+
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdisabled-macro-expansion"
+#endif
+  sa.sa_handler = sigint_handler;
+#ifdef __clang__
+// #pragma clang diagnostic pop
+#endif
+
+  sigemptyset(&sa.sa_mask);
+  sa.sa_flags = 0;
+
+  if (sigaction(SIGINT, &sa, NULL) == -1) {
+    perror("sigaction");
+    exit(EXIT_FAILURE);
+  }
+}
+
+#pragma GCC diagnostic pop
 static void close_socket(int sockfd) {
   if (close(sockfd) == -1) {
     perror("Error closing socket");

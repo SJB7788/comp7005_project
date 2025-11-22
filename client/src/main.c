@@ -2,6 +2,7 @@
 #include <errno.h>
 #include <inttypes.h>
 #include <netinet/in.h>
+#include <signal.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,19 +24,26 @@ static int create_socket(int domain, int type, int protocol);
 static void get_server_address(struct sockaddr_storage *addr, in_port_t port);
 static void send_message(int sockfd, const char *message,
                          struct sockaddr_storage *addr, socklen_t addr_len);
+static void setup_signal_handler(void);
+static void sigint_handler(int signum);
 static void close_socket(int sockfd);
 
 enum {
-
   UNKNOWN_OPTION_MESSAGE_LEN = 24,
   BASE_TEN = 10,
+  MESSAGE_LEN = 1028,
+  SEQ_LEN = 256
 };
+
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
+static volatile sig_atomic_t exit_flag = 0;
 
 int main(int argc, char *argv[]) {
   char *address;
   char *port_str;
   in_port_t port;
   int sockfd;
+  int seq;
 
   struct sockaddr_storage addr;
   socklen_t addr_len;
@@ -51,8 +59,30 @@ int main(int argc, char *argv[]) {
   convert_address(address, &addr, &addr_len);
   sockfd = create_socket(addr.ss_family, SOCK_DGRAM, 0);
   get_server_address(&addr, port);
+  setup_signal_handler();
 
-  send_message(sockfd, message, &addr, addr_len);
+  seq = 0;
+  while (!exit_flag) {
+    char input_message[MESSAGE_LEN];
+    char seq_string[SEQ_LEN];
+    char final_message[MESSAGE_LEN];
+    int int_parsed;
+
+    scanf("%1027s", input_message);
+    int_parsed = snprintf(seq_string, sizeof(seq_string), "%d", seq);
+
+    if (int_parsed < 0) {
+      perror("snprintf");
+      exit(EXIT_FAILURE);
+    }
+
+    strlcpy(final_message, seq_string, MESSAGE_LEN);
+    strlcat(final_message, ",", MESSAGE_LEN);
+    strlcat(final_message, input_message, MESSAGE_LEN);
+
+    send_message(sockfd, final_message, &addr, addr_len);
+    seq++;
+  }
 
   close_socket(sockfd);
 
@@ -208,6 +238,33 @@ static void get_server_address(struct sockaddr_storage *addr, in_port_t port) {
     ipv6_addr = (struct sockaddr_in6 *)addr;
     ipv6_addr->sin6_family = AF_INET6;
     ipv6_addr->sin6_port = htons(port);
+  }
+}
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+static void sigint_handler(int signum) { exit_flag = 1; }
+
+static void setup_signal_handler(void) {
+  struct sigaction sa;
+
+  memset(&sa, 0, sizeof(sa));
+
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdisabled-macro-expansion"
+#endif
+  sa.sa_handler = sigint_handler;
+#ifdef __clang__
+// #pragma clang diagnostic pop
+#endif
+
+  sigemptyset(&sa.sa_mask);
+  sa.sa_flags = 0;
+
+  if (sigaction(SIGINT, &sa, NULL) == -1) {
+    perror("sigaction");
+    exit(EXIT_FAILURE);
   }
 }
 
