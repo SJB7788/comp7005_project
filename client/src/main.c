@@ -1,4 +1,5 @@
 #include <arpa/inet.h>
+#include <bits/getopt_core.h>
 #include <errno.h>
 #include <inttypes.h>
 #include <netinet/in.h>
@@ -13,16 +14,19 @@
 #include <unistd.h>
 
 static void parse_arguments(int argc, char *argv[], char **address,
-                            char **port);
+                            char **port_str, char **timeout_str,
+                            char **max_retries_str);
 static void handle_arguments(const char *binary_name, const char *address,
-                             const char *port_str, in_port_t *port);
+                             const char *port_str, const char *timeout_str,
+                             const char *max_retries_str, in_port_t *port,
+                             int *timeout, int *max_retries);
 static in_port_t parse_port(const char *binary_name, const char *port_str);
 _Noreturn static void usage(const char *program_name, int exit_code,
                             const char *message);
 static void convert_address(const char *address, struct sockaddr_storage *addr,
                             socklen_t *addr_len);
 static int create_socket(int domain, int type, int protocol);
-static int timeout(int sockfd, int timeout_seconds);
+static int start_timeout(int sockfd, int timeout_seconds);
 static void get_server_address(struct sockaddr_storage *addr, in_port_t port);
 static void structure_message(char *message, size_t message_len,
                               char *input_message, long seq_number);
@@ -40,8 +44,6 @@ enum {
   BASE_TEN = 10,
   BUFFER_SIZE = 1024,
   SEQ_LEN = 256,
-  TIMEOUT = 1,
-  MAX_RETRY = 5,
 };
 
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
@@ -50,7 +52,12 @@ static volatile sig_atomic_t exit_flag = 0;
 int main(int argc, char *argv[]) {
   char *address;
   char *port_str;
+  char *timeout_str;
+  char *max_retry_str;
+
   in_port_t port;
+  int timeout;
+  int max_retry;
   int sockfd;
 
   struct sockaddr_storage addr;
@@ -65,12 +72,16 @@ int main(int argc, char *argv[]) {
   port_str = NULL;
   retry_count = 0;
   seq_number = 0;
+  timeout = 0;
+  max_retry = 0;
 
-  parse_arguments(argc, argv, &address, &port_str);
-  handle_arguments(argv[0], address, port_str, &port);
+  parse_arguments(argc, argv, &address, &port_str, &timeout_str,
+                  &max_retry_str);
+  handle_arguments(argv[0], address, port_str, timeout_str, max_retry_str,
+                   &port, &timeout, &max_retry);
   convert_address(address, &addr, &addr_len);
-  sockfd = create_socket(addr.ss_family, SOCK_DGRAM, 0);
   get_server_address(&addr, port);
+  sockfd = create_socket(addr.ss_family, SOCK_DGRAM, 0);
   setup_signal_handler();
 
   while (!exit_flag) {
@@ -79,7 +90,7 @@ int main(int argc, char *argv[]) {
     long ack;
     int status;
 
-    if (retry_count > MAX_RETRY) {
+    if (retry_count > max_retry) {
       fprintf(stderr, "Max retry limit reached. Dropping packet.\n\n");
       retry_count = 0;
     }
@@ -98,7 +109,7 @@ int main(int argc, char *argv[]) {
 
     send_message(sockfd, final_message, &addr, addr_len);
 
-    status = timeout(sockfd, TIMEOUT);
+    status = start_timeout(sockfd, timeout);
 
     if (status == 0) {
       retry_count++;
@@ -208,7 +219,8 @@ static void handle_packet(char *buffer, char *payload, long *seq) {
 }
 
 static void parse_arguments(int argc, char *argv[], char **address,
-                            char **port) {
+                            char **port_str, char **timeout_str,
+                            char **max_retries_str) {
   int opt;
 
   opterr = 0;
@@ -234,16 +246,20 @@ static void parse_arguments(int argc, char *argv[], char **address,
     usage(argv[0], EXIT_FAILURE, "Too little arguments");
   }
 
-  if (optind < argc - 2) {
+  if (optind + 3 < argc - 1) {
     usage(argv[0], EXIT_FAILURE, "Too many arguments");
   }
 
   *address = argv[optind];
-  *port = argv[optind + 1];
+  *port_str = argv[optind + 1];
+  *timeout_str = argv[optind + 2];
+  *max_retries_str = argv[optind + 3];
 }
 
 static void handle_arguments(const char *binary_name, const char *address,
-                             const char *port_str, in_port_t *port) {
+                             const char *port_str, const char *timeout_str,
+                             const char *max_retries_str, in_port_t *port,
+                             int *timeout, int *max_retries) {
   if (address == NULL) {
     usage(binary_name, EXIT_FAILURE, "Address is required");
   }
@@ -252,7 +268,32 @@ static void handle_arguments(const char *binary_name, const char *address,
     usage(binary_name, EXIT_FAILURE, "Port is required");
   }
 
+  if (timeout_str == NULL) {
+    usage(binary_name, EXIT_FAILURE, "Timeout is required");
+  }
+
+  if (max_retries_str == NULL) {
+    usage(binary_name, EXIT_FAILURE, "Max retries is required");
+  }
+
   *port = parse_port(binary_name, port_str);
+
+  errno = 0;
+  *timeout = (int)strtoumax(timeout_str, NULL, BASE_TEN);
+  *max_retries = (int)strtoumax(max_retries_str, NULL, BASE_TEN);
+
+  if (errno != 0) {
+    perror("strtol");
+    exit(EXIT_FAILURE);
+  }
+
+  if (*timeout <= 0) {
+    usage(binary_name, EXIT_FAILURE, "Timeout must be greater than 0");
+  }
+
+  if (*max_retries <= 0) {
+    usage(binary_name, EXIT_FAILURE, "Max retries must be greater than 0");
+  }
 }
 
 in_port_t parse_port(const char *binary_name, const char *str) {
@@ -320,7 +361,7 @@ static int create_socket(int domain, int type, int protocol) {
   return sockfd;
 }
 
-static int timeout(int sockfd, int timeout_seconds) {
+static int start_timeout(int sockfd, int timeout_seconds) {
   fd_set fds;
   struct timeval tv;
   int result;
