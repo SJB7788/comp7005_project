@@ -27,13 +27,20 @@ static void read_message(int sockfd, char *buffer, size_t buffer_size,
                          struct sockaddr_storage *client_addr,
                          socklen_t *addr_len);
 static void handle_packet(int client_sockfd,
-                          struct sockaddr_storage *client_addr,
-                          const char *buffer, size_t bytes);
+                          struct sockaddr_storage *client_addr, char *buffer,
+                          size_t bytes, char *payload, long *seq);
+static void send_message(int sockfd, const char *message,
+                         struct sockaddr_storage *addr, socklen_t addr_len);
 static void setup_signal_handler(void);
 static void sigint_handler(int signum);
 static void close_socket(int sockfd);
 
-enum { UNKNOWN_OPTION_MESSAGE_LEN = 24, BUFFER_SIZE = 1024, BASE_TEN = 10 };
+enum {
+  UNKNOWN_OPTION_MESSAGE_LEN = 24,
+  ACK_SIZE = 256,
+  BUFFER_SIZE = 1024,
+  BASE_TEN = 10
+};
 
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
 static volatile sig_atomic_t exit_flag = 0;
@@ -48,7 +55,7 @@ int main(int argc, char *argv[]) {
   socklen_t client_addr_len;
   struct sockaddr_storage addr;
 
-  char buffer[BUFFER_SIZE + 1];
+  char buffer[BUFFER_SIZE];
   ssize_t bytes_received;
 
   address = NULL;
@@ -58,24 +65,58 @@ int main(int argc, char *argv[]) {
   handle_arguments(argv[0], address, port_str, &port);
 
   convert_address(address, &addr);
+
   sockfd = create_socket(addr.ss_family, SOCK_DGRAM, 0);
   bind_socket(sockfd, &addr, port);
 
   setup_signal_handler();
-
   while (!exit_flag) {
+    long seq;
+    char payload[BUFFER_SIZE];
+    char ack[ACK_SIZE];
+    char ack_message[BUFFER_SIZE];
+    int long_parsed;
+
     read_message(sockfd, buffer, BUFFER_SIZE, &bytes_received, &client_addr,
                  &client_addr_len);
 
-    bytes_received =
-        recvfrom(sockfd, buffer, sizeof(buffer) - 1, 0,
-                 (struct sockaddr *)&client_addr, &client_addr_len);
+    handle_packet(sockfd, &client_addr, buffer, (size_t)bytes_received, payload,
+                  &seq);
 
-    handle_packet(sockfd, &client_addr, buffer, (size_t)bytes_received);
+    printf("SEQ: %ld, PAYLOAD: %s\n", seq, payload);
+
+    long_parsed = snprintf(ack, sizeof(ack), "%ld", seq);
+
+    if (long_parsed < 0) {
+      perror("snprintf");
+      exit(EXIT_FAILURE);
+    }
+
+    strlcpy(ack_message, ack, ACK_SIZE);
+    strlcat(ack_message, "|", BUFFER_SIZE);
+    strlcat(ack_message, ack, BUFFER_SIZE);
+    sleep(BUFFER_SIZE);
+    send_message(sockfd, ack_message, &client_addr, client_addr_len);
   }
 
   close_socket(sockfd);
   return EXIT_SUCCESS;
+}
+
+static void send_message(int sockfd, const char *message,
+                         // cppcheck-suppress constParameterPointer
+                         struct sockaddr_storage *addr, socklen_t addr_len) {
+  ssize_t bytes_sent;
+
+  bytes_sent = sendto(sockfd, message, strlen(message) + 1, 0,
+                      (struct sockaddr *)addr, addr_len);
+
+  if (bytes_sent == -1) {
+    perror("sendto");
+    exit(EXIT_FAILURE);
+  }
+
+  printf("Sent %zu bytes: \"%s\"\n", (size_t)bytes_sent, message);
 }
 
 static void parse_arguments(int argc, char *argv[], char **ip_address,
@@ -238,7 +279,7 @@ static void bind_socket(int sockfd, struct sockaddr_storage *addr,
     exit(EXIT_FAILURE);
   }
 
-  printf("Bound to socket: %s:%u\n", addr_str, port);
+  printf("Bound to socket: %s:%u\n\n", addr_str, port);
 }
 
 static void read_message(int sockfd, char *buffer, size_t buffer_size,
@@ -247,7 +288,7 @@ static void read_message(int sockfd, char *buffer, size_t buffer_size,
                          socklen_t *addr_len) {
   size_t n;
 
-  *bytes_received = recvfrom(sockfd, buffer, sizeof(buffer) - 1, 0,
+  *bytes_received = recvfrom(sockfd, buffer, buffer_size - 1, 0,
                              (struct sockaddr *)client_addr, addr_len);
 
   if (*bytes_received < 0) {
@@ -270,9 +311,20 @@ static void read_message(int sockfd, char *buffer, size_t buffer_size,
 
 // cppcheck-suppress constParameterPointer
 static void handle_packet(int client_sockfd,
-                          struct sockaddr_storage *client_addr,
-                          const char *buffer, size_t bytes) {
-  printf("%d read %zu characters: \"%s\" from\n", client_sockfd, bytes, buffer);
+                          struct sockaddr_storage *client_addr, char *buffer,
+                          size_t bytes, char *payload, long *seq) {
+
+  const char *token;
+  const char *token_payload;
+  char *token_ptr;
+
+  token = strtok_r(buffer, "|", &token_ptr);
+  *seq = strtol(token, NULL, BASE_TEN);
+
+  token_payload = token_ptr;
+
+  strncpy(payload, token_payload, BUFFER_SIZE - 1);
+  payload[BUFFER_SIZE - 1] = '\0';
 }
 
 #pragma GCC diagnostic push

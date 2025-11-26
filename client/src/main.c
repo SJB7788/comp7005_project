@@ -8,22 +8,25 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
+#include <sys/types.h>
 #include <unistd.h>
 
-static void parse_arguments(int argc, char *argv[], char **address, char **port,
-                            char **msg);
+static void parse_arguments(int argc, char *argv[], char **address,
+                            char **port);
 static void handle_arguments(const char *binary_name, const char *address,
-                             const char *port_str, const char *message,
-                             in_port_t *port);
+                             const char *port_str, in_port_t *port);
 static in_port_t parse_port(const char *binary_name, const char *port_str);
 _Noreturn static void usage(const char *program_name, int exit_code,
                             const char *message);
 static void convert_address(const char *address, struct sockaddr_storage *addr,
                             socklen_t *addr_len);
 static int create_socket(int domain, int type, int protocol);
+static int timeout(int sockfd, int timeout_seconds);
 static void get_server_address(struct sockaddr_storage *addr, in_port_t port);
 static void send_message(int sockfd, const char *message,
                          struct sockaddr_storage *addr, socklen_t addr_len);
+static void read_message(int sockfd, char *buffer, size_t buffer_size,
+                         ssize_t *bytes_received);
 static void setup_signal_handler(void);
 static void sigint_handler(int signum);
 static void close_socket(int sockfd);
@@ -31,8 +34,9 @@ static void close_socket(int sockfd);
 enum {
   UNKNOWN_OPTION_MESSAGE_LEN = 24,
   BASE_TEN = 10,
-  MESSAGE_LEN = 1028,
-  SEQ_LEN = 256
+  MESSAGE_LEN = 1024,
+  SEQ_LEN = 256,
+  TIMEOUT = 10,
 };
 
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
@@ -43,45 +47,80 @@ int main(int argc, char *argv[]) {
   char *port_str;
   in_port_t port;
   int sockfd;
-  int seq;
 
   struct sockaddr_storage addr;
   socklen_t addr_len;
-
-  char *message;
+  long seq;
 
   address = NULL;
   port_str = NULL;
-  message = NULL;
 
-  parse_arguments(argc, argv, &address, &port_str, &message);
-  handle_arguments(argv[0], address, port_str, message, &port);
+  parse_arguments(argc, argv, &address, &port_str);
+  handle_arguments(argv[0], address, port_str, &port);
   convert_address(address, &addr, &addr_len);
   sockfd = create_socket(addr.ss_family, SOCK_DGRAM, 0);
   get_server_address(&addr, port);
   setup_signal_handler();
-
   seq = 0;
+
   while (!exit_flag) {
     char input_message[MESSAGE_LEN];
     char seq_string[SEQ_LEN];
     char final_message[MESSAGE_LEN];
-    int int_parsed;
+    int long_parsed;
 
-    scanf("%1027s", input_message);
-    int_parsed = snprintf(seq_string, sizeof(seq_string), "%d", seq);
+    char ack_buffer[MESSAGE_LEN];
+    char payload[MESSAGE_LEN];
+    ssize_t bytes_received;
+    long ack;
+    const char *token;
+    char *token_ptr;
+    int status;
 
-    if (int_parsed < 0) {
+    if (fgets(input_message, sizeof(input_message), stdin) == NULL) {
+      fprintf(stderr, "invalid user input");
+      continue;
+    }
+
+    input_message[strcspn(input_message, "\n")] = '\0';
+    long_parsed = snprintf(seq_string, sizeof(seq_string), "%ld", seq);
+
+    if (long_parsed < 0) {
       perror("snprintf");
       exit(EXIT_FAILURE);
     }
 
     strlcpy(final_message, seq_string, MESSAGE_LEN);
-    strlcat(final_message, ",", MESSAGE_LEN);
+    strlcat(final_message, "|", MESSAGE_LEN);
     strlcat(final_message, input_message, MESSAGE_LEN);
 
     send_message(sockfd, final_message, &addr, addr_len);
     seq++;
+
+    status = timeout(sockfd, TIMEOUT);
+
+    if (status == 0) {
+      printf("Timeout! No reply.\n");
+
+    } else if (status == 1) {
+      read_message(sockfd, ack_buffer, MESSAGE_LEN, &bytes_received);
+
+      token = strtok_r(ack_buffer, "|", &token_ptr);
+      ack = strtol(token, NULL, 0);
+
+      token = strtok_r(NULL, "|", &token_ptr);
+      strncpy(payload, token, MESSAGE_LEN - 1);
+      payload[MESSAGE_LEN - 1] = '\0';
+
+      printf("ack: %ld\n", ack);
+      printf("payload: %s\n", payload);
+
+      if (seq != ack) {
+      }
+    } else {
+      perror("timeout");
+      exit(EXIT_FAILURE);
+    }
   }
 
   close_socket(sockfd);
@@ -105,8 +144,29 @@ static void send_message(int sockfd, const char *message,
   printf("Sent %zu bytes: \"%s\"\n", (size_t)bytes_sent, message);
 }
 
-static void parse_arguments(int argc, char *argv[], char **address, char **port,
-                            char **msg) {
+static void read_message(int sockfd, char *buffer, size_t buffer_size,
+                         ssize_t *bytes_received) {
+  size_t n;
+
+  *bytes_received = recvfrom(sockfd, buffer, buffer_size - 1, 0, NULL, NULL);
+
+  if (*bytes_received < 0) {
+    perror("recvfrom");
+    close_socket(sockfd);
+    exit(EXIT_FAILURE);
+  }
+
+  n = (size_t)*bytes_received;
+
+  if (n >= buffer_size) {
+    n = buffer_size - 1;
+  }
+
+  buffer[n] = '\0';
+}
+
+static void parse_arguments(int argc, char *argv[], char **address,
+                            char **port) {
   int opt;
 
   opterr = 0;
@@ -132,28 +192,22 @@ static void parse_arguments(int argc, char *argv[], char **address, char **port,
     usage(argv[0], EXIT_FAILURE, "Too little arguments");
   }
 
-  if (optind < argc - 3) {
+  if (optind < argc - 2) {
     usage(argv[0], EXIT_FAILURE, "Too many arguments");
   }
 
   *address = argv[optind];
   *port = argv[optind + 1];
-  *msg = argv[optind + 2];
 }
 
 static void handle_arguments(const char *binary_name, const char *address,
-                             const char *port_str, const char *message,
-                             in_port_t *port) {
+                             const char *port_str, in_port_t *port) {
   if (address == NULL) {
     usage(binary_name, EXIT_FAILURE, "Address is required");
   }
 
   if (port_str == NULL) {
     usage(binary_name, EXIT_FAILURE, "Port is required");
-  }
-
-  if (message == NULL) {
-    usage(binary_name, EXIT_FAILURE, "Message is required");
   }
 
   *port = parse_port(binary_name, port_str);
@@ -218,11 +272,34 @@ static int create_socket(int domain, int type, int protocol) {
   sockfd = socket(domain, type, protocol);
 
   if (sockfd == -1) {
-    perror("Socket creation failed");
     exit(EXIT_FAILURE);
   }
 
   return sockfd;
+}
+
+static int timeout(int sockfd, int timeout_seconds) {
+  fd_set fds;
+  struct timeval tv;
+  int result;
+
+  FD_ZERO(&fds);
+  FD_SET(sockfd, &fds);
+
+  tv.tv_sec = timeout_seconds;
+  tv.tv_usec = 0;
+
+  result = select(sockfd + 1, &fds, NULL, NULL, &tv);
+
+  if (result == -1) {
+    perror("select");
+    return -1;
+  }
+
+  if (result == 0) {
+    return 0;
+  }
+  return 1;
 }
 
 static void get_server_address(struct sockaddr_storage *addr, in_port_t port) {

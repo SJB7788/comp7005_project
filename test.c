@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main() {
-    char test[128];
-    int seq = 0;
-
-    snprintf(test, sizeof(test), "%d", seq);
+    char test[128] = "1,Hello";
+    strtok(test, ",");
     printf("%s\n", test);
 }
