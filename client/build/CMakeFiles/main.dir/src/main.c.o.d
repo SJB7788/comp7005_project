@@ -92,8 +92,12 @@ CMakeFiles/main.dir/src/main.c.o: \
   /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
   /usr/include/x86_64-linux-gnu/bits/sigthread.h \
-  /usr/include/x86_64-linux-gnu/bits/signal_ext.h /usr/include/stdio.h \
-  /usr/lib/llvm-18/lib/clang/18/include/stdarg.h \
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  /usr/lib/llvm-18/lib/clang/18/include/__stddef_ptrdiff_t.h \
+  /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h \
+  /usr/lib/llvm-18/lib/clang/18/include/__stddef_max_align_t.h \
+  /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h \
+  /usr/include/stdio.h /usr/lib/llvm-18/lib/clang/18/include/stdarg.h \
   /usr/lib/llvm-18/lib/clang/18/include/__stdarg___gnuc_va_list.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
@@ -105,9 +109,7 @@ CMakeFiles/main.dir/src/main.c.o: \
   /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
-  /usr/include/stdlib.h \
-  /usr/lib/llvm-18/lib/clang/18/include/__stddef_wchar_t.h \
-  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+  /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \

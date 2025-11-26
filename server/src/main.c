@@ -26,9 +26,7 @@ static void read_message(int sockfd, char *buffer, size_t buffer_size,
                          ssize_t *bytes_received,
                          struct sockaddr_storage *client_addr,
                          socklen_t *addr_len);
-static void handle_packet(int client_sockfd,
-                          struct sockaddr_storage *client_addr, char *buffer,
-                          size_t bytes, char *payload, long *seq);
+static void handle_packet(char *buffer, char *payload, long *seq);
 static void send_message(int sockfd, const char *message,
                          struct sockaddr_storage *addr, socklen_t addr_len);
 static void setup_signal_handler(void);
@@ -80,8 +78,7 @@ int main(int argc, char *argv[]) {
     read_message(sockfd, buffer, BUFFER_SIZE, &bytes_received, &client_addr,
                  &client_addr_len);
 
-    handle_packet(sockfd, &client_addr, buffer, (size_t)bytes_received, payload,
-                  &seq);
+    handle_packet(buffer, payload, &seq);
 
     printf("SEQ: %ld, PAYLOAD: %s\n", seq, payload);
 
@@ -95,7 +92,7 @@ int main(int argc, char *argv[]) {
     strlcpy(ack_message, ack, ACK_SIZE);
     strlcat(ack_message, "|", BUFFER_SIZE);
     strlcat(ack_message, ack, BUFFER_SIZE);
-    sleep(BUFFER_SIZE);
+    sleep(BASE_TEN);
     send_message(sockfd, ack_message, &client_addr, client_addr_len);
   }
 
@@ -310,9 +307,7 @@ static void read_message(int sockfd, char *buffer, size_t buffer_size,
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
 // cppcheck-suppress constParameterPointer
-static void handle_packet(int client_sockfd,
-                          struct sockaddr_storage *client_addr, char *buffer,
-                          size_t bytes, char *payload, long *seq) {
+static void handle_packet(char *buffer, char *payload, long *seq) {
 
   const char *token;
   const char *token_payload;

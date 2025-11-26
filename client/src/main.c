@@ -3,6 +3,7 @@
 #include <inttypes.h>
 #include <netinet/in.h>
 #include <signal.h>
+#include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,20 +24,24 @@ static void convert_address(const char *address, struct sockaddr_storage *addr,
 static int create_socket(int domain, int type, int protocol);
 static int timeout(int sockfd, int timeout_seconds);
 static void get_server_address(struct sockaddr_storage *addr, in_port_t port);
+static void structure_message(char *message, size_t message_len,
+                              char *input_message, long seq_number);
 static void send_message(int sockfd, const char *message,
                          struct sockaddr_storage *addr, socklen_t addr_len);
 static void read_message(int sockfd, char *buffer, size_t buffer_size,
                          ssize_t *bytes_received);
+static void handle_packet(char *buffer, char *payload, long *seq);
 static void setup_signal_handler(void);
 static void sigint_handler(int signum);
 static void close_socket(int sockfd);
 
 enum {
-  UNKNOWN_OPTION_MESSAGE_LEN = 24,
+  UNKNOWN_OPTION_BUFFER_SIZE = 24,
   BASE_TEN = 10,
-  MESSAGE_LEN = 1024,
+  BUFFER_SIZE = 1024,
   SEQ_LEN = 256,
-  TIMEOUT = 10,
+  TIMEOUT = 1,
+  MAX_RETRY = 5,
 };
 
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
@@ -50,10 +55,16 @@ int main(int argc, char *argv[]) {
 
   struct sockaddr_storage addr;
   socklen_t addr_len;
-  long seq;
+  long seq_number;
+  int retry_count;
+
+  char input_message[BUFFER_SIZE];
+  char final_message[BUFFER_SIZE];
 
   address = NULL;
   port_str = NULL;
+  retry_count = 0;
+  seq_number = 0;
 
   parse_arguments(argc, argv, &address, &port_str);
   handle_arguments(argv[0], address, port_str, &port);
@@ -61,71 +72,86 @@ int main(int argc, char *argv[]) {
   sockfd = create_socket(addr.ss_family, SOCK_DGRAM, 0);
   get_server_address(&addr, port);
   setup_signal_handler();
-  seq = 0;
 
   while (!exit_flag) {
-    char input_message[MESSAGE_LEN];
-    char seq_string[SEQ_LEN];
-    char final_message[MESSAGE_LEN];
-    int long_parsed;
-
-    char ack_buffer[MESSAGE_LEN];
-    char payload[MESSAGE_LEN];
     ssize_t bytes_received;
+
     long ack;
-    const char *token;
-    char *token_ptr;
     int status;
 
-    if (fgets(input_message, sizeof(input_message), stdin) == NULL) {
-      fprintf(stderr, "invalid user input");
-      continue;
+    if (retry_count > MAX_RETRY) {
+      fprintf(stderr, "Max retry limit reached. Dropping packet.\n\n");
+      retry_count = 0;
     }
 
-    input_message[strcspn(input_message, "\n")] = '\0';
-    long_parsed = snprintf(seq_string, sizeof(seq_string), "%ld", seq);
+    // if we are not retransmitting, get user input and structure message
+    if (retry_count == 0) {
+      // get message payload on stdin
+      if (fgets(input_message, sizeof(input_message), stdin) == NULL) {
+        fprintf(stderr, "invalid user input");
+        continue;
+      }
 
-    if (long_parsed < 0) {
-      perror("snprintf");
-      exit(EXIT_FAILURE);
+      input_message[strcspn(input_message, "\n")] = '\0';
+      structure_message(final_message, BUFFER_SIZE, input_message, seq_number);
     }
-
-    strlcpy(final_message, seq_string, MESSAGE_LEN);
-    strlcat(final_message, "|", MESSAGE_LEN);
-    strlcat(final_message, input_message, MESSAGE_LEN);
 
     send_message(sockfd, final_message, &addr, addr_len);
-    seq++;
 
     status = timeout(sockfd, TIMEOUT);
 
     if (status == 0) {
-      printf("Timeout! No reply.\n");
-
-    } else if (status == 1) {
-      read_message(sockfd, ack_buffer, MESSAGE_LEN, &bytes_received);
-
-      token = strtok_r(ack_buffer, "|", &token_ptr);
-      ack = strtol(token, NULL, 0);
-
-      token = strtok_r(NULL, "|", &token_ptr);
-      strncpy(payload, token, MESSAGE_LEN - 1);
-      payload[MESSAGE_LEN - 1] = '\0';
-
-      printf("ack: %ld\n", ack);
-      printf("payload: %s\n", payload);
-
-      if (seq != ack) {
-      }
-    } else {
-      perror("timeout");
-      exit(EXIT_FAILURE);
+      retry_count++;
+      printf("Timeout! Retransmitting message. Retry: %d\n", retry_count);
+      continue;
     }
+
+    if (status == 1) { // received message before timeout
+      char ack_buffer[BUFFER_SIZE];
+      char payload[BUFFER_SIZE];
+
+      read_message(sockfd, ack_buffer, BUFFER_SIZE, &bytes_received);
+      handle_packet(ack_buffer, payload, &ack);
+      printf("received ack: %ld\n", ack);
+      printf("received payload: %s\n\n", payload);
+
+      if (seq_number != ack) {
+        retry_count++;
+        printf("Packet with SEQ: %ld does not have matching ACK. Retry count: "
+               "%d\n",
+               seq_number, retry_count);
+        continue;
+      }
+
+      seq_number++;
+      retry_count = 0;
+      continue;
+    }
+
+    perror("timeout");
+    exit(EXIT_FAILURE);
   }
 
   close_socket(sockfd);
 
   return EXIT_SUCCESS;
+}
+
+static void structure_message(char *message, size_t message_len,
+                              char *input_message, long seq_number) {
+  char seq_string[SEQ_LEN];
+  int long_parsed;
+
+  long_parsed = snprintf(seq_string, sizeof(seq_string), "%ld", seq_number);
+
+  if (long_parsed < 0) {
+    perror("snprintf");
+    exit(EXIT_FAILURE);
+  }
+
+  strlcpy(message, seq_string, message_len);
+  strlcat(message, "|", message_len);
+  strlcat(message, input_message, message_len);
 }
 
 static void send_message(int sockfd, const char *message,
@@ -165,6 +191,22 @@ static void read_message(int sockfd, char *buffer, size_t buffer_size,
   buffer[n] = '\0';
 }
 
+// cppcheck-suppress constParameterPointer
+static void handle_packet(char *buffer, char *payload, long *seq) {
+
+  const char *token;
+  const char *token_payload;
+  char *token_ptr;
+
+  token = strtok_r(buffer, "|", &token_ptr);
+  *seq = strtol(token, NULL, BASE_TEN);
+
+  token_payload = token_ptr;
+
+  strncpy(payload, token_payload, BUFFER_SIZE - 1);
+  payload[BUFFER_SIZE - 1] = '\0';
+}
+
 static void parse_arguments(int argc, char *argv[], char **address,
                             char **port) {
   int opt;
@@ -177,7 +219,7 @@ static void parse_arguments(int argc, char *argv[], char **address,
       usage(argv[0], EXIT_SUCCESS, NULL);
     }
     case '?': {
-      char message[UNKNOWN_OPTION_MESSAGE_LEN];
+      char message[UNKNOWN_OPTION_BUFFER_SIZE];
 
       snprintf(message, sizeof(message), "Unknown option '-%c'", optopt);
       usage(argv[0], EXIT_FAILURE, message);
