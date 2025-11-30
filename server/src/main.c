@@ -89,6 +89,7 @@ int main(int argc, char *argv[]) {
       exit(EXIT_FAILURE);
     }
 
+    // seq and ack are the same number
     strlcpy(ack_message, ack, ACK_SIZE);
     strlcat(ack_message, "|", BUFFER_SIZE);
     strlcat(ack_message, ack, BUFFER_SIZE);

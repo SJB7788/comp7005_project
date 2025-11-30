@@ -34,7 +34,7 @@ static void send_message(int sockfd, const char *message,
                          struct sockaddr_storage *addr, socklen_t addr_len);
 static void read_message(int sockfd, char *buffer, size_t buffer_size,
                          ssize_t *bytes_received);
-static void handle_packet(char *buffer, char *payload, long *seq);
+static void handle_packet(char *buffer, long *seq);
 static void setup_signal_handler(void);
 static void sigint_handler(int signum);
 static void close_socket(int sockfd);
@@ -113,18 +113,16 @@ int main(int argc, char *argv[]) {
 
     if (status == 0) {
       retry_count++;
-      printf("Timeout! Retransmitting message. Retry: %d\n", retry_count);
+      printf("Timeout! Retransmitting message. Retry: %d\n\n", retry_count);
       continue;
     }
 
     if (status == 1) { // received message before timeout
       char ack_buffer[BUFFER_SIZE];
-      char payload[BUFFER_SIZE];
 
       read_message(sockfd, ack_buffer, BUFFER_SIZE, &bytes_received);
-      handle_packet(ack_buffer, payload, &ack);
-      printf("received ack: %ld\n", ack);
-      printf("received payload: %s\n\n", payload);
+      handle_packet(ack_buffer, &ack);
+      printf("Received ack: %ld\n", ack);
 
       if (seq_number != ack) {
         retry_count++;
@@ -203,19 +201,17 @@ static void read_message(int sockfd, char *buffer, size_t buffer_size,
 }
 
 // cppcheck-suppress constParameterPointer
-static void handle_packet(char *buffer, char *payload, long *seq) {
+static void handle_packet(char *buffer, long *seq) {
 
   const char *token;
-  const char *token_payload;
   char *token_ptr;
 
-  token = strtok_r(buffer, "|", &token_ptr);
+  // skip the seq
+  strtok_r(buffer, "|", &token_ptr);
+
+  // get the ack
+  token = token_ptr;
   *seq = strtol(token, NULL, BASE_TEN);
-
-  token_payload = token_ptr;
-
-  strncpy(payload, token_payload, BUFFER_SIZE - 1);
-  payload[BUFFER_SIZE - 1] = '\0';
 }
 
 static void parse_arguments(int argc, char *argv[], char **address,

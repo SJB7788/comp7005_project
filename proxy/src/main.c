@@ -1,6 +1,7 @@
 #include <arpa/inet.h>
 #include <bits/getopt_core.h>
 #include <errno.h>
+#include <getopt.h>
 #include <inttypes.h>
 #include <netinet/in.h>
 #include <signal.h>
@@ -14,26 +15,32 @@
 #include <unistd.h>
 
 enum {
-  ARG_IP = 0,
-  ARG_PORT,
-  ARG_SERVER_IP,
-  ARG_SERVER_PORT,
-  ARG_S_MIN_DELAY,
-  ARG_S_MAX_DELAY,
-  ARG_S_DELAY_PROB,
-  ARG_S_DROP_PROB,
-  ARG_C_MIN_DELAY,
-  ARG_C_MAX_DELAY,
-  ARG_C_DELAY_PROB,
-  ARG_C_DROP_PROB,
-  ARG_COUNT,
   UNKNOWN_OPTION_MESSAGE_LEN = 24,
   ACK_SIZE = 256,
   BUFFER_SIZE = 1024,
   BASE_TEN = 10,
   DENOMINATOR = 100,
-  MILISECONDS = 1000,
+  MILLISECONDS = 1000,
+  NANOSECONDS = 1000000L,
 };
+
+static const struct option long_options[] = {
+    {"listen-ip", required_argument, 0, 0},
+    {"listen-port", required_argument, 0, 0},
+    {"target-ip", required_argument, 0, 0},
+    {"target-port", required_argument, 0, 0},
+
+    {"client-drop", required_argument, 0, 0},
+    {"server-drop", required_argument, 0, 0},
+    {"client-delay", required_argument, 0, 0},
+    {"server-delay", required_argument, 0, 0},
+
+    {"client-delay-time-min", required_argument, 0, 0},
+    {"client-delay-time-max", required_argument, 0, 0},
+    {"server-delay-time-min", required_argument, 0, 0},
+    {"server-delay-time-max", required_argument, 0, 0},
+
+    {0, 0, 0, 0}};
 
 typedef struct {
   int min_delay;
@@ -77,7 +84,7 @@ static void read_server_message(int sockfd, char *buffer, size_t buffer_size,
 static void send_message(int sockfd, const char *message,
                          struct sockaddr_storage *addr, socklen_t addr_len);
 static int return_random(int max);
-static void sleep_seconds(int seconds);
+static void sleep_milliseconds(int ms);
 static int simulate_drop(int denominator, int drop_prob);
 static void simulate_delay(int denominator, int delay_min, int delay_max,
                            int delay_prob);
@@ -93,7 +100,7 @@ static volatile sig_atomic_t exit_flag = 0;
 int main(int argc, char *argv[]) {
   int sockfd;
 
-  Arguments args;
+  Arguments args = {0};
 
   struct sockaddr_storage server_addr;
   socklen_t server_addr_len;
@@ -106,7 +113,6 @@ int main(int argc, char *argv[]) {
 
   parse_arguments(argc, argv, &args);
   handle_arguments(argv[0], &args);
-
   convert_address(args.ip_address, &addr);
 
   convert_server_address(args.server_ip_address, &server_addr,
@@ -174,37 +180,58 @@ static int simulate_traffic(int denominator, int delay_min, int delay_max,
 
 static void simulate_delay(int denominator, int delay_min, int delay_max,
                            int delay_prob) {
-  if (return_random(denominator) > delay_prob) {
+  int delay_chance;
+  int delay_range;
+  int delay;
+  int sleep_val;
+
+  delay_chance = return_random(denominator);
+
+  if (delay_chance > delay_prob) {
     return;
   }
 
-  int delay_range = delay_max - delay_min;
-  int delay = return_random(delay_range);
-  int sleep_val = delay + delay_min - 1;
+  delay_range = delay_max - delay_min;
+  delay = return_random(delay_range);
 
-  sleep_seconds(sleep_val);
+  sleep_val = delay + delay_min - 1;
+
+  sleep_milliseconds(sleep_val);
 }
 
-static void sleep_seconds(int seconds) {
-  if (seconds <= 0) {
+static void sleep_milliseconds(int ms) {
+  if (ms <= 0) {
     return;
   }
 
   struct timespec ts;
-  ts.tv_sec = seconds;
-  ts.tv_nsec = 0;
+  ts.tv_sec = ms / MILLISECONDS;
+  ts.tv_nsec = (long)(ms % MILLISECONDS) * NANOSECONDS;
 
   nanosleep(&ts, NULL);
 }
 
 static int simulate_drop(int denominator, int drop_prob) {
-  if (return_random(denominator) > drop_prob) {
+  int drop_chance = return_random(denominator);
+
+  if (drop_chance < 0) {
+    perror("drop_chance");
+    exit(EXIT_FAILURE);
+  }
+
+  if (drop_chance > drop_prob) {
     return 0;
   }
   return 1;
 }
 
-static int return_random(int max) { return rand() % max + 1; }
+static int return_random(int max) {
+  if (max <= 0) {
+    return -1;
+  }
+
+  return rand() % max + 1;
+}
 
 static int parse_int(const char *binary_name, const char *str,
                      const char *field) {
@@ -235,62 +262,138 @@ static void send_message(int sockfd, const char *message,
 }
 
 static void parse_arguments(int argc, char *argv[], Arguments *args) {
-  int opt;
+  int option_index = 0;
 
-  opterr = 0;
+  while (1) {
+    int c;
+    c = getopt_long(argc, argv, "h", long_options, &option_index);
+    if (c == -1) {
+      break;
+    }
 
-  while ((opt = getopt(argc, argv, "h")) != -1) {
-    switch (opt) {
+    switch (c) {
+    case 0: {
+      const char *optname = long_options[option_index].name;
+
+      if (strcmp(optname, "listen-ip") == 0) {
+        args->ip_address = optarg;
+      } else if (strcmp(optname, "listen-port") == 0) {
+        args->port = parse_port(argv[0], optarg);
+      } else if (strcmp(optname, "target-ip") == 0) {
+        args->server_ip_address = optarg;
+      } else if (strcmp(optname, "target-port") == 0) {
+        args->server_port = parse_port(argv[0], optarg);
+      }
+
+      // server settings
+      else if (strcmp(optname, "server-delay-time-min") == 0) {
+        args->server_cfg.min_delay =
+            parse_int(argv[0], optarg, "server_delay_time_min");
+      } else if (strcmp(optname, "server-delay-time-max") == 0) {
+        args->server_cfg.max_delay =
+            parse_int(argv[0], optarg, "server_max_delay");
+      } else if (strcmp(optname, "server-delay") == 0) {
+        args->server_cfg.delay_prob =
+            parse_int(argv[0], optarg, "server_delay_prob");
+      } else if (strcmp(optname, "server-drop") == 0) {
+        args->server_cfg.drop_prob =
+            parse_int(argv[0], optarg, "server_drop_prob");
+      }
+
+      // client settings
+      else if (strcmp(optname, "client-delay-time-min") == 0) {
+        args->client_cfg.min_delay =
+            parse_int(argv[0], optarg, "client_min_delay");
+      } else if (strcmp(optname, "client-delay-time-max") == 0) {
+        args->client_cfg.max_delay =
+            parse_int(argv[0], optarg, "client_max_delay");
+      } else if (strcmp(optname, "client-delay") == 0) {
+        args->client_cfg.delay_prob =
+            parse_int(argv[0], optarg, "client_delay_prob");
+      } else if (strcmp(optname, "client-drop") == 0) {
+        args->client_cfg.drop_prob =
+            parse_int(argv[0], optarg, "client_drop_prob");
+      }
+
+      break;
+    }
+
     case 'h':
       usage(argv[0], EXIT_SUCCESS, NULL);
-    case '?': {
-      char message[UNKNOWN_OPTION_MESSAGE_LEN];
-      snprintf(message, sizeof(message), "Unknown option '-%c'", optopt);
-      usage(argv[0], EXIT_FAILURE, message);
-    }
+      break;
+
+    case '?':
+      usage(argv[0], EXIT_FAILURE, "Unknown option");
+      break;
+
     default:
       usage(argv[0], EXIT_FAILURE, NULL);
     }
   }
 
-  // After getopt, optind should point to positional args
-  int remaining = argc - optind;
-
-  if (remaining < ARG_COUNT) {
-    usage(argv[0], EXIT_FAILURE, "Missing required arguments");
+  // Validate required flags
+  if (!args->ip_address || !args->server_ip_address) {
+    usage(argv[0], EXIT_FAILURE, "--target-ip and --server-ip are required");
   }
-
-  if (remaining > ARG_COUNT) {
-    usage(argv[0], EXIT_FAILURE, "Too many arguments");
-  }
-
-  // Use meaningful indexed constants
-  char **a = &argv[optind];
-
-  args->ip_address = a[ARG_IP];
-  args->port = parse_port(argv[0], a[ARG_PORT]);
-
-  args->server_ip_address = a[ARG_SERVER_IP];
-  args->server_port = parse_port(argv[0], a[ARG_SERVER_PORT]);
-
-  args->server_cfg.min_delay =
-      parse_int(argv[0], a[ARG_S_MIN_DELAY], "server_min_delay");
-  args->server_cfg.max_delay =
-      parse_int(argv[0], a[ARG_S_MAX_DELAY], "server_max_delay");
-  args->server_cfg.delay_prob =
-      parse_int(argv[0], a[ARG_S_DELAY_PROB], "server_delay_prob");
-  args->server_cfg.drop_prob =
-      parse_int(argv[0], a[ARG_S_DROP_PROB], "server_drop_prob");
-
-  args->client_cfg.min_delay =
-      parse_int(argv[0], a[ARG_C_MIN_DELAY], "client_min_delay");
-  args->client_cfg.max_delay =
-      parse_int(argv[0], a[ARG_C_MAX_DELAY], "client_max_delay");
-  args->client_cfg.delay_prob =
-      parse_int(argv[0], a[ARG_C_DELAY_PROB], "client_delay_prob");
-  args->client_cfg.drop_prob =
-      parse_int(argv[0], a[ARG_C_DROP_PROB], "client_drop_prob");
 }
+
+// static void parse_arguments(int argc, char *argv[], Arguments *args) {
+//   int opt;
+
+//   opterr = 0;
+
+//   while ((opt = getopt(argc, argv, "h")) != -1) {
+//     switch (opt) {
+//     case 'h':
+//       usage(argv[0], EXIT_SUCCESS, NULL);
+//     case '?': {
+//       char message[UNKNOWN_OPTION_MESSAGE_LEN];
+//       snprintf(message, sizeof(message), "Unknown option '-%c'", optopt);
+//       usage(argv[0], EXIT_FAILURE, message);
+//     }
+//     default:
+//       usage(argv[0], EXIT_FAILURE, NULL);
+//     }
+//   }
+
+//   // After getopt, optind should point to positional args
+//   int remaining = argc - optind;
+
+//   if (remaining < ARG_COUNT) {
+//     usage(argv[0], EXIT_FAILURE, "Missing required arguments");
+//   }
+
+//   if (remaining > ARG_COUNT) {
+//     usage(argv[0], EXIT_FAILURE, "Too many arguments");
+//   }
+
+//   // Use meaningful indexed constants
+//   char **a = &argv[optind];
+
+//   args->ip_address = a[ARG_IP];
+//   args->port = parse_port(argv[0], a[ARG_PORT]);
+
+//   args->server_ip_address = a[ARG_SERVER_IP];
+//   args->server_port = parse_port(argv[0], a[ARG_SERVER_PORT]);
+
+//   args->server_cfg.min_delay =
+//       parse_int(argv[0], a[ARG_S_MIN_DELAY], "server_min_delay");
+//   args->server_cfg.max_delay =
+//       parse_int(argv[0], a[ARG_S_MAX_DELAY], "server_max_delay");
+//   args->server_cfg.delay_prob =
+//       parse_int(argv[0], a[ARG_S_DELAY_PROB], "server_delay_prob");
+//   args->server_cfg.drop_prob =
+//       parse_int(argv[0], a[ARG_S_DROP_PROB], "server_drop_prob");
+
+//   args->client_cfg.min_delay =
+//       parse_int(argv[0], a[ARG_C_MIN_DELAY], "client_min_delay");
+//   args->client_cfg.max_delay =
+//       parse_int(argv[0], a[ARG_C_MAX_DELAY], "client_max_delay");
+//   args->client_cfg.delay_prob =
+//       parse_int(argv[0], a[ARG_C_DELAY_PROB], "client_delay_prob");
+//   args->client_cfg.drop_prob =
+//       parse_int(argv[0], a[ARG_C_DROP_PROB], "client_drop_prob");
+// }
 
 static void handle_arguments(const char *binary_name, const Arguments *args) {
   // validate server
