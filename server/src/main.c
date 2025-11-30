@@ -92,7 +92,6 @@ int main(int argc, char *argv[]) {
     strlcpy(ack_message, ack, ACK_SIZE);
     strlcat(ack_message, "|", BUFFER_SIZE);
     strlcat(ack_message, ack, BUFFER_SIZE);
-    sleep(BASE_TEN);
     send_message(sockfd, ack_message, &client_addr, client_addr_len);
   }
 
