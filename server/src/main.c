@@ -1,9 +1,9 @@
 #include <arpa/inet.h>
 #include <errno.h>
+#include <getopt.h>
 #include <inttypes.h>
 #include <netinet/in.h>
 #include <signal.h>
-#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,7 +12,7 @@
 #include <unistd.h>
 
 static void parse_arguments(int argc, char *argv[], char **ip_address,
-                            char **port);
+                            char **port_str);
 static void handle_arguments(const char *binary_name, const char *ip_address,
                              const char *port_str, in_port_t *port);
 static in_port_t parse_port(const char *binary_name, const char *port_str);
@@ -39,6 +39,12 @@ enum {
   BUFFER_SIZE = 1024,
   BASE_TEN = 10
 };
+
+static const struct option long_options[] = {
+    {"listen-ip", required_argument, 0, 0},
+    {"listen-port", required_argument, 0, 0},
+
+    {0, 0, 0, 0}};
 
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
 static volatile sig_atomic_t exit_flag = 0;
@@ -113,17 +119,30 @@ static void send_message(int sockfd, const char *message,
     exit(EXIT_FAILURE);
   }
 
-  printf("Sent %zu bytes: \"%s\"\n", (size_t)bytes_sent, message);
+  printf("Sent %zu bytes: \"%s\"\n\n", (size_t)bytes_sent, message);
 }
 
 static void parse_arguments(int argc, char *argv[], char **ip_address,
-                            char **port) {
+                            char **port_str) {
   int opt;
+  int option_index = 0;
 
   opterr = 0;
 
-  while ((opt = getopt(argc, argv, "h")) != -1) {
+  while ((opt = getopt_long(argc, argv, "h", long_options, &option_index)) !=
+         -1) {
     switch (opt) {
+    case 0: {
+      const char *optname = long_options[option_index].name;
+
+      if (strcmp(optname, "listen-ip") == 0) {
+        *ip_address = optarg;
+      } else if (strcmp(optname, "listen-port") == 0) {
+        *port_str = optarg;
+      }
+
+      break;
+    }
     case 'h': {
       usage(argv[0], EXIT_SUCCESS, NULL);
     }
@@ -138,21 +157,6 @@ static void parse_arguments(int argc, char *argv[], char **ip_address,
     }
     }
   }
-
-  if (optind >= argc) {
-    usage(argv[0], EXIT_FAILURE, "IP address and port are required");
-  }
-
-  if (optind + 1 >= argc) {
-    usage(argv[0], EXIT_FAILURE, "Port is required");
-  }
-
-  if (optind < argc - 2) {
-    usage(argv[0], EXIT_FAILURE, "Too many arguments");
-  }
-
-  *ip_address = argv[optind];
-  *port = argv[optind + 1];
 }
 
 static void handle_arguments(const char *binary_name, const char *ip_address,
@@ -197,7 +201,8 @@ _Noreturn static void usage(const char *program_name, int exit_code,
     fprintf(stderr, "%s\n", message);
   }
 
-  fprintf(stderr, "Usage: %s [-h] <ip address> <port>\n", program_name);
+  fprintf(stderr, "Usage: %s [-h]\n --listen-ip <ip>\n --listen-port <port>\n",
+          program_name);
   fputs("Options:\n", stderr);
   fputs("  -h  Display this help message\n", stderr);
   exit(exit_code);

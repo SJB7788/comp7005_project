@@ -14,34 +14,6 @@
 #include <time.h>
 #include <unistd.h>
 
-enum {
-  UNKNOWN_OPTION_MESSAGE_LEN = 24,
-  ACK_SIZE = 256,
-  BUFFER_SIZE = 1024,
-  BASE_TEN = 10,
-  DENOMINATOR = 100,
-  MILLISECONDS = 1000,
-  NANOSECONDS = 1000000L,
-};
-
-static const struct option long_options[] = {
-    {"listen-ip", required_argument, 0, 0},
-    {"listen-port", required_argument, 0, 0},
-    {"target-ip", required_argument, 0, 0},
-    {"target-port", required_argument, 0, 0},
-
-    {"client-drop", required_argument, 0, 0},
-    {"server-drop", required_argument, 0, 0},
-    {"client-delay", required_argument, 0, 0},
-    {"server-delay", required_argument, 0, 0},
-
-    {"client-delay-time-min", required_argument, 0, 0},
-    {"client-delay-time-max", required_argument, 0, 0},
-    {"server-delay-time-min", required_argument, 0, 0},
-    {"server-delay-time-max", required_argument, 0, 0},
-
-    {0, 0, 0, 0}};
-
 typedef struct {
   int min_delay;
   int max_delay;
@@ -93,6 +65,34 @@ static int simulate_traffic(int denominator, int delay_min, int delay_max,
 static void setup_signal_handler(void);
 static void sigint_handler(int signum);
 static void close_socket(int sockfd);
+
+enum {
+  UNKNOWN_OPTION_MESSAGE_LEN = 24,
+  ACK_SIZE = 256,
+  BUFFER_SIZE = 1024,
+  BASE_TEN = 10,
+  DENOMINATOR = 100,
+  MILLISECONDS = 1000,
+  NANOSECONDS = 1000000L,
+};
+
+static const struct option long_options[] = {
+    {"listen-ip", required_argument, 0, 0},
+    {"listen-port", required_argument, 0, 0},
+    {"target-ip", required_argument, 0, 0},
+    {"target-port", required_argument, 0, 0},
+
+    {"client-drop", required_argument, 0, 0},
+    {"server-drop", required_argument, 0, 0},
+    {"client-delay", required_argument, 0, 0},
+    {"server-delay", required_argument, 0, 0},
+
+    {"client-delay-time-min", required_argument, 0, 0},
+    {"client-delay-time-max", required_argument, 0, 0},
+    {"server-delay-time-min", required_argument, 0, 0},
+    {"server-delay-time-max", required_argument, 0, 0},
+
+    {0, 0, 0, 0}};
 
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
 static volatile sig_atomic_t exit_flag = 0;
@@ -331,99 +331,40 @@ static void parse_arguments(int argc, char *argv[], Arguments *args) {
     }
   }
 
-  // Validate required flags
   if (!args->ip_address || !args->server_ip_address) {
     usage(argv[0], EXIT_FAILURE, "--target-ip and --server-ip are required");
   }
 }
 
-// static void parse_arguments(int argc, char *argv[], Arguments *args) {
-//   int opt;
-
-//   opterr = 0;
-
-//   while ((opt = getopt(argc, argv, "h")) != -1) {
-//     switch (opt) {
-//     case 'h':
-//       usage(argv[0], EXIT_SUCCESS, NULL);
-//     case '?': {
-//       char message[UNKNOWN_OPTION_MESSAGE_LEN];
-//       snprintf(message, sizeof(message), "Unknown option '-%c'", optopt);
-//       usage(argv[0], EXIT_FAILURE, message);
-//     }
-//     default:
-//       usage(argv[0], EXIT_FAILURE, NULL);
-//     }
-//   }
-
-//   // After getopt, optind should point to positional args
-//   int remaining = argc - optind;
-
-//   if (remaining < ARG_COUNT) {
-//     usage(argv[0], EXIT_FAILURE, "Missing required arguments");
-//   }
-
-//   if (remaining > ARG_COUNT) {
-//     usage(argv[0], EXIT_FAILURE, "Too many arguments");
-//   }
-
-//   // Use meaningful indexed constants
-//   char **a = &argv[optind];
-
-//   args->ip_address = a[ARG_IP];
-//   args->port = parse_port(argv[0], a[ARG_PORT]);
-
-//   args->server_ip_address = a[ARG_SERVER_IP];
-//   args->server_port = parse_port(argv[0], a[ARG_SERVER_PORT]);
-
-//   args->server_cfg.min_delay =
-//       parse_int(argv[0], a[ARG_S_MIN_DELAY], "server_min_delay");
-//   args->server_cfg.max_delay =
-//       parse_int(argv[0], a[ARG_S_MAX_DELAY], "server_max_delay");
-//   args->server_cfg.delay_prob =
-//       parse_int(argv[0], a[ARG_S_DELAY_PROB], "server_delay_prob");
-//   args->server_cfg.drop_prob =
-//       parse_int(argv[0], a[ARG_S_DROP_PROB], "server_drop_prob");
-
-//   args->client_cfg.min_delay =
-//       parse_int(argv[0], a[ARG_C_MIN_DELAY], "client_min_delay");
-//   args->client_cfg.max_delay =
-//       parse_int(argv[0], a[ARG_C_MAX_DELAY], "client_max_delay");
-//   args->client_cfg.delay_prob =
-//       parse_int(argv[0], a[ARG_C_DELAY_PROB], "client_delay_prob");
-//   args->client_cfg.drop_prob =
-//       parse_int(argv[0], a[ARG_C_DROP_PROB], "client_drop_prob");
-// }
-
 static void handle_arguments(const char *binary_name, const Arguments *args) {
   // validate server
   if (args->server_cfg.min_delay > args->server_cfg.max_delay) {
-    usage(binary_name, EXIT_FAILURE, "Server min_delay > max_delay");
+    usage(binary_name, EXIT_FAILURE, "--server-delay-min > --server-delay-max");
   }
 
   if (args->server_cfg.delay_prob < 0 ||
       args->server_cfg.delay_prob > DENOMINATOR) {
-    usage(binary_name, EXIT_FAILURE, "Server delay_prob must be 0–100}");
+    usage(binary_name, EXIT_FAILURE, "--server-delay must be 0–100}");
   }
 
   if (args->server_cfg.drop_prob < 0 ||
       args->server_cfg.drop_prob > DENOMINATOR) {
-    usage(binary_name, EXIT_FAILURE, "Server drop_prob must be 0–100");
+    usage(binary_name, EXIT_FAILURE, "--server-drop must be 0–100");
   }
 
   // validate client
   if (args->client_cfg.min_delay > args->client_cfg.max_delay) {
-    usage(binary_name, EXIT_FAILURE, "Client min_delay > max_delay");
+    usage(binary_name, EXIT_FAILURE, "--client-delay-min > --client-delay-max");
   }
 
   if (args->client_cfg.delay_prob < 0 ||
       args->client_cfg.delay_prob > DENOMINATOR) {
-    usage(binary_name, EXIT_FAILURE, "Client delay_prob must be 0–100");
+    usage(binary_name, EXIT_FAILURE, "--client-delay must be 0–100");
   }
 
   if (args->client_cfg.drop_prob < 0 ||
       args->client_cfg.drop_prob > DENOMINATOR) {
-    usage(binary_name, EXIT_FAILURE, "Client drop_prob must be 0–100");
+    usage(binary_name, EXIT_FAILURE, "--client-drop must be 0–100");
   }
 }
 
@@ -453,18 +394,25 @@ in_port_t parse_port(const char *binary_name, const char *str) {
 _Noreturn static void usage(const char *program_name, int exit_code,
                             const char *message) {
   if (message) {
-    fprintf(stderr, "%s\n", message);
+    fprintf(stderr, "\n%s\n\n", message);
   }
 
   fprintf(stderr,
-          "Usage: %s [-h] "
-          "<client_ip> <client_port> "
-          "<server_ip> <server_port> "
-          "<server_min_delay> <server_max_delay> "
-          "<server_delay_prob> <server_drop_prob> "
-          "<client_min_delay> <client_max_delay> "
-          "<client_delay_prob> <client_drop_prob>\n",
+          "Usage: %s [-h] \n"
+          "--listen-ip <ip> \n"
+          "--listen-port <port> \n"
+          "--target-ip <ip> \n"
+          "--target-port <port> \n"
+          "--client-drop <percent value> \n"
+          "--server-drop <percent value> \n"
+          "--client-delay <percent value> \n"
+          "--server-delay <percent value> \n"
+          "--client-delay-time-min <ms> \n"
+          "--client-delay-time-max <ms> \n"
+          "--server-delay-time-min <ms> \n"
+          "--server-delay-time-max <ms>\n",
           program_name);
+
   fputs("Options:\n", stderr);
   fputs("  -h  Display this help message\n", stderr);
   exit(exit_code);
