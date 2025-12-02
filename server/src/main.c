@@ -98,8 +98,7 @@ int main(int argc, char *argv[]) {
     handle_packet(buffer, payload, &seq);
 
     snprintf(log_buffer, sizeof(log_buffer),
-             "Received message from proxy. SEQ: %ld, PAYLOAD: %s", seq,
-             payload);
+             "Received message: SEQ: %ld, PAYLOAD: %s", seq, payload);
     log_message(log_file, "RECEIVE", log_buffer);
 
     long_parsed = snprintf(ack, sizeof(ack), "%ld", seq);

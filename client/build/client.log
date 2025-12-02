@@ -60,3 +60,26 @@
 2025-12-01T22:01:31 [RECEIVE]: Received ack: 25
 2025-12-01T22:01:31 [SEND]: Sent message: 26|AHDJKJASHDKAJSDHA
 2025-12-01T22:01:31 [RECEIVE]: Received ack: 26
+2025-12-02T11:53:08 [SEND]: Sent message: 0|hi
+2025-12-02T11:53:10 [RETRY]: Timeout! Retransmitting message. Retry: 1
+2025-12-02T11:53:10 [SEND]: Sent message: 0|hi
+2025-12-02T11:53:10 [RECEIVE]: Received ack: 0
+2025-12-02T11:53:16 [SEND]: Sent message: 1|wat
+2025-12-02T11:53:16 [RECEIVE]: Received ack: 1
+2025-12-02T11:53:56 [SEND]: Sent message: 0|wass
+2025-12-02T11:53:58 [RETRY]: Timeout! Retransmitting message. Retry: 1
+2025-12-02T11:53:58 [SEND]: Sent message: 0|wass
+2025-12-02T11:54:00 [RETRY]: Timeout! Retransmitting message. Retry: 2
+2025-12-02T11:54:00 [SEND]: Sent message: 0|wass
+2025-12-02T11:54:02 [RETRY]: Timeout! Retransmitting message. Retry: 3
+2025-12-02T11:54:02 [SEND]: Sent message: 0|wass
+2025-12-02T11:54:04 [RETRY]: Timeout! Retransmitting message. Retry: 4
+2025-12-02T11:54:04 [SEND]: Sent message: 0|wass
+2025-12-02T11:54:06 [RETRY]: Timeout! Retransmitting message. Retry: 5
+2025-12-02T11:54:06 [SEND]: Sent message: 0|wass
+2025-12-02T11:54:08 [RETRY]: Timeout! Retransmitting message. Retry: 6
+2025-12-02T11:54:08 [DROP]: Max retry limit reached
+2025-12-02T12:01:59 [SEND]: Sent message: 0|hello this is a message
+2025-12-02T12:02:01 [RETRY]: Timeout! Retransmitting message. Retry: 1
+2025-12-02T12:02:01 [SEND]: Sent message: 0|hello this is a message
+2025-12-02T12:02:01 [RECEIVE]: Received ack: 0
