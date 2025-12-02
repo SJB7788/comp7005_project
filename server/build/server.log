@@ -48,3 +48,493 @@
 2025-12-01T18:55:19 [SEND]: Sent message to proxy: 11|11
 2025-12-01T18:55:24 [RECEIVE]: Received message from proxy. SEQ: 11, PAYLOAD: a
 2025-12-01T18:55:24 [SEND]: Sent message to proxy: 11|11
+2025-12-01T20:24:36 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: hi
+2025-12-01T20:24:36 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:24:41 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: hi
+2025-12-01T20:24:41 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:24:45 [RECEIVE]: Received message from proxy. SEQ: 1, PAYLOAD: wassup
+2025-12-01T20:24:45 [SEND]: Sent message to proxy: 1|1
+2025-12-01T20:24:46 [RECEIVE]: Received message from proxy. SEQ: 2, PAYLOAD: a
+2025-12-01T20:24:46 [SEND]: Sent message to proxy: 2|2
+2025-12-01T20:24:47 [RECEIVE]: Received message from proxy. SEQ: 3, PAYLOAD: w
+2025-12-01T20:24:47 [SEND]: Sent message to proxy: 3|3
+2025-12-01T20:24:47 [RECEIVE]: Received message from proxy. SEQ: 4, PAYLOAD: e
+2025-12-01T20:24:47 [SEND]: Sent message to proxy: 4|4
+2025-12-01T20:24:48 [RECEIVE]: Received message from proxy. SEQ: 5, PAYLOAD: d
+2025-12-01T20:24:48 [SEND]: Sent message to proxy: 5|5
+2025-12-01T20:24:48 [RECEIVE]: Received message from proxy. SEQ: 6, PAYLOAD: a
+2025-12-01T20:24:48 [SEND]: Sent message to proxy: 6|6
+2025-12-01T20:24:54 [RECEIVE]: Received message from proxy. SEQ: 7, PAYLOAD: v
+2025-12-01T20:24:54 [SEND]: Sent message to proxy: 7|7
+2025-12-01T20:24:55 [RECEIVE]: Received message from proxy. SEQ: 8, PAYLOAD: c
+2025-12-01T20:24:55 [SEND]: Sent message to proxy: 8|8
+2025-12-01T20:24:56 [RECEIVE]: Received message from proxy. SEQ: 9, PAYLOAD: s
+2025-12-01T20:24:56 [SEND]: Sent message to proxy: 9|9
+2025-12-01T20:24:58 [RECEIVE]: Received message from proxy. SEQ: 10, PAYLOAD: d
+2025-12-01T20:24:58 [SEND]: Sent message to proxy: 10|10
+2025-12-01T20:24:59 [RECEIVE]: Received message from proxy. SEQ: 11, PAYLOAD: p
+2025-12-01T20:24:59 [SEND]: Sent message to proxy: 11|11
+2025-12-01T20:25:00 [RECEIVE]: Received message from proxy. SEQ: 12, PAYLOAD: a
+2025-12-01T20:25:00 [SEND]: Sent message to proxy: 12|12
+2025-12-01T20:25:01 [RECEIVE]: Received message from proxy. SEQ: 13, PAYLOAD: d
+2025-12-01T20:25:01 [SEND]: Sent message to proxy: 13|13
+2025-12-01T20:25:02 [RECEIVE]: Received message from proxy. SEQ: 14, PAYLOAD: c
+2025-12-01T20:25:02 [SEND]: Sent message to proxy: 14|14
+2025-12-01T20:25:03 [RECEIVE]: Received message from proxy. SEQ: 15, PAYLOAD: z
+2025-12-01T20:25:03 [SEND]: Sent message to proxy: 15|15
+2025-12-01T20:25:03 [RECEIVE]: Received message from proxy. SEQ: 16, PAYLOAD: s
+2025-12-01T20:25:03 [SEND]: Sent message to proxy: 16|16
+2025-12-01T20:25:04 [RECEIVE]: Received message from proxy. SEQ: 17, PAYLOAD: w
+2025-12-01T20:25:04 [SEND]: Sent message to proxy: 17|17
+2025-12-01T20:25:05 [RECEIVE]: Received message from proxy. SEQ: 18, PAYLOAD: je;o
+2025-12-01T20:25:05 [SEND]: Sent message to proxy: 18|18
+2025-12-01T20:25:14 [RECEIVE]: Received message from proxy. SEQ: 19, PAYLOAD: ami gonna timeout
+2025-12-01T20:25:14 [SEND]: Sent message to proxy: 19|19
+2025-12-01T20:29:52 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: MOVE IT
+2025-12-01T20:29:52 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:30:01 [RECEIVE]: Received message from proxy. SEQ: 1, PAYLOAD: MOV EI
+2025-12-01T20:30:01 [SEND]: Sent message to proxy: 1|1
+2025-12-01T20:30:02 [RECEIVE]: Received message from proxy. SEQ: 2, PAYLOAD: Taaaa
+2025-12-01T20:30:02 [SEND]: Sent message to proxy: 2|2
+2025-12-01T20:30:23 [RECEIVE]: Received message from proxy. SEQ: 3, PAYLOAD: a
+2025-12-01T20:30:23 [SEND]: Sent message to proxy: 3|3
+2025-12-01T20:30:32 [RECEIVE]: Received message from proxy. SEQ: 4, PAYLOAD: hmmm
+2025-12-01T20:30:32 [SEND]: Sent message to proxy: 4|4
+2025-12-01T20:31:08 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: a
+2025-12-01T20:31:08 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:31:14 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: a
+2025-12-01T20:31:14 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:31:16 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: a
+2025-12-01T20:31:16 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:31:40 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: SEND ME NOTHING
+2025-12-01T20:31:40 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:31:44 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: SEND ME NOTHING
+2025-12-01T20:31:44 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:31:48 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: SEND ME NOTHING
+2025-12-01T20:31:48 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:37:12 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: hello
+2025-12-01T20:37:12 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:37:14 [RECEIVE]: Received message from proxy. SEQ: 1, PAYLOAD: world
+2025-12-01T20:37:14 [SEND]: Sent message to proxy: 1|1
+2025-12-01T20:37:15 [RECEIVE]: Received message from proxy. SEQ: 2, PAYLOAD: test
+2025-12-01T20:37:15 [SEND]: Sent message to proxy: 2|2
+2025-12-01T20:37:16 [RECEIVE]: Received message from proxy. SEQ: 3, PAYLOAD: pls
+2025-12-01T20:37:16 [SEND]: Sent message to proxy: 3|3
+2025-12-01T20:37:17 [RECEIVE]: Received message from proxy. SEQ: 4, PAYLOAD: drop
+2025-12-01T20:37:17 [SEND]: Sent message to proxy: 4|4
+2025-12-01T20:37:18 [RECEIVE]: Received message from proxy. SEQ: 5, PAYLOAD: pls
+2025-12-01T20:37:18 [SEND]: Sent message to proxy: 5|5
+2025-12-01T20:37:18 [RECEIVE]: Received message from proxy. SEQ: 6, PAYLOAD: drop
+2025-12-01T20:37:18 [SEND]: Sent message to proxy: 6|6
+2025-12-01T20:37:19 [RECEIVE]: Received message from proxy. SEQ: 7, PAYLOAD: pls
+2025-12-01T20:37:19 [SEND]: Sent message to proxy: 7|7
+2025-12-01T20:37:20 [RECEIVE]: Received message from proxy. SEQ: 8, PAYLOAD: drop
+2025-12-01T20:37:20 [SEND]: Sent message to proxy: 8|8
+2025-12-01T20:37:21 [RECEIVE]: Received message from proxy. SEQ: 9, PAYLOAD: pls
+2025-12-01T20:37:21 [SEND]: Sent message to proxy: 9|9
+2025-12-01T20:37:21 [RECEIVE]: Received message from proxy. SEQ: 10, PAYLOAD: drop
+2025-12-01T20:37:21 [SEND]: Sent message to proxy: 10|10
+2025-12-01T20:37:22 [RECEIVE]: Received message from proxy. SEQ: 11, PAYLOAD: a
+2025-12-01T20:37:22 [SEND]: Sent message to proxy: 11|11
+2025-12-01T20:37:22 [RECEIVE]: Received message from proxy. SEQ: 12, PAYLOAD: q
+2025-12-01T20:37:22 [SEND]: Sent message to proxy: 12|12
+2025-12-01T20:37:23 [RECEIVE]: Received message from proxy. SEQ: 13, PAYLOAD: w
+2025-12-01T20:37:23 [SEND]: Sent message to proxy: 13|13
+2025-12-01T20:37:23 [RECEIVE]: Received message from proxy. SEQ: 14, PAYLOAD: e
+2025-12-01T20:37:23 [SEND]: Sent message to proxy: 14|14
+2025-12-01T20:37:23 [RECEIVE]: Received message from proxy. SEQ: 15, PAYLOAD: r
+2025-12-01T20:37:23 [SEND]: Sent message to proxy: 15|15
+2025-12-01T20:37:25 [RECEIVE]: Received message from proxy. SEQ: 15, PAYLOAD: r
+2025-12-01T20:37:25 [SEND]: Sent message to proxy: 15|15
+2025-12-01T20:37:27 [RECEIVE]: Received message from proxy. SEQ: 16, PAYLOAD: a
+2025-12-01T20:37:27 [SEND]: Sent message to proxy: 16|16
+2025-12-01T20:37:28 [RECEIVE]: Received message from proxy. SEQ: 17, PAYLOAD: s
+2025-12-01T20:37:28 [SEND]: Sent message to proxy: 17|17
+2025-12-01T20:37:28 [RECEIVE]: Received message from proxy. SEQ: 18, PAYLOAD: d
+2025-12-01T20:37:28 [SEND]: Sent message to proxy: 18|18
+2025-12-01T20:37:29 [RECEIVE]: Received message from proxy. SEQ: 19, PAYLOAD: f
+2025-12-01T20:37:29 [SEND]: Sent message to proxy: 19|19
+2025-12-01T20:37:30 [RECEIVE]: Received message from proxy. SEQ: 20, PAYLOAD: g
+2025-12-01T20:37:30 [SEND]: Sent message to proxy: 20|20
+2025-12-01T20:37:32 [RECEIVE]: Received message from proxy. SEQ: 21, PAYLOAD: h
+2025-12-01T20:37:32 [SEND]: Sent message to proxy: 21|21
+2025-12-01T20:37:34 [RECEIVE]: Received message from proxy. SEQ: 22, PAYLOAD: z
+2025-12-01T20:37:34 [SEND]: Sent message to proxy: 22|22
+2025-12-01T20:37:34 [RECEIVE]: Received message from proxy. SEQ: 23, PAYLOAD: d
+2025-12-01T20:37:34 [SEND]: Sent message to proxy: 23|23
+2025-12-01T20:37:36 [RECEIVE]: Received message from proxy. SEQ: 24, PAYLOAD: q
+2025-12-01T20:37:36 [SEND]: Sent message to proxy: 24|24
+2025-12-01T20:37:37 [RECEIVE]: Received message from proxy. SEQ: 25, PAYLOAD: e
+2025-12-01T20:37:37 [SEND]: Sent message to proxy: 25|25
+2025-12-01T20:37:38 [RECEIVE]: Received message from proxy. SEQ: 26, PAYLOAD: r
+2025-12-01T20:37:38 [SEND]: Sent message to proxy: 26|26
+2025-12-01T20:37:38 [RECEIVE]: Received message from proxy. SEQ: 27, PAYLOAD: f
+2025-12-01T20:37:38 [SEND]: Sent message to proxy: 27|27
+2025-12-01T20:37:39 [RECEIVE]: Received message from proxy. SEQ: 28, PAYLOAD: r
+2025-12-01T20:37:39 [SEND]: Sent message to proxy: 28|28
+2025-12-01T20:37:40 [RECEIVE]: Received message from proxy. SEQ: 29, PAYLOAD: t
+2025-12-01T20:37:40 [SEND]: Sent message to proxy: 29|29
+2025-12-01T20:37:40 [RECEIVE]: Received message from proxy. SEQ: 30, PAYLOAD: g
+2025-12-01T20:37:40 [SEND]: Sent message to proxy: 30|30
+2025-12-01T20:37:40 [RECEIVE]: Received message from proxy. SEQ: 31, PAYLOAD: b
+2025-12-01T20:37:40 [SEND]: Sent message to proxy: 31|31
+2025-12-01T20:37:41 [RECEIVE]: Received message from proxy. SEQ: 32, PAYLOAD: v
+2025-12-01T20:37:41 [SEND]: Sent message to proxy: 32|32
+2025-12-01T20:37:41 [RECEIVE]: Received message from proxy. SEQ: 33, PAYLOAD: c
+2025-12-01T20:37:41 [SEND]: Sent message to proxy: 33|33
+2025-12-01T20:37:42 [RECEIVE]: Received message from proxy. SEQ: 34, PAYLOAD: a
+2025-12-01T20:37:42 [SEND]: Sent message to proxy: 34|34
+2025-12-01T20:37:42 [RECEIVE]: Received message from proxy. SEQ: 35, PAYLOAD: s
+2025-12-01T20:37:42 [SEND]: Sent message to proxy: 35|35
+2025-12-01T20:37:43 [RECEIVE]: Received message from proxy. SEQ: 36, PAYLOAD: d
+2025-12-01T20:37:43 [SEND]: Sent message to proxy: 36|36
+2025-12-01T20:37:43 [RECEIVE]: Received message from proxy. SEQ: 37, PAYLOAD: f
+2025-12-01T20:37:43 [SEND]: Sent message to proxy: 37|37
+2025-12-01T20:37:44 [RECEIVE]: Received message from proxy. SEQ: 38, PAYLOAD: g
+2025-12-01T20:37:44 [SEND]: Sent message to proxy: 38|38
+2025-12-01T20:37:44 [RECEIVE]: Received message from proxy. SEQ: 39, PAYLOAD: h
+2025-12-01T20:37:44 [SEND]: Sent message to proxy: 39|39
+2025-12-01T20:37:46 [RECEIVE]: Received message from proxy. SEQ: 39, PAYLOAD: h
+2025-12-01T20:37:46 [SEND]: Sent message to proxy: 39|39
+2025-12-01T20:43:44 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: DO IT
+2025-12-01T20:43:44 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:43:46 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: DO IT
+2025-12-01T20:43:46 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:43:50 [RECEIVE]: Received message from proxy. SEQ: 1, PAYLOAD: MOVE IT
+2025-12-01T20:43:50 [SEND]: Sent message to proxy: 1|1
+2025-12-01T20:43:52 [RECEIVE]: Received message from proxy. SEQ: 2, PAYLOAD: RAHH
+2025-12-01T20:43:52 [SEND]: Sent message to proxy: 2|2
+2025-12-01T20:44:02 [RECEIVE]: Received message from proxy. SEQ: 3, PAYLOAD: hh
+2025-12-01T20:44:02 [SEND]: Sent message to proxy: 3|3
+2025-12-01T20:44:04 [RECEIVE]: Received message from proxy. SEQ: 4, PAYLOAD: o
+2025-12-01T20:44:04 [SEND]: Sent message to proxy: 4|4
+2025-12-01T20:44:06 [RECEIVE]: Received message from proxy. SEQ: 5, PAYLOAD: plan
+2025-12-01T20:44:06 [SEND]: Sent message to proxy: 5|5
+2025-12-01T20:44:07 [RECEIVE]: Received message from proxy. SEQ: 6, PAYLOAD: rah
+2025-12-01T20:44:07 [SEND]: Sent message to proxy: 6|6
+2025-12-01T20:44:09 [RECEIVE]: Received message from proxy. SEQ: 6, PAYLOAD: rah
+2025-12-01T20:44:09 [SEND]: Sent message to proxy: 6|6
+2025-12-01T20:44:11 [RECEIVE]: Received message from proxy. SEQ: 7, PAYLOAD: welp
+2025-12-01T20:44:11 [SEND]: Sent message to proxy: 7|7
+2025-12-01T20:44:13 [RECEIVE]: Received message from proxy. SEQ: 8, PAYLOAD: DO
+2025-12-01T20:44:13 [SEND]: Sent message to proxy: 8|8
+2025-12-01T20:44:13 [RECEIVE]: Received message from proxy. SEQ: 9, PAYLOAD: DO
+2025-12-01T20:44:13 [SEND]: Sent message to proxy: 9|9
+2025-12-01T20:44:14 [RECEIVE]: Received message from proxy. SEQ: 10, PAYLOAD: DO
+2025-12-01T20:44:14 [SEND]: Sent message to proxy: 10|10
+2025-12-01T20:44:16 [RECEIVE]: Received message from proxy. SEQ: 11, PAYLOAD: DO
+2025-12-01T20:44:16 [SEND]: Sent message to proxy: 11|11
+2025-12-01T20:44:17 [RECEIVE]: Received message from proxy. SEQ: 12, PAYLOAD: WEE WOO
+2025-12-01T20:44:17 [SEND]: Sent message to proxy: 12|12
+2025-12-01T20:44:20 [RECEIVE]: Received message from proxy. SEQ: 13, PAYLOAD: move it
+2025-12-01T20:44:20 [SEND]: Sent message to proxy: 13|13
+2025-12-01T20:44:21 [RECEIVE]: Received message from proxy. SEQ: 14, PAYLOAD: darcy
+2025-12-01T20:44:21 [SEND]: Sent message to proxy: 14|14
+2025-12-01T20:44:23 [RECEIVE]: Received message from proxy. SEQ: 15, PAYLOAD: baby
+2025-12-01T20:44:23 [SEND]: Sent message to proxy: 15|15
+2025-12-01T20:44:24 [RECEIVE]: Received message from proxy. SEQ: 16, PAYLOAD: poooo
+2025-12-01T20:44:24 [SEND]: Sent message to proxy: 16|16
+2025-12-01T20:44:26 [RECEIVE]: Received message from proxy. SEQ: 17, PAYLOAD: MOVE IT
+2025-12-01T20:44:26 [SEND]: Sent message to proxy: 17|17
+2025-12-01T20:44:27 [RECEIVE]: Received message from proxy. SEQ: 18, PAYLOAD: a
+2025-12-01T20:44:27 [SEND]: Sent message to proxy: 18|18
+2025-12-01T20:44:28 [RECEIVE]: Received message from proxy. SEQ: 19, PAYLOAD: w
+2025-12-01T20:44:28 [SEND]: Sent message to proxy: 19|19
+2025-12-01T20:44:28 [RECEIVE]: Received message from proxy. SEQ: 20, PAYLOAD: e
+2025-12-01T20:44:28 [SEND]: Sent message to proxy: 20|20
+2025-12-01T20:44:29 [RECEIVE]: Received message from proxy. SEQ: 21, PAYLOAD: d
+2025-12-01T20:44:29 [SEND]: Sent message to proxy: 21|21
+2025-12-01T20:44:29 [RECEIVE]: Received message from proxy. SEQ: 22, PAYLOAD: s
+2025-12-01T20:44:29 [SEND]: Sent message to proxy: 22|22
+2025-12-01T20:44:30 [RECEIVE]: Received message from proxy. SEQ: 23, PAYLOAD: q
+2025-12-01T20:44:30 [SEND]: Sent message to proxy: 23|23
+2025-12-01T20:44:30 [RECEIVE]: Received message from proxy. SEQ: 24, PAYLOAD: b
+2025-12-01T20:44:30 [SEND]: Sent message to proxy: 24|24
+2025-12-01T20:44:31 [RECEIVE]: Received message from proxy. SEQ: 25, PAYLOAD: n
+2025-12-01T20:44:31 [SEND]: Sent message to proxy: 25|25
+2025-12-01T20:44:34 [RECEIVE]: Received message from proxy. SEQ: 26, PAYLOAD: g
+2025-12-01T20:44:34 [SEND]: Sent message to proxy: 26|26
+2025-12-01T20:44:36 [RECEIVE]: Received message from proxy. SEQ: 26, PAYLOAD: g
+2025-12-01T20:44:36 [SEND]: Sent message to proxy: 26|26
+2025-12-01T20:44:36 [RECEIVE]: Received message from proxy. SEQ: 27, PAYLOAD: f
+2025-12-01T20:44:36 [SEND]: Sent message to proxy: 27|27
+2025-12-01T20:53:08 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: test
+2025-12-01T20:53:08 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:53:10 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: test
+2025-12-01T20:53:10 [SEND]: Sent message to proxy: 0|0
+2025-12-01T20:53:10 [RECEIVE]: Received message from proxy. SEQ: 1, PAYLOAD: a
+2025-12-01T20:53:10 [SEND]: Sent message to proxy: 1|1
+2025-12-01T20:53:11 [RECEIVE]: Received message from proxy. SEQ: 2, PAYLOAD: w
+2025-12-01T20:53:11 [SEND]: Sent message to proxy: 2|2
+2025-12-01T20:53:11 [RECEIVE]: Received message from proxy. SEQ: 3, PAYLOAD: e
+2025-12-01T20:53:11 [SEND]: Sent message to proxy: 3|3
+2025-12-01T20:53:11 [RECEIVE]: Received message from proxy. SEQ: 4, PAYLOAD: d
+2025-12-01T20:53:11 [SEND]: Sent message to proxy: 4|4
+2025-12-01T20:53:11 [RECEIVE]: Received message from proxy. SEQ: 5, PAYLOAD: f
+2025-12-01T20:53:11 [SEND]: Sent message to proxy: 5|5
+2025-12-01T20:53:11 [RECEIVE]: Received message from proxy. SEQ: 6, PAYLOAD: g
+2025-12-01T20:53:11 [SEND]: Sent message to proxy: 6|6
+2025-12-01T20:53:12 [RECEIVE]: Received message from proxy. SEQ: 7, PAYLOAD: 
+2025-12-01T20:53:12 [SEND]: Sent message to proxy: 7|7
+2025-12-01T20:53:12 [RECEIVE]: Received message from proxy. SEQ: 8, PAYLOAD: h
+2025-12-01T20:53:12 [SEND]: Sent message to proxy: 8|8
+2025-12-01T20:53:12 [RECEIVE]: Received message from proxy. SEQ: 9, PAYLOAD: e
+2025-12-01T20:53:12 [SEND]: Sent message to proxy: 9|9
+2025-12-01T20:53:12 [RECEIVE]: Received message from proxy. SEQ: 10, PAYLOAD: 
+2025-12-01T20:53:12 [SEND]: Sent message to proxy: 10|10
+2025-12-01T20:53:13 [RECEIVE]: Received message from proxy. SEQ: 11, PAYLOAD: r
+2025-12-01T20:53:13 [SEND]: Sent message to proxy: 11|11
+2025-12-01T20:53:13 [RECEIVE]: Received message from proxy. SEQ: 12, PAYLOAD: e
+2025-12-01T20:53:13 [SEND]: Sent message to proxy: 12|12
+2025-12-01T20:53:13 [RECEIVE]: Received message from proxy. SEQ: 13, PAYLOAD: w
+2025-12-01T20:53:13 [SEND]: Sent message to proxy: 13|13
+2025-12-01T20:53:13 [RECEIVE]: Received message from proxy. SEQ: 14, PAYLOAD: f
+2025-12-01T20:53:13 [SEND]: Sent message to proxy: 14|14
+2025-12-01T20:53:16 [RECEIVE]: Received message from proxy. SEQ: 15, PAYLOAD: f
+2025-12-01T20:53:16 [SEND]: Sent message to proxy: 15|15
+2025-12-01T20:53:16 [RECEIVE]: Received message from proxy. SEQ: 16, PAYLOAD: a
+2025-12-01T20:53:16 [SEND]: Sent message to proxy: 16|16
+2025-12-01T20:53:18 [RECEIVE]: Received message from proxy. SEQ: 17, PAYLOAD: s
+2025-12-01T20:53:18 [SEND]: Sent message to proxy: 17|17
+2025-12-01T20:53:18 [RECEIVE]: Received message from proxy. SEQ: 18, PAYLOAD: d
+2025-12-01T20:53:18 [SEND]: Sent message to proxy: 18|18
+2025-12-01T20:53:18 [RECEIVE]: Received message from proxy. SEQ: 19, PAYLOAD: d
+2025-12-01T20:53:18 [SEND]: Sent message to proxy: 19|19
+2025-12-01T20:53:20 [RECEIVE]: Received message from proxy. SEQ: 20, PAYLOAD: as
+2025-12-01T20:53:20 [SEND]: Sent message to proxy: 20|20
+2025-12-01T20:53:22 [RECEIVE]: Received message from proxy. SEQ: 21, PAYLOAD: das
+2025-12-01T20:53:22 [SEND]: Sent message to proxy: 21|21
+2025-12-01T20:53:22 [RECEIVE]: Received message from proxy. SEQ: 22, PAYLOAD: d
+2025-12-01T20:53:22 [SEND]: Sent message to proxy: 22|22
+2025-12-01T20:53:22 [RECEIVE]: Received message from proxy. SEQ: 23, PAYLOAD: asd
+2025-12-01T20:53:22 [SEND]: Sent message to proxy: 23|23
+2025-12-01T20:53:22 [RECEIVE]: Received message from proxy. SEQ: 24, PAYLOAD: as
+2025-12-01T20:53:22 [SEND]: Sent message to proxy: 24|24
+2025-12-01T20:53:22 [RECEIVE]: Received message from proxy. SEQ: 25, PAYLOAD: das
+2025-12-01T20:53:22 [SEND]: Sent message to proxy: 25|25
+2025-12-01T20:53:22 [RECEIVE]: Received message from proxy. SEQ: 26, PAYLOAD: da
+2025-12-01T20:53:22 [SEND]: Sent message to proxy: 26|26
+2025-12-01T20:53:22 [RECEIVE]: Received message from proxy. SEQ: 27, PAYLOAD: sd
+2025-12-01T20:53:22 [SEND]: Sent message to proxy: 27|27
+2025-12-01T20:53:22 [RECEIVE]: Received message from proxy. SEQ: 28, PAYLOAD: asd
+2025-12-01T20:53:22 [SEND]: Sent message to proxy: 28|28
+2025-12-01T20:53:23 [RECEIVE]: Received message from proxy. SEQ: 29, PAYLOAD: asd
+2025-12-01T20:53:23 [SEND]: Sent message to proxy: 29|29
+2025-12-01T20:53:23 [RECEIVE]: Received message from proxy. SEQ: 30, PAYLOAD: as
+2025-12-01T20:53:23 [SEND]: Sent message to proxy: 30|30
+2025-12-01T20:53:25 [RECEIVE]: Received message from proxy. SEQ: 31, PAYLOAD: d
+2025-12-01T20:53:25 [SEND]: Sent message to proxy: 31|31
+2025-12-01T20:53:28 [RECEIVE]: Received message from proxy. SEQ: 32, PAYLOAD: q
+2025-12-01T20:53:28 [SEND]: Sent message to proxy: 32|32
+2025-12-01T20:53:29 [RECEIVE]: Received message from proxy. SEQ: 33, PAYLOAD: w
+2025-12-01T20:53:29 [SEND]: Sent message to proxy: 33|33
+2025-12-01T20:53:29 [RECEIVE]: Received message from proxy. SEQ: 34, PAYLOAD: e
+2025-12-01T20:53:29 [SEND]: Sent message to proxy: 34|34
+2025-12-01T20:53:29 [RECEIVE]: Received message from proxy. SEQ: 35, PAYLOAD: r
+2025-12-01T20:53:29 [SEND]: Sent message to proxy: 35|35
+2025-12-01T20:53:31 [RECEIVE]: Received message from proxy. SEQ: 36, PAYLOAD: t
+2025-12-01T20:53:31 [SEND]: Sent message to proxy: 36|36
+2025-12-01T20:53:31 [RECEIVE]: Received message from proxy. SEQ: 37, PAYLOAD: y
+2025-12-01T20:53:31 [SEND]: Sent message to proxy: 37|37
+2025-12-01T20:53:31 [RECEIVE]: Received message from proxy. SEQ: 38, PAYLOAD: u
+2025-12-01T20:53:31 [SEND]: Sent message to proxy: 38|38
+2025-12-01T20:53:31 [RECEIVE]: Received message from proxy. SEQ: 39, PAYLOAD: i
+2025-12-01T20:53:31 [SEND]: Sent message to proxy: 39|39
+2025-12-01T20:53:33 [RECEIVE]: Received message from proxy. SEQ: 40, PAYLOAD: o
+2025-12-01T20:53:33 [SEND]: Sent message to proxy: 40|40
+2025-12-01T20:53:33 [RECEIVE]: Received message from proxy. SEQ: 41, PAYLOAD: p
+2025-12-01T20:53:33 [SEND]: Sent message to proxy: 41|41
+2025-12-01T20:53:35 [RECEIVE]: Received message from proxy. SEQ: 42, PAYLOAD: a
+2025-12-01T20:53:35 [SEND]: Sent message to proxy: 42|42
+2025-12-01T20:53:36 [RECEIVE]: Received message from proxy. SEQ: 43, PAYLOAD: s
+2025-12-01T20:53:36 [SEND]: Sent message to proxy: 43|43
+2025-12-01T20:53:36 [RECEIVE]: Received message from proxy. SEQ: 44, PAYLOAD: d
+2025-12-01T20:53:36 [SEND]: Sent message to proxy: 44|44
+2025-12-01T20:53:36 [RECEIVE]: Received message from proxy. SEQ: 45, PAYLOAD: f
+2025-12-01T20:53:36 [SEND]: Sent message to proxy: 45|45
+2025-12-01T20:53:36 [RECEIVE]: Received message from proxy. SEQ: 46, PAYLOAD: g
+2025-12-01T20:53:36 [SEND]: Sent message to proxy: 46|46
+2025-12-01T20:53:36 [RECEIVE]: Received message from proxy. SEQ: 47, PAYLOAD: h
+2025-12-01T20:53:36 [SEND]: Sent message to proxy: 47|47
+2025-12-01T20:53:36 [RECEIVE]: Received message from proxy. SEQ: 48, PAYLOAD: j
+2025-12-01T20:53:36 [SEND]: Sent message to proxy: 48|48
+2025-12-01T20:53:36 [RECEIVE]: Received message from proxy. SEQ: 49, PAYLOAD: k
+2025-12-01T20:53:36 [SEND]: Sent message to proxy: 49|49
+2025-12-01T20:53:36 [RECEIVE]: Received message from proxy. SEQ: 50, PAYLOAD: l
+2025-12-01T20:53:36 [SEND]: Sent message to proxy: 50|50
+2025-12-01T21:04:50 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: q
+2025-12-01T21:04:50 [SEND]: Sent message to proxy: 0|0
+2025-12-01T21:04:52 [RECEIVE]: Received message from proxy. SEQ: 1, PAYLOAD: w
+2025-12-01T21:04:52 [SEND]: Sent message to proxy: 1|1
+2025-12-01T21:04:52 [RECEIVE]: Received message from proxy. SEQ: 2, PAYLOAD: e
+2025-12-01T21:04:52 [SEND]: Sent message to proxy: 2|2
+2025-12-01T21:04:52 [RECEIVE]: Received message from proxy. SEQ: 3, PAYLOAD: r
+2025-12-01T21:04:52 [SEND]: Sent message to proxy: 3|3
+2025-12-01T21:04:52 [RECEIVE]: Received message from proxy. SEQ: 4, PAYLOAD: t
+2025-12-01T21:04:52 [SEND]: Sent message to proxy: 4|4
+2025-12-01T21:04:52 [RECEIVE]: Received message from proxy. SEQ: 5, PAYLOAD: y
+2025-12-01T21:04:52 [SEND]: Sent message to proxy: 5|5
+2025-12-01T21:04:52 [RECEIVE]: Received message from proxy. SEQ: 6, PAYLOAD: u
+2025-12-01T21:04:52 [SEND]: Sent message to proxy: 6|6
+2025-12-01T21:04:52 [RECEIVE]: Received message from proxy. SEQ: 7, PAYLOAD: i
+2025-12-01T21:04:52 [SEND]: Sent message to proxy: 7|7
+2025-12-01T21:04:54 [RECEIVE]: Received message from proxy. SEQ: 7, PAYLOAD: i
+2025-12-01T21:04:54 [SEND]: Sent message to proxy: 7|7
+2025-12-01T21:04:54 [RECEIVE]: Received message from proxy. SEQ: 8, PAYLOAD: o
+2025-12-01T21:04:54 [SEND]: Sent message to proxy: 8|8
+2025-12-01T21:04:54 [RECEIVE]: Received message from proxy. SEQ: 9, PAYLOAD: p
+2025-12-01T21:04:54 [SEND]: Sent message to proxy: 9|9
+2025-12-01T21:04:54 [RECEIVE]: Received message from proxy. SEQ: 10, PAYLOAD: l
+2025-12-01T21:04:54 [SEND]: Sent message to proxy: 10|10
+2025-12-01T21:04:54 [RECEIVE]: Received message from proxy. SEQ: 11, PAYLOAD: k
+2025-12-01T21:04:54 [SEND]: Sent message to proxy: 11|11
+2025-12-01T21:04:56 [RECEIVE]: Received message from proxy. SEQ: 12, PAYLOAD: j
+2025-12-01T21:04:56 [SEND]: Sent message to proxy: 12|12
+2025-12-01T21:04:56 [RECEIVE]: Received message from proxy. SEQ: 13, PAYLOAD: h
+2025-12-01T21:04:56 [SEND]: Sent message to proxy: 13|13
+2025-12-01T21:04:56 [RECEIVE]: Received message from proxy. SEQ: 14, PAYLOAD: g
+2025-12-01T21:04:56 [SEND]: Sent message to proxy: 14|14
+2025-12-01T21:04:56 [RECEIVE]: Received message from proxy. SEQ: 15, PAYLOAD: f
+2025-12-01T21:04:56 [SEND]: Sent message to proxy: 15|15
+2025-12-01T21:04:58 [RECEIVE]: Received message from proxy. SEQ: 16, PAYLOAD: f
+2025-12-01T21:04:58 [SEND]: Sent message to proxy: 16|16
+2025-12-01T21:04:59 [RECEIVE]: Received message from proxy. SEQ: 17, PAYLOAD: d
+2025-12-01T21:04:59 [SEND]: Sent message to proxy: 17|17
+2025-12-01T21:04:59 [RECEIVE]: Received message from proxy. SEQ: 18, PAYLOAD: s
+2025-12-01T21:04:59 [SEND]: Sent message to proxy: 18|18
+2025-12-01T21:04:59 [RECEIVE]: Received message from proxy. SEQ: 19, PAYLOAD: a
+2025-12-01T21:04:59 [SEND]: Sent message to proxy: 19|19
+2025-12-01T21:05:01 [RECEIVE]: Received message from proxy. SEQ: 20, PAYLOAD: z
+2025-12-01T21:05:01 [SEND]: Sent message to proxy: 20|20
+2025-12-01T21:05:01 [RECEIVE]: Received message from proxy. SEQ: 21, PAYLOAD: x
+2025-12-01T21:05:01 [SEND]: Sent message to proxy: 21|21
+2025-12-01T21:05:03 [RECEIVE]: Received message from proxy. SEQ: 21, PAYLOAD: x
+2025-12-01T21:05:03 [SEND]: Sent message to proxy: 21|21
+2025-12-01T21:05:03 [RECEIVE]: Received message from proxy. SEQ: 22, PAYLOAD: c
+2025-12-01T21:05:03 [SEND]: Sent message to proxy: 22|22
+2025-12-01T21:05:03 [RECEIVE]: Received message from proxy. SEQ: 23, PAYLOAD: v
+2025-12-01T21:05:03 [SEND]: Sent message to proxy: 23|23
+2025-12-01T21:05:03 [RECEIVE]: Received message from proxy. SEQ: 24, PAYLOAD: b
+2025-12-01T21:05:03 [SEND]: Sent message to proxy: 24|24
+2025-12-01T21:05:03 [RECEIVE]: Received message from proxy. SEQ: 25, PAYLOAD: n
+2025-12-01T21:05:03 [SEND]: Sent message to proxy: 25|25
+2025-12-01T21:05:03 [RECEIVE]: Received message from proxy. SEQ: 26, PAYLOAD: m
+2025-12-01T21:05:03 [SEND]: Sent message to proxy: 26|26
+2025-12-01T22:00:15 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: q
+2025-12-01T22:00:15 [SEND]: Sent message to proxy: 0|0
+2025-12-01T22:00:15 [RECEIVE]: Received message from proxy. SEQ: 1, PAYLOAD: w
+2025-12-01T22:00:15 [SEND]: Sent message to proxy: 1|1
+2025-12-01T22:00:15 [RECEIVE]: Received message from proxy. SEQ: 2, PAYLOAD: e
+2025-12-01T22:00:15 [SEND]: Sent message to proxy: 2|2
+2025-12-01T22:00:16 [RECEIVE]: Received message from proxy. SEQ: 3, PAYLOAD: r
+2025-12-01T22:00:16 [SEND]: Sent message to proxy: 3|3
+2025-12-01T22:00:16 [RECEIVE]: Received message from proxy. SEQ: 4, PAYLOAD: t
+2025-12-01T22:00:16 [SEND]: Sent message to proxy: 4|4
+2025-12-01T22:00:16 [RECEIVE]: Received message from proxy. SEQ: 5, PAYLOAD: y
+2025-12-01T22:00:16 [SEND]: Sent message to proxy: 5|5
+2025-12-01T22:00:16 [RECEIVE]: Received message from proxy. SEQ: 6, PAYLOAD: u
+2025-12-01T22:00:16 [SEND]: Sent message to proxy: 6|6
+2025-12-01T22:00:19 [RECEIVE]: Received message from proxy. SEQ: 7, PAYLOAD: i
+2025-12-01T22:00:19 [SEND]: Sent message to proxy: 7|7
+2025-12-01T22:00:19 [RECEIVE]: Received message from proxy. SEQ: 8, PAYLOAD: o
+2025-12-01T22:00:19 [SEND]: Sent message to proxy: 8|8
+2025-12-01T22:00:19 [RECEIVE]: Received message from proxy. SEQ: 9, PAYLOAD: p
+2025-12-01T22:00:19 [SEND]: Sent message to proxy: 9|9
+2025-12-01T22:00:19 [RECEIVE]: Received message from proxy. SEQ: 10, PAYLOAD: l
+2025-12-01T22:00:19 [SEND]: Sent message to proxy: 10|10
+2025-12-01T22:00:21 [RECEIVE]: Received message from proxy. SEQ: 11, PAYLOAD: k
+2025-12-01T22:00:21 [SEND]: Sent message to proxy: 11|11
+2025-12-01T22:00:23 [RECEIVE]: Received message from proxy. SEQ: 11, PAYLOAD: k
+2025-12-01T22:00:23 [SEND]: Sent message to proxy: 11|11
+2025-12-01T22:00:23 [RECEIVE]: Received message from proxy. SEQ: 12, PAYLOAD: j
+2025-12-01T22:00:23 [SEND]: Sent message to proxy: 12|12
+2025-12-01T22:00:23 [RECEIVE]: Received message from proxy. SEQ: 13, PAYLOAD: h
+2025-12-01T22:00:23 [SEND]: Sent message to proxy: 13|13
+2025-12-01T22:00:23 [RECEIVE]: Received message from proxy. SEQ: 14, PAYLOAD: g
+2025-12-01T22:00:23 [SEND]: Sent message to proxy: 14|14
+2025-12-01T22:00:23 [RECEIVE]: Received message from proxy. SEQ: 15, PAYLOAD: f
+2025-12-01T22:00:23 [SEND]: Sent message to proxy: 15|15
+2025-12-01T22:00:23 [RECEIVE]: Received message from proxy. SEQ: 16, PAYLOAD: d
+2025-12-01T22:00:23 [SEND]: Sent message to proxy: 16|16
+2025-12-01T22:00:23 [RECEIVE]: Received message from proxy. SEQ: 17, PAYLOAD: s
+2025-12-01T22:00:23 [SEND]: Sent message to proxy: 17|17
+2025-12-01T22:00:23 [RECEIVE]: Received message from proxy. SEQ: 18, PAYLOAD: a
+2025-12-01T22:00:23 [SEND]: Sent message to proxy: 18|18
+2025-12-01T22:00:25 [RECEIVE]: Received message from proxy. SEQ: 18, PAYLOAD: a
+2025-12-01T22:00:25 [SEND]: Sent message to proxy: 18|18
+2025-12-01T22:00:25 [RECEIVE]: Received message from proxy. SEQ: 19, PAYLOAD: z
+2025-12-01T22:00:25 [SEND]: Sent message to proxy: 19|19
+2025-12-01T22:00:25 [RECEIVE]: Received message from proxy. SEQ: 20, PAYLOAD: x
+2025-12-01T22:00:25 [SEND]: Sent message to proxy: 20|20
+2025-12-01T22:00:25 [RECEIVE]: Received message from proxy. SEQ: 21, PAYLOAD: c
+2025-12-01T22:00:25 [SEND]: Sent message to proxy: 21|21
+2025-12-01T22:00:26 [RECEIVE]: Received message from proxy. SEQ: 22, PAYLOAD: v
+2025-12-01T22:00:26 [SEND]: Sent message to proxy: 22|22
+2025-12-01T22:00:26 [RECEIVE]: Received message from proxy. SEQ: 23, PAYLOAD: b
+2025-12-01T22:00:26 [SEND]: Sent message to proxy: 23|23
+2025-12-01T22:00:30 [RECEIVE]: Received message from proxy. SEQ: 23, PAYLOAD: b
+2025-12-01T22:00:30 [SEND]: Sent message to proxy: 23|23
+2025-12-01T22:00:30 [RECEIVE]: Received message from proxy. SEQ: 24, PAYLOAD: n
+2025-12-01T22:00:30 [SEND]: Sent message to proxy: 24|24
+2025-12-01T22:00:30 [RECEIVE]: Received message from proxy. SEQ: 25, PAYLOAD: m
+2025-12-01T22:00:30 [SEND]: Sent message to proxy: 25|25
+2025-12-01T22:00:30 [RECEIVE]: Received message from proxy. SEQ: 26, PAYLOAD: q
+2025-12-01T22:00:30 [SEND]: Sent message to proxy: 26|26
+2025-12-01T22:01:24 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: q
+2025-12-01T22:01:24 [SEND]: Sent message to proxy: 0|0
+2025-12-01T22:01:26 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: q
+2025-12-01T22:01:26 [SEND]: Sent message to proxy: 0|0
+2025-12-01T22:01:26 [RECEIVE]: Received message from proxy. SEQ: 1, PAYLOAD: w
+2025-12-01T22:01:26 [SEND]: Sent message to proxy: 1|1
+2025-12-01T22:01:26 [RECEIVE]: Received message from proxy. SEQ: 2, PAYLOAD: e
+2025-12-01T22:01:26 [SEND]: Sent message to proxy: 2|2
+2025-12-01T22:01:26 [RECEIVE]: Received message from proxy. SEQ: 3, PAYLOAD: r
+2025-12-01T22:01:26 [SEND]: Sent message to proxy: 3|3
+2025-12-01T22:01:26 [RECEIVE]: Received message from proxy. SEQ: 4, PAYLOAD: t
+2025-12-01T22:01:26 [SEND]: Sent message to proxy: 4|4
+2025-12-01T22:01:26 [RECEIVE]: Received message from proxy. SEQ: 5, PAYLOAD: y
+2025-12-01T22:01:26 [SEND]: Sent message to proxy: 5|5
+2025-12-01T22:01:26 [RECEIVE]: Received message from proxy. SEQ: 6, PAYLOAD: u
+2025-12-01T22:01:26 [SEND]: Sent message to proxy: 6|6
+2025-12-01T22:01:26 [RECEIVE]: Received message from proxy. SEQ: 7, PAYLOAD: i
+2025-12-01T22:01:26 [SEND]: Sent message to proxy: 7|7
+2025-12-01T22:01:26 [RECEIVE]: Received message from proxy. SEQ: 8, PAYLOAD: o
+2025-12-01T22:01:26 [SEND]: Sent message to proxy: 8|8
+2025-12-01T22:01:26 [RECEIVE]: Received message from proxy. SEQ: 9, PAYLOAD: p
+2025-12-01T22:01:26 [SEND]: Sent message to proxy: 9|9
+2025-12-01T22:01:26 [RECEIVE]: Received message from proxy. SEQ: 10, PAYLOAD: l
+2025-12-01T22:01:26 [SEND]: Sent message to proxy: 10|10
+2025-12-01T22:01:26 [RECEIVE]: Received message from proxy. SEQ: 11, PAYLOAD: k
+2025-12-01T22:01:26 [SEND]: Sent message to proxy: 11|11
+2025-12-01T22:01:29 [RECEIVE]: Received message from proxy. SEQ: 12, PAYLOAD: j
+2025-12-01T22:01:29 [SEND]: Sent message to proxy: 12|12
+2025-12-01T22:01:29 [RECEIVE]: Received message from proxy. SEQ: 13, PAYLOAD: h
+2025-12-01T22:01:29 [SEND]: Sent message to proxy: 13|13
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 13, PAYLOAD: h
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 13|13
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 14, PAYLOAD: g
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 14|14
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 15, PAYLOAD: f
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 15|15
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 16, PAYLOAD: d
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 16|16
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 17, PAYLOAD: s
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 17|17
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 18, PAYLOAD: a
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 18|18
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 19, PAYLOAD: z
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 19|19
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 20, PAYLOAD: x
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 20|20
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 21, PAYLOAD: c
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 21|21
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 22, PAYLOAD: v
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 22|22
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 23, PAYLOAD: b
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 23|23
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 24, PAYLOAD: n
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 24|24
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 25, PAYLOAD: m
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 25|25
+2025-12-01T22:01:31 [RECEIVE]: Received message from proxy. SEQ: 26, PAYLOAD: AHDJKJASHDKAJSDHA
+2025-12-01T22:01:31 [SEND]: Sent message to proxy: 26|26

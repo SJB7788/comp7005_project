@@ -138,7 +138,7 @@ int main(int argc, char *argv[]) {
       retry_count++;
       snprintf(log_buffer, sizeof(log_buffer),
                "Timeout! Retransmitting message. Retry: %d", retry_count);
-      log_message(log_file, "TIMEOUT", log_buffer);
+      log_message(log_file, "RETRY", log_buffer);
       continue;
     }
 

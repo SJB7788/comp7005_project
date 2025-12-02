@@ -102,41 +102,6 @@ static const struct option long_options[] = {
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
 static volatile sig_atomic_t exit_flag = 0;
 
-static void print_sockaddr(struct sockaddr_storage *addr, const char *label) {
-  char ipstr[INET6_ADDRSTRLEN];
-  void *src = NULL;
-  uint16_t port;
-
-  if (addr == NULL) {
-    fprintf(stderr, "%s: (null address)\n", label);
-    return;
-  }
-
-  if (addr->ss_family == AF_INET) {
-    struct sockaddr_in *a4 = (struct sockaddr_in *)addr;
-    src = (void *)&a4->sin_addr;
-    port = ntohs(a4->sin_port);
-
-    if (inet_ntop(AF_INET, src, ipstr, sizeof(ipstr)) == NULL) {
-      strcpy(ipstr, "invalid-ipv4");
-    }
-
-    fprintf(stderr, "%s: IPv4 %s:%u\n", label, ipstr, port);
-  } else if (addr->ss_family == AF_INET6) {
-    struct sockaddr_in6 *a6 = (struct sockaddr_in6 *)addr;
-    src = (void *)&a6->sin6_addr;
-    port = ntohs(a6->sin6_port);
-
-    if (inet_ntop(AF_INET6, src, ipstr, sizeof(ipstr)) == NULL) {
-      strcpy(ipstr, "invalid-ipv6");
-    }
-
-    fprintf(stderr, "%s: IPv6 [%s]:%u\n", label, ipstr, port);
-  } else {
-    fprintf(stderr, "%s: Unknown address family: %d\n", label, addr->ss_family);
-  }
-}
-
 int main(int argc, char *argv[]) {
   Arguments args = {0};
 
@@ -194,14 +159,12 @@ int main(int argc, char *argv[]) {
       memcpy(&client_addr, &src_addr, sizeof(struct sockaddr_storage));
       client_addr_len = src_addr_len;
       client_known = 1;
-      printf("CLIENT\n\n");
-      print_sockaddr(&client_addr, "CLIENT");
     }
 
     if (same_addr(&src_addr, &server_addr)) {
-      snprintf(log_buffer, sizeof(log_buffer), "Read message from Server: %s",
+      snprintf(log_buffer, sizeof(log_buffer), "Read message from server: %s",
                message);
-      log_message(log_file, "RECIEVE", "proxy<-server", log_buffer);
+      log_message(log_file, "RECEIVE", "server", log_buffer);
 
       delay =
           simulate_delay(DENOMINATOR, args.server_cfg.min_delay,
@@ -209,24 +172,24 @@ int main(int argc, char *argv[]) {
       if (delay > 0) {
         snprintf(log_buffer, sizeof(log_buffer),
                  "Delayed server message for %d ms", delay);
-        log_message(log_file, "DELAY", "client<-proxy", log_buffer);
+        log_message(log_file, "DELAY", "server", log_buffer);
       }
 
       if (simulate_drop(DENOMINATOR, args.server_cfg.drop_prob)) {
         snprintf(log_buffer, sizeof(log_buffer), "Dropped server message : %s",
                  message);
-        log_message(log_file, "DROP", "client<-proxy", log_buffer);
+        log_message(log_file, "DROP", "server", log_buffer);
         continue;
       }
 
       send_message(sockfd, message, &client_addr, client_addr_len);
-      snprintf(log_buffer, sizeof(log_buffer), "Sent message to client: %s",
-               message);
-      log_message(log_file, "SEND", "client<-proxy", log_buffer);
+      snprintf(log_buffer, sizeof(log_buffer),
+               "Sent server message to client: %s", message);
+      log_message(log_file, "SEND", "client", log_buffer);
     } else {
-      snprintf(log_buffer, sizeof(log_buffer), "Read message from Client: %s",
+      snprintf(log_buffer, sizeof(log_buffer), "Read message from client: %s",
                message);
-      log_message(log_file, "RECEIVE", "client->proxy", log_buffer);
+      log_message(log_file, "RECEIVE", "client", log_buffer);
 
       delay =
           simulate_delay(DENOMINATOR, args.client_cfg.min_delay,
@@ -234,20 +197,20 @@ int main(int argc, char *argv[]) {
       if (delay > 0) {
         snprintf(log_buffer, sizeof(log_buffer),
                  "Delayed client message for %d ms", delay);
-        log_message(log_file, "DELAY", "proxy->server", log_buffer);
+        log_message(log_file, "DELAY", "client", log_buffer);
       }
 
       if (simulate_drop(DENOMINATOR, args.client_cfg.drop_prob)) {
-        snprintf(log_buffer, sizeof(log_buffer), "Dropped Client message: %s",
+        snprintf(log_buffer, sizeof(log_buffer), "Dropped client message: %s",
                  message);
-        log_message(log_file, "DROP", "proxy->server", log_buffer);
+        log_message(log_file, "DROP", "client", log_buffer);
         continue;
       }
 
       send_message(sockfd, message, &server_addr, server_addr_len);
-      snprintf(log_buffer, sizeof(log_buffer), "Sent message to Server: %s",
-               message);
-      log_message(log_file, "SEND", "proxy->server", log_buffer);
+      snprintf(log_buffer, sizeof(log_buffer),
+               "Sent client message to server: %s", message);
+      log_message(log_file, "SEND", "server", log_buffer);
     }
   }
 
