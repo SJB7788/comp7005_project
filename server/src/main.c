@@ -113,8 +113,7 @@ int main(int argc, char *argv[]) {
     strlcat(ack_message, "|", BUFFER_SIZE);
     strlcat(ack_message, ack, BUFFER_SIZE);
     send_message(sockfd, ack_message, &client_addr, client_addr_len);
-    snprintf(log_buffer, sizeof(log_buffer), "Sent message to proxy: %s",
-             ack_message);
+    snprintf(log_buffer, sizeof(log_buffer), "Sent message: %s", ack_message);
     log_message(log_file, "SEND", log_buffer);
   }
 
