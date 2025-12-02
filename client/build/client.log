@@ -83,3 +83,7 @@
 2025-12-02T12:02:01 [RETRY]: Timeout! Retransmitting message. Retry: 1
 2025-12-02T12:02:01 [SEND]: Sent message: 0|hello this is a message
 2025-12-02T12:02:01 [RECEIVE]: Received ack: 0
+2025-12-02T12:03:53 [SEND]: Sent message: 0|hi
+2025-12-02T12:03:55 [RETRY]: Timeout! Retransmitting message. Retry: 1
+2025-12-02T12:03:55 [SEND]: Sent message: 0|hi
+2025-12-02T12:03:55 [RECEIVE]: Received ack: 0
