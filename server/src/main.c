@@ -19,7 +19,8 @@ static void handle_arguments(const char *binary_name, const char *ip_address,
 static in_port_t parse_port(const char *binary_name, const char *port_str);
 _Noreturn static void usage(const char *program_name, int exit_code,
                             const char *message);
-static void convert_address(const char *address, struct sockaddr_storage *addr);
+static void convert_address(const char *address, struct sockaddr_storage *addr,
+                            socklen_t *addr_len);
 static int create_socket(int domain, int type, int protocol);
 static void bind_socket(int sockfd, struct sockaddr_storage *addr,
                         in_port_t port);
@@ -64,6 +65,7 @@ int main(int argc, char *argv[]) {
   struct sockaddr_storage client_addr;
   socklen_t client_addr_len;
   struct sockaddr_storage addr;
+  socklen_t addr_len;
 
   char buffer[BUFFER_SIZE];
   ssize_t bytes_received;
@@ -77,7 +79,7 @@ int main(int argc, char *argv[]) {
   parse_arguments(argc, argv, &address, &port_str);
   handle_arguments(argv[0], address, port_str, &port);
 
-  convert_address(address, &addr);
+  convert_address(address, &addr, &addr_len);
 
   sockfd = create_socket(addr.ss_family, SOCK_DGRAM, 0);
   bind_socket(sockfd, &addr, port);
@@ -259,16 +261,18 @@ _Noreturn static void usage(const char *program_name, int exit_code,
   exit(exit_code);
 }
 
-static void convert_address(const char *address,
-                            struct sockaddr_storage *addr) {
+static void convert_address(const char *address, struct sockaddr_storage *addr,
+                            socklen_t *addr_len) {
   memset(addr, 0, sizeof(*addr));
 
   if (inet_pton(AF_INET, address, &(((struct sockaddr_in *)addr)->sin_addr)) ==
       1) {
     addr->ss_family = AF_INET;
+    *addr_len = sizeof(struct sockaddr_in);
   } else if (inet_pton(AF_INET6, address,
                        &(((struct sockaddr_in6 *)addr)->sin6_addr)) == 1) {
     addr->ss_family = AF_INET6;
+    *addr_len = sizeof(struct sockaddr_in6);
   } else {
     fprintf(stderr, "%s is not an IPv4 or an IPv6 address\n", address);
     exit(EXIT_FAILURE);
