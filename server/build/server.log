@@ -1,0 +1,50 @@
+2025-12-01T18:51:40 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: we are charlie kiiiirk
+2025-12-01T18:51:40 [SEND]: Sent message to proxy: 0|0
+2025-12-01T18:51:45 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: we are charlie kiiiirk
+2025-12-01T18:51:45 [SEND]: Sent message to proxy: 0|0
+2025-12-01T18:52:26 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: move it
+2025-12-01T18:52:26 [SEND]: Sent message to proxy: 0|0
+2025-12-01T18:52:31 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: move it
+2025-12-01T18:52:31 [SEND]: Sent message to proxy: 0|0
+2025-12-01T18:52:36 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: move it
+2025-12-01T18:52:36 [SEND]: Sent message to proxy: 0|0
+2025-12-01T18:52:41 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: move it
+2025-12-01T18:52:41 [SEND]: Sent message to proxy: 0|0
+2025-12-01T18:53:08 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: hi
+2025-12-01T18:53:08 [SEND]: Sent message to proxy: 0|0
+2025-12-01T18:53:13 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: hi
+2025-12-01T18:53:13 [SEND]: Sent message to proxy: 0|0
+2025-12-01T18:53:18 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: hi
+2025-12-01T18:53:18 [SEND]: Sent message to proxy: 0|0
+2025-12-01T18:53:23 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: hi
+2025-12-01T18:53:23 [SEND]: Sent message to proxy: 0|0
+2025-12-01T18:53:33 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: hi
+2025-12-01T18:53:33 [SEND]: Sent message to proxy: 0|0
+2025-12-01T18:54:12 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: ah
+2025-12-01T18:54:12 [SEND]: Sent message to proxy: 0|0
+2025-12-01T18:54:17 [RECEIVE]: Received message from proxy. SEQ: 0, PAYLOAD: ah
+2025-12-01T18:54:17 [SEND]: Sent message to proxy: 0|0
+2025-12-01T18:54:33 [RECEIVE]: Received message from proxy. SEQ: 1, PAYLOAD: tets
+2025-12-01T18:54:33 [SEND]: Sent message to proxy: 1|1
+2025-12-01T18:54:41 [RECEIVE]: Received message from proxy. SEQ: 2, PAYLOAD: delay
+2025-12-01T18:54:41 [SEND]: Sent message to proxy: 2|2
+2025-12-01T18:54:45 [RECEIVE]: Received message from proxy. SEQ: 3, PAYLOAD: delay2
+2025-12-01T18:54:45 [SEND]: Sent message to proxy: 3|3
+2025-12-01T18:54:51 [RECEIVE]: Received message from proxy. SEQ: 4, PAYLOAD: what
+2025-12-01T18:54:51 [SEND]: Sent message to proxy: 4|4
+2025-12-01T18:54:56 [RECEIVE]: Received message from proxy. SEQ: 5, PAYLOAD: its too fast
+2025-12-01T18:54:56 [SEND]: Sent message to proxy: 5|5
+2025-12-01T18:54:57 [RECEIVE]: Received message from proxy. SEQ: 6, PAYLOAD: please
+2025-12-01T18:54:57 [SEND]: Sent message to proxy: 6|6
+2025-12-01T18:54:59 [RECEIVE]: Received message from proxy. SEQ: 7, PAYLOAD: DELAAY
+2025-12-01T18:54:59 [SEND]: Sent message to proxy: 7|7
+2025-12-01T18:55:03 [RECEIVE]: Received message from proxy. SEQ: 8, PAYLOAD: here come DELAY
+2025-12-01T18:55:03 [SEND]: Sent message to proxy: 8|8
+2025-12-01T18:55:14 [RECEIVE]: Received message from proxy. SEQ: 9, PAYLOAD: how is there no delay
+2025-12-01T18:55:14 [SEND]: Sent message to proxy: 9|9
+2025-12-01T18:55:18 [RECEIVE]: Received message from proxy. SEQ: 10, PAYLOAD: a
+2025-12-01T18:55:18 [SEND]: Sent message to proxy: 10|10
+2025-12-01T18:55:19 [RECEIVE]: Received message from proxy. SEQ: 11, PAYLOAD: a
+2025-12-01T18:55:19 [SEND]: Sent message to proxy: 11|11
+2025-12-01T18:55:24 [RECEIVE]: Received message from proxy. SEQ: 11, PAYLOAD: a
+2025-12-01T18:55:24 [SEND]: Sent message to proxy: 11|11

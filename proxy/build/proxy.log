@@ -1,0 +1,362 @@
+2025-11-30T23:52:39 [RECEIVE] (client->proxy): Read message from Client: 5|hellooo
+2025-11-30T23:52:39 [SEND] (proxy->server): Sent message to Server: 5|hellooo
+2025-11-30T23:52:39 [RECIEVE] (server->proxy): Read message from Server: 5|5
+2025-11-30T23:52:39 [SEND] (proxy): Sent message to client: 5|5
+2025-11-30T23:52:48 [RECEIVE] (client->proxy): Read message from Client: 6|unusual
+2025-11-30T23:52:48 [DELAY] (client->server): Delayed client message for 319 ms
+2025-11-30T23:52:48 [DROP] (proxy): Dropped Client message: 6|unusual
+2025-11-30T23:52:50 [RECEIVE] (client->proxy): Read message from Client: 6|unusual
+2025-11-30T23:52:50 [DELAY] (client->server): Delayed client message for 228 ms
+2025-11-30T23:52:50 [DROP] (proxy): Dropped Client message: 6|unusual
+2025-11-30T23:52:52 [RECEIVE] (client->proxy): Read message from Client: 6|unusual
+2025-11-30T23:52:52 [DROP] (proxy): Dropped Client message: 6|unusual
+2025-11-30T23:52:54 [RECEIVE] (client->proxy): Read message from Client: 6|unusual
+2025-11-30T23:52:54 [DELAY] (client->server): Delayed client message for 216 ms
+2025-11-30T23:52:54 [DROP] (proxy): Dropped Client message: 6|unusual
+2025-11-30T23:52:56 [RECEIVE] (client->proxy): Read message from Client: 6|unusual
+2025-11-30T23:52:56 [DELAY] (client->server): Delayed client message for 184 ms
+2025-11-30T23:52:56 [SEND] (proxy->server): Sent message to Server: 6|unusual
+2025-11-30T23:52:56 [RECIEVE] (server->proxy): Read message from Server: 6|6
+2025-11-30T23:52:56 [DROP] (client<-proxy): Dropped server message : 6|6
+2025-11-30T23:52:58 [RECEIVE] (client->proxy): Read message from Client: 6|unusual
+2025-11-30T23:52:58 [DELAY] (client->server): Delayed client message for 498 ms
+2025-11-30T23:52:58 [SEND] (proxy->server): Sent message to Server: 6|unusual
+2025-11-30T23:52:58 [RECIEVE] (server->proxy): Read message from Server: 6|6
+2025-11-30T23:52:58 [DROP] (client<-proxy): Dropped server message : 6|6
+2025-11-30T23:53:35 [RECEIVE] (client->proxy): Read message from Client: 6|hi
+2025-11-30T23:53:35 [SEND] (proxy->server): Sent message to Server: 6|hi
+2025-11-30T23:53:35 [RECIEVE] (server->proxy): Read message from Server: 6|6
+2025-11-30T23:53:37 [DELAY] (client<-proxy): Delayed server message for 1839 ms
+2025-11-30T23:53:37 [SEND] (proxy): Sent message to client: 6|6
+2025-11-30T23:53:45 [RECEIVE] (client->proxy): Read message from Client: 7|hi
+2025-11-30T23:53:49 [DELAY] (client->server): Delayed client message for 4348 ms
+2025-11-30T23:53:49 [SEND] (proxy->server): Sent message to Server: 7|hi
+2025-11-30T23:53:49 [RECIEVE] (server->proxy): Read message from Server: 7|hi
+2025-11-30T23:53:49 [DROP] (client<-proxy): Dropped server message : 7|hi
+2025-11-30T23:53:49 [RECEIVE] (client->proxy): Read message from Client: 7|hi
+2025-11-30T23:53:49 [SEND] (proxy->server): Sent message to Server: 7|hi
+2025-11-30T23:53:49 [RECIEVE] (server->proxy): Read message from Server: 7|7
+2025-11-30T23:53:49 [DROP] (client<-proxy): Dropped server message : 7|7
+2025-11-30T23:53:49 [RECEIVE] (client->proxy): Read message from Client: 7|7
+2025-11-30T23:53:49 [SEND] (proxy->server): Sent message to Server: 7|7
+2025-11-30T23:53:49 [RECIEVE] (server->proxy): Read message from Server: 7|7
+2025-11-30T23:53:51 [DELAY] (client<-proxy): Delayed server message for 1523 ms
+2025-11-30T23:53:51 [SEND] (proxy): Sent message to client: 7|7
+2025-11-30T23:53:51 [RECEIVE] (client->proxy): Read message from Client: 7|7
+2025-11-30T23:53:53 [DELAY] (client->server): Delayed client message for 2082 ms
+2025-11-30T23:53:53 [DROP] (proxy): Dropped Client message: 7|7
+2025-11-30T23:53:53 [RECEIVE] (client->proxy): Read message from Client: 7|hi
+2025-11-30T23:53:57 [DELAY] (client->server): Delayed client message for 4166 ms
+2025-11-30T23:53:57 [SEND] (proxy->server): Sent message to Server: 7|hi
+2025-11-30T23:53:57 [RECIEVE] (server->proxy): Read message from Server: 7|hi
+2025-11-30T23:53:57 [SEND] (proxy): Sent message to client: 7|hi
+2025-11-30T23:53:57 [RECEIVE] (client->proxy): Read message from Client: 7|hi
+2025-11-30T23:54:01 [DELAY] (client->server): Delayed client message for 4166 ms
+2025-11-30T23:54:01 [SEND] (proxy->server): Sent message to Server: 7|hi
+2025-11-30T23:54:01 [RECIEVE] (server->proxy): Read message from Server: 7|7
+2025-11-30T23:54:01 [DROP] (client<-proxy): Dropped server message : 7|7
+2025-11-30T23:54:01 [RECEIVE] (client->proxy): Read message from Client: 7|7
+2025-11-30T23:54:03 [DELAY] (client->server): Delayed client message for 1820 ms
+2025-11-30T23:54:03 [SEND] (proxy->server): Sent message to Server: 7|7
+2025-11-30T23:54:03 [RECIEVE] (server->proxy): Read message from Server: 7|7
+2025-11-30T23:54:06 [DELAY] (client<-proxy): Delayed server message for 2395 ms
+2025-11-30T23:54:06 [SEND] (proxy): Sent message to client: 7|7
+2025-11-30T23:54:06 [RECEIVE] (client->proxy): Read message from Client: 7|7
+2025-11-30T23:54:06 [SEND] (proxy->server): Sent message to Server: 7|7
+2025-11-30T23:54:06 [RECIEVE] (server->proxy): Read message from Server: 7|7
+2025-11-30T23:54:08 [DELAY] (client<-proxy): Delayed server message for 2407 ms
+2025-11-30T23:54:08 [DROP] (client<-proxy): Dropped server message : 7|7
+2025-11-30T23:55:54 [RECEIVE] (client->proxy): Read message from Client: 7|hi
+2025-11-30T23:55:54 [DROP] (proxy->server): Dropped Client message: 7|hi
+2025-11-30T23:55:54 [RECEIVE] (client->proxy): Read message from Client: 7|hi
+2025-11-30T23:55:54 [DROP] (proxy->server): Dropped Client message: 7|hi
+2025-11-30T23:55:56 [RECEIVE] (client->proxy): Read message from Client: 7|hi
+2025-11-30T23:55:56 [DROP] (proxy->server): Dropped Client message: 7|hi
+2025-11-30T23:55:58 [RECEIVE] (client->proxy): Read message from Client: 7|hi
+2025-11-30T23:56:01 [DELAY] (proxy->server): Delayed client message for 2575 ms
+2025-11-30T23:56:01 [DROP] (proxy->server): Dropped Client message: 7|hi
+2025-11-30T23:56:01 [RECEIVE] (client->proxy): Read message from Client: 7|hi
+2025-11-30T23:56:04 [DELAY] (proxy->server): Delayed client message for 2487 ms
+2025-11-30T23:56:04 [SEND] (proxy->server): Sent message to Server: 7|hi
+2025-11-30T23:56:04 [RECIEVE] (proxy<-server): Read message from Server: 7|hi
+2025-11-30T23:56:04 [SEND] (client<-proxy): Sent message to client: 7|hi
+2025-11-30T23:56:04 [RECEIVE] (client->proxy): Read message from Client: 7|7
+2025-11-30T23:56:04 [SEND] (proxy->server): Sent message to Server: 7|7
+2025-11-30T23:56:04 [RECIEVE] (proxy<-server): Read message from Server: 7|7
+2025-11-30T23:56:04 [SEND] (client<-proxy): Sent message to client: 7|7
+2025-11-30T23:56:04 [RECEIVE] (client->proxy): Read message from Client: 7|7
+2025-11-30T23:56:04 [SEND] (proxy->server): Sent message to Server: 7|7
+2025-11-30T23:56:04 [RECIEVE] (proxy<-server): Read message from Server: 7|7
+2025-11-30T23:56:08 [DELAY] (client<-proxy): Delayed server message for 4028 ms
+2025-11-30T23:56:08 [DROP] (client<-proxy): Dropped server message : 7|7
+2025-11-30T23:58:09 [RECEIVE] (client->proxy): Read message from Client: 7|hi
+2025-11-30T23:58:09 [SEND] (proxy->server): Sent message to Server: 7|hi
+2025-11-30T23:58:09 [RECIEVE] (proxy<-server): Read message from Server: 7|7
+2025-11-30T23:58:09 [SEND] (client<-proxy): Sent message to client: 7|7
+2025-11-30T23:58:13 [RECEIVE] (client->proxy): Read message from Client: 8|hi
+2025-11-30T23:58:15 [DELAY] (proxy->server): Delayed client message for 1696 ms
+2025-11-30T23:58:15 [DROP] (proxy->server): Dropped Client message: 8|hi
+2025-11-30T23:58:15 [RECEIVE] (client->proxy): Read message from Client: 8|hi
+2025-11-30T23:58:18 [DELAY] (proxy->server): Delayed client message for 3260 ms
+2025-11-30T23:58:18 [DROP] (proxy->server): Dropped Client message: 8|hi
+2025-11-30T23:58:18 [RECEIVE] (client->proxy): Read message from Client: 8|hi
+2025-11-30T23:58:19 [DELAY] (proxy->server): Delayed client message for 1391 ms
+2025-11-30T23:58:19 [SEND] (proxy->server): Sent message to Server: 8|hi
+2025-11-30T23:58:19 [RECIEVE] (proxy<-server): Read message from Server: 8|hi
+2025-11-30T23:58:19 [SEND] (client<-proxy): Sent message to client: 8|hi
+2025-11-30T23:58:19 [RECEIVE] (client->proxy): Read message from Client: 8|8
+2025-11-30T23:58:19 [DROP] (proxy->server): Dropped Client message: 8|8
+2025-11-30T23:58:19 [RECEIVE] (client->proxy): Read message from Client: 8|hi
+2025-11-30T23:58:21 [DELAY] (proxy->server): Delayed client message for 1374 ms
+2025-11-30T23:58:21 [SEND] (proxy->server): Sent message to Server: 8|hi
+2025-11-30T23:58:21 [RECIEVE] (proxy<-server): Read message from Server: 8|8
+2025-11-30T23:58:25 [DELAY] (client<-proxy): Delayed server message for 4339 ms
+2025-11-30T23:58:25 [SEND] (client<-proxy): Sent message to client: 8|8
+2025-11-30T23:58:25 [RECEIVE] (client->proxy): Read message from Client: 8|hi
+2025-11-30T23:58:25 [DROP] (proxy->server): Dropped Client message: 8|hi
+2025-12-01T00:00:31 [RECEIVE] (client->proxy): Read message from Client: 8|hi
+2025-12-01T00:00:31 [DROP] (proxy->server): Dropped Client message: 8|hi
+2025-12-01T00:00:42 [RECEIVE] (client->proxy): Read message from Client: 9|hi
+2025-12-01T00:00:46 [DELAY] (proxy->server): Delayed client message for 3704 ms
+2025-12-01T00:00:46 [SEND] (proxy->server): Sent message to Server: 9|hi
+2025-12-01T00:00:46 [RECIEVE] (proxy<-server): Read message from Server: 9|hi
+2025-12-01T00:00:46 [DROP] (client<-proxy): Dropped server message : 9|hi
+2025-12-01T00:00:46 [RECEIVE] (client->proxy): Read message from Client: 9|9
+2025-12-01T00:00:48 [DELAY] (proxy->server): Delayed client message for 2175 ms
+2025-12-01T00:00:48 [SEND] (proxy->server): Sent message to Server: 9|9
+2025-12-01T00:00:48 [RECIEVE] (proxy<-server): Read message from Server: 9|hi
+2025-12-01T00:00:48 [SEND] (client<-proxy): Sent message to client: 9|hi
+2025-12-01T00:00:48 [RECEIVE] (client->proxy): Read message from Client: 9|9
+2025-12-01T00:00:53 [DELAY] (proxy->server): Delayed client message for 4789 ms
+2025-12-01T00:00:53 [SEND] (proxy->server): Sent message to Server: 9|9
+2025-12-01T00:00:53 [RECIEVE] (proxy<-server): Read message from Server: 9|9
+2025-12-01T00:00:55 [DELAY] (client<-proxy): Delayed server message for 2467 ms
+2025-12-01T00:00:55 [DROP] (client<-proxy): Dropped server message : 9|9
+2025-12-01T00:00:55 [RECEIVE] (client->proxy): Read message from Client: 9|hi
+2025-12-01T00:00:55 [DROP] (proxy->server): Dropped Client message: 9|hi
+2025-12-01T00:00:55 [RECEIVE] (client->proxy): Read message from Client: 9|hi
+2025-12-01T00:00:55 [DROP] (proxy->server): Dropped Client message: 9|hi
+2025-12-01T00:00:55 [RECEIVE] (client->proxy): Read message from Client: 9|hi
+2025-12-01T00:00:58 [DELAY] (proxy->server): Delayed client message for 2364 ms
+2025-12-01T00:00:58 [SEND] (proxy->server): Sent message to Server: 9|hi
+2025-12-01T00:00:58 [RECIEVE] (proxy<-server): Read message from Server: 9|9
+2025-12-01T00:00:59 [DELAY] (client<-proxy): Delayed server message for 1025 ms
+2025-12-01T00:00:59 [SEND] (client<-proxy): Sent message to client: 9|9
+2025-12-01T00:00:59 [RECEIVE] (client->proxy): Read message from Client: 9|9
+2025-12-01T00:01:01 [DELAY] (proxy->server): Delayed client message for 1980 ms
+2025-12-01T00:01:01 [DROP] (proxy->server): Dropped Client message: 9|9
+2025-12-01T00:02:26 [RECEIVE] (client->proxy): Read message from Client: 9|hi
+2025-12-01T00:02:30 [DELAY] (proxy->server): Delayed client message for 3707 ms
+2025-12-01T00:02:30 [DROP] (proxy->server): Dropped Client message: 9|hi
+2025-12-01T00:02:30 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:02:30 [DROP] (proxy->server): Dropped Client message: 10|hi
+2025-12-01T00:02:31 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:02:34 [DELAY] (proxy->server): Delayed client message for 3633 ms
+2025-12-01T00:02:34 [DROP] (proxy->server): Dropped Client message: 10|hi
+2025-12-01T00:02:34 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:02:34 [DROP] (proxy->server): Dropped Client message: 10|hi
+2025-12-01T00:02:35 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:02:35 [DROP] (proxy->server): Dropped Client message: 10|hi
+2025-12-01T00:02:37 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:02:41 [DELAY] (proxy->server): Delayed client message for 3790 ms
+2025-12-01T00:02:41 [SEND] (proxy->server): Sent message to Server: 10|hi
+2025-12-01T00:02:41 [RECIEVE] (proxy<-server): Read message from Server: 10|hi
+2025-12-01T00:02:45 [DELAY] (client<-proxy): Delayed server message for 4522 ms
+2025-12-01T00:02:45 [SEND] (client<-proxy): Sent message to client: 10|hi
+2025-12-01T00:02:45 [RECEIVE] (client->proxy): Read message from Client: 10|10
+2025-12-01T00:02:48 [DELAY] (proxy->server): Delayed client message for 2450 ms
+2025-12-01T00:02:48 [SEND] (proxy->server): Sent message to Server: 10|10
+2025-12-01T00:02:48 [RECIEVE] (proxy<-server): Read message from Server: 10|10
+2025-12-01T00:02:52 [DELAY] (client<-proxy): Delayed server message for 4917 ms
+2025-12-01T00:02:52 [SEND] (client<-proxy): Sent message to client: 10|10
+2025-12-01T00:02:52 [RECEIVE] (client->proxy): Read message from Client: 10|10
+2025-12-01T00:02:57 [DELAY] (proxy->server): Delayed client message for 4430 ms
+2025-12-01T00:02:57 [DROP] (proxy->server): Dropped Client message: 10|10
+2025-12-01T00:29:03 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:29:03 [SEND] (proxy->server): Sent message to Server: 10|hi
+2025-12-01T00:29:03 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:29:03 [SEND] (proxy->server): Sent message to Server: 10|hi
+2025-12-01T00:29:03 [RECIEVE] (proxy<-server): Read message from Server: 10|10
+2025-12-01T00:30:12 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:30:17 [DELAY] (proxy->server): Delayed client message for 4254 ms
+2025-12-01T00:30:17 [DROP] (proxy->server): Dropped Client message: 10|hi
+2025-12-01T00:30:17 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:30:17 [DROP] (proxy->server): Dropped Client message: 10|hi
+2025-12-01T00:30:17 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:30:22 [DELAY] (proxy->server): Delayed client message for 4970 ms
+2025-12-01T00:30:22 [SEND] (proxy->server): Sent message to Server: 10|hi
+2025-12-01T00:30:22 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:30:22 [SEND] (proxy->server): Sent message to Server: 10|hi
+2025-12-01T00:30:22 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:30:23 [DELAY] (proxy->server): Delayed client message for 1190 ms
+2025-12-01T00:30:23 [SEND] (proxy->server): Sent message to Server: 10|hi
+2025-12-01T00:30:23 [RECIEVE] (proxy<-server): Read message from Server: 10|10
+2025-12-01T00:33:18 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:33:23 [DELAY] (proxy->server): Delayed client message for 4334 ms
+2025-12-01T00:33:23 [SEND] (proxy->server): Sent message to Server: 10|hi
+2025-12-01T00:33:23 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:33:23 [SEND] (proxy->server): Sent message to Server: 10|hi
+2025-12-01T00:33:23 [RECEIVE] (client->proxy): Read message from Client: 10|hi
+2025-12-01T00:33:26 [DELAY] (proxy->server): Delayed client message for 3313 ms
+2025-12-01T00:33:26 [SEND] (proxy->server): Sent message to Server: 10|hi
+2025-12-01T00:33:26 [RECIEVE] (proxy<-server): Read message from Server: 10|10
+2025-12-01T00:36:11 [RECEIVE] (client->proxy): Read message from Client: 0|hi
+2025-12-01T00:36:12 [DELAY] (proxy->server): Delayed client message for 1194 ms
+2025-12-01T00:36:12 [SEND] (proxy->server): Sent message to Server: 0|hi
+2025-12-01T00:36:12 [RECIEVE] (proxy<-server): Read message from Server: 0|0
+2025-12-01T00:36:12 [SEND] (client<-proxy): Sent message to client: 0|0
+2025-12-01T00:36:18 [RECEIVE] (client->proxy): Read message from Client: 1|AHHHH
+2025-12-01T00:36:18 [SEND] (proxy->server): Sent message to Server: 1|AHHHH
+2025-12-01T00:36:18 [RECIEVE] (proxy<-server): Read message from Server: 1|1
+2025-12-01T00:36:18 [SEND] (client<-proxy): Sent message to client: 1|1
+2025-12-01T00:36:29 [RECEIVE] (client->proxy): Read message from Client: 2|hello
+2025-12-01T00:36:32 [DELAY] (proxy->server): Delayed client message for 3149 ms
+2025-12-01T00:36:32 [SEND] (proxy->server): Sent message to Server: 2|hello
+2025-12-01T00:36:32 [RECIEVE] (proxy<-server): Read message from Server: 2|2
+2025-12-01T00:36:35 [DELAY] (client<-proxy): Delayed server message for 2817 ms
+2025-12-01T00:36:35 [SEND] (client<-proxy): Sent message to client: 2|2
+2025-12-01T00:36:35 [RECEIVE] (client->proxy): Read message from Client: 2|hello
+2025-12-01T00:36:38 [DELAY] (proxy->server): Delayed client message for 2706 ms
+2025-12-01T00:36:38 [DROP] (proxy->server): Dropped Client message: 2|hello
+2025-12-01T00:36:45 [RECEIVE] (client->proxy): Read message from Client: 3|holy shit
+2025-12-01T00:36:45 [SEND] (proxy->server): Sent message to Server: 3|holy shit
+2025-12-01T00:36:45 [RECIEVE] (proxy<-server): Read message from Server: 3|3
+2025-12-01T00:36:45 [SEND] (client<-proxy): Sent message to client: 3|3
+2025-12-01T00:36:50 [RECEIVE] (client->proxy): Read message from Client: 4|please this is amaznig
+2025-12-01T00:36:50 [DROP] (proxy->server): Dropped Client message: 4|please this is amaznig
+2025-12-01T00:36:56 [RECEIVE] (client->proxy): Read message from Client: 4|please this is amaznig
+2025-12-01T00:36:57 [DELAY] (proxy->server): Delayed client message for 1664 ms
+2025-12-01T00:36:57 [DROP] (proxy->server): Dropped Client message: 4|please this is amaznig
+2025-12-01T00:37:01 [RECEIVE] (client->proxy): Read message from Client: 4|please this is amaznig
+2025-12-01T00:37:01 [DROP] (proxy->server): Dropped Client message: 4|please this is amaznig
+2025-12-01T00:37:06 [RECEIVE] (client->proxy): Read message from Client: 4|please this is amaznig
+2025-12-01T00:37:08 [DELAY] (proxy->server): Delayed client message for 2531 ms
+2025-12-01T00:37:08 [SEND] (proxy->server): Sent message to Server: 4|please this is amaznig
+2025-12-01T00:37:08 [RECIEVE] (proxy<-server): Read message from Server: 4|4
+2025-12-01T00:37:13 [DELAY] (client<-proxy): Delayed server message for 4896 ms
+2025-12-01T00:37:13 [DROP] (client<-proxy): Dropped server message : 4|4
+2025-12-01T00:37:13 [RECEIVE] (client->proxy): Read message from Client: 4|please this is amaznig
+2025-12-01T00:37:16 [DELAY] (proxy->server): Delayed client message for 3507 ms
+2025-12-01T00:37:16 [DROP] (proxy->server): Dropped Client message: 4|please this is amaznig
+2025-12-01T00:37:16 [RECEIVE] (client->proxy): Read message from Client: 4|please this is amaznig
+2025-12-01T00:37:21 [DELAY] (proxy->server): Delayed client message for 4486 ms
+2025-12-01T00:37:21 [SEND] (proxy->server): Sent message to Server: 4|please this is amaznig
+2025-12-01T00:37:21 [RECIEVE] (proxy<-server): Read message from Server: 4|4
+2025-12-01T00:37:23 [DELAY] (client<-proxy): Delayed server message for 1936 ms
+2025-12-01T00:37:23 [SEND] (client<-proxy): Sent message to client: 4|4
+2025-12-01T18:51:35 [RECEIVE] (client->proxy): Read message from Client: 0|we are charlie kiiiirk
+2025-12-01T18:51:35 [DROP] (proxy->server): Dropped Client message: 0|we are charlie kiiiirk
+2025-12-01T18:51:40 [RECEIVE] (client->proxy): Read message from Client: 0|we are charlie kiiiirk
+2025-12-01T18:51:40 [SEND] (proxy->server): Sent message to Server: 0|we are charlie kiiiirk
+2025-12-01T18:51:45 [RECEIVE] (client->proxy): Read message from Client: 0|we are charlie kiiiirk
+2025-12-01T18:51:45 [SEND] (proxy->server): Sent message to Server: 0|we are charlie kiiiirk
+2025-12-01T18:51:45 [RECIEVE] (proxy<-server): Read message from Server: 0|0
+2025-12-01T18:51:46 [DELAY] (client<-proxy): Delayed server message for 164 ms
+2025-12-01T18:51:46 [SEND] (client<-proxy): Sent message to client: 0|0
+2025-12-01T18:52:26 [RECEIVE] (client->proxy): Read message from Client: 0|move it
+2025-12-01T18:52:26 [SEND] (proxy->server): Sent message to Server: 0|move it
+2025-12-01T18:52:31 [RECEIVE] (client->proxy): Read message from Client: 0|move it
+2025-12-01T18:52:31 [SEND] (proxy->server): Sent message to Server: 0|move it
+2025-12-01T18:52:31 [RECIEVE] (proxy<-server): Read message from Server: 0|0
+2025-12-01T18:52:31 [SEND] (client<-proxy): Sent message to client: 0|0
+2025-12-01T18:52:36 [RECEIVE] (client->proxy): Read message from Client: 0|move it
+2025-12-01T18:52:36 [SEND] (proxy->server): Sent message to Server: 0|move it
+2025-12-01T18:52:36 [RECIEVE] (proxy<-server): Read message from Server: 0|0
+2025-12-01T18:52:36 [SEND] (client<-proxy): Sent message to client: 0|0
+2025-12-01T18:52:41 [RECEIVE] (client->proxy): Read message from Client: 0|move it
+2025-12-01T18:52:41 [DELAY] (proxy->server): Delayed client message for 172 ms
+2025-12-01T18:52:41 [SEND] (proxy->server): Sent message to Server: 0|move it
+2025-12-01T18:52:41 [RECIEVE] (proxy<-server): Read message from Server: 0|0
+2025-12-01T18:52:41 [SEND] (client<-proxy): Sent message to client: 0|0
+2025-12-01T18:52:46 [RECEIVE] (client->proxy): Read message from Client: 0|move it
+2025-12-01T18:52:46 [SEND] (proxy->server): Sent message to Server: 0|move it
+2025-12-01T18:52:51 [RECEIVE] (client->proxy): Read message from Client: 0|move it
+2025-12-01T18:52:51 [SEND] (proxy->server): Sent message to Server: 0|move it
+2025-12-01T18:53:08 [RECEIVE] (client->proxy): Read message from Client: 0|hi
+2025-12-01T18:53:08 [SEND] (proxy->server): Sent message to Server: 0|hi
+2025-12-01T18:53:13 [RECEIVE] (client->proxy): Read message from Client: 0|hi
+2025-12-01T18:53:13 [DELAY] (proxy->server): Delayed client message for 124 ms
+2025-12-01T18:53:13 [SEND] (proxy->server): Sent message to Server: 0|hi
+2025-12-01T18:53:13 [RECIEVE] (proxy<-server): Read message from Server: 0|0
+2025-12-01T18:53:13 [SEND] (client<-proxy): Sent message to client: 0|0
+2025-12-01T18:53:18 [RECEIVE] (client->proxy): Read message from Client: 0|hi
+2025-12-01T18:53:18 [SEND] (proxy->server): Sent message to Server: 0|hi
+2025-12-01T18:53:18 [RECIEVE] (proxy<-server): Read message from Server: 0|0
+2025-12-01T18:53:18 [SEND] (client<-proxy): Sent message to client: 0|0
+2025-12-01T18:53:23 [RECEIVE] (client->proxy): Read message from Client: 0|hi
+2025-12-01T18:53:23 [SEND] (proxy->server): Sent message to Server: 0|hi
+2025-12-01T18:53:23 [RECIEVE] (proxy<-server): Read message from Server: 0|0
+2025-12-01T18:53:23 [SEND] (client<-proxy): Sent message to client: 0|0
+2025-12-01T18:53:28 [RECEIVE] (client->proxy): Read message from Client: 0|hi
+2025-12-01T18:53:28 [DELAY] (proxy->server): Delayed client message for 100 ms
+2025-12-01T18:53:28 [DROP] (proxy->server): Dropped Client message: 0|hi
+2025-12-01T18:53:33 [RECEIVE] (client->proxy): Read message from Client: 0|hi
+2025-12-01T18:53:33 [SEND] (proxy->server): Sent message to Server: 0|hi
+2025-12-01T18:53:33 [RECIEVE] (proxy<-server): Read message from Server: 0|0
+2025-12-01T18:53:33 [SEND] (client<-proxy): Sent message to client: 0|0
+2025-12-01T18:54:12 [RECEIVE] (client->proxy): Read message from Client: 0|ah
+2025-12-01T18:54:12 [SEND] (proxy->server): Sent message to Server: 0|ah
+2025-12-01T18:54:12 [RECIEVE] (proxy<-server): Read message from Server: 0|0
+2025-12-01T18:54:12 [DROP] (client<-proxy): Dropped server message : 0|0
+2025-12-01T18:54:17 [RECEIVE] (client->proxy): Read message from Client: 0|ah
+2025-12-01T18:54:17 [SEND] (proxy->server): Sent message to Server: 0|ah
+2025-12-01T18:54:17 [RECIEVE] (proxy<-server): Read message from Server: 0|0
+2025-12-01T18:54:17 [SEND] (client<-proxy): Sent message to client: 0|0
+2025-12-01T18:54:28 [RECEIVE] (client->proxy): Read message from Client: 1|tets
+2025-12-01T18:54:28 [DROP] (proxy->server): Dropped Client message: 1|tets
+2025-12-01T18:54:33 [RECEIVE] (client->proxy): Read message from Client: 1|tets
+2025-12-01T18:54:33 [SEND] (proxy->server): Sent message to Server: 1|tets
+2025-12-01T18:54:33 [RECIEVE] (proxy<-server): Read message from Server: 1|1
+2025-12-01T18:54:33 [SEND] (client<-proxy): Sent message to client: 1|1
+2025-12-01T18:54:41 [RECEIVE] (client->proxy): Read message from Client: 2|delay
+2025-12-01T18:54:41 [SEND] (proxy->server): Sent message to Server: 2|delay
+2025-12-01T18:54:41 [RECIEVE] (proxy<-server): Read message from Server: 2|2
+2025-12-01T18:54:41 [SEND] (client<-proxy): Sent message to client: 2|2
+2025-12-01T18:54:45 [RECEIVE] (client->proxy): Read message from Client: 3|delay2
+2025-12-01T18:54:45 [SEND] (proxy->server): Sent message to Server: 3|delay2
+2025-12-01T18:54:45 [RECIEVE] (proxy<-server): Read message from Server: 3|3
+2025-12-01T18:54:45 [SEND] (client<-proxy): Sent message to client: 3|3
+2025-12-01T18:54:51 [RECEIVE] (client->proxy): Read message from Client: 4|what
+2025-12-01T18:54:51 [SEND] (proxy->server): Sent message to Server: 4|what
+2025-12-01T18:54:51 [RECIEVE] (proxy<-server): Read message from Server: 4|4
+2025-12-01T18:54:52 [DELAY] (client<-proxy): Delayed server message for 282 ms
+2025-12-01T18:54:52 [SEND] (client<-proxy): Sent message to client: 4|4
+2025-12-01T18:54:56 [RECEIVE] (client->proxy): Read message from Client: 5|its too fast
+2025-12-01T18:54:56 [SEND] (proxy->server): Sent message to Server: 5|its too fast
+2025-12-01T18:54:56 [RECIEVE] (proxy<-server): Read message from Server: 5|5
+2025-12-01T18:54:56 [SEND] (client<-proxy): Sent message to client: 5|5
+2025-12-01T18:54:57 [RECEIVE] (client->proxy): Read message from Client: 6|please
+2025-12-01T18:54:57 [SEND] (proxy->server): Sent message to Server: 6|please
+2025-12-01T18:54:57 [RECIEVE] (proxy<-server): Read message from Server: 6|6
+2025-12-01T18:54:57 [DELAY] (client<-proxy): Delayed server message for 194 ms
+2025-12-01T18:54:57 [SEND] (client<-proxy): Sent message to client: 6|6
+2025-12-01T18:54:59 [RECEIVE] (client->proxy): Read message from Client: 7|DELAAY
+2025-12-01T18:54:59 [SEND] (proxy->server): Sent message to Server: 7|DELAAY
+2025-12-01T18:54:59 [RECIEVE] (proxy<-server): Read message from Server: 7|7
+2025-12-01T18:55:00 [DELAY] (client<-proxy): Delayed server message for 200 ms
+2025-12-01T18:55:00 [SEND] (client<-proxy): Sent message to client: 7|7
+2025-12-01T18:55:03 [RECEIVE] (client->proxy): Read message from Client: 8|here come DELAY
+2025-12-01T18:55:03 [DELAY] (proxy->server): Delayed client message for 193 ms
+2025-12-01T18:55:03 [SEND] (proxy->server): Sent message to Server: 8|here come DELAY
+2025-12-01T18:55:03 [RECIEVE] (proxy<-server): Read message from Server: 8|8
+2025-12-01T18:55:03 [SEND] (client<-proxy): Sent message to client: 8|8
+2025-12-01T18:55:14 [RECEIVE] (client->proxy): Read message from Client: 9|how is there no delay
+2025-12-01T18:55:14 [DELAY] (proxy->server): Delayed client message for 134 ms
+2025-12-01T18:55:14 [SEND] (proxy->server): Sent message to Server: 9|how is there no delay
+2025-12-01T18:55:14 [RECIEVE] (proxy<-server): Read message from Server: 9|9
+2025-12-01T18:55:14 [SEND] (client<-proxy): Sent message to client: 9|9
+2025-12-01T18:55:18 [RECEIVE] (client->proxy): Read message from Client: 10|a
+2025-12-01T18:55:18 [SEND] (proxy->server): Sent message to Server: 10|a
+2025-12-01T18:55:18 [RECIEVE] (proxy<-server): Read message from Server: 10|10
+2025-12-01T18:55:18 [DELAY] (client<-proxy): Delayed server message for 271 ms
+2025-12-01T18:55:18 [SEND] (client<-proxy): Sent message to client: 10|10
+2025-12-01T18:55:19 [RECEIVE] (client->proxy): Read message from Client: 11|a
+2025-12-01T18:55:19 [SEND] (proxy->server): Sent message to Server: 11|a
+2025-12-01T18:55:19 [RECIEVE] (proxy<-server): Read message from Server: 11|11
+2025-12-01T18:55:19 [DROP] (client<-proxy): Dropped server message : 11|11
+2025-12-01T18:55:24 [RECEIVE] (client->proxy): Read message from Client: 11|a
+2025-12-01T18:55:24 [DELAY] (proxy->server): Delayed client message for 113 ms
+2025-12-01T18:55:24 [SEND] (proxy->server): Sent message to Server: 11|a
+2025-12-01T18:55:24 [RECIEVE] (proxy<-server): Read message from Server: 11|11
+2025-12-01T18:55:24 [DELAY] (client<-proxy): Delayed server message for 292 ms
+2025-12-01T18:55:24 [SEND] (client<-proxy): Sent message to client: 11|11

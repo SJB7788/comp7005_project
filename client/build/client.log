@@ -1,0 +1,253 @@
+2025-11-30T23:27:59 [SEND]: Sent message: 0|wassup
+2025-11-30T23:28:04 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-11-30T23:28:04 [SEND]: Sent message: 0|wassup
+2025-11-30T23:28:09 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-11-30T23:28:09 [SEND]: Sent message: 0|wassup
+2025-11-30T23:28:14 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-11-30T23:28:14 [SEND]: Sent message: 0|wassup
+2025-11-30T23:28:19 [TIMEOUT]: Timeout! Retransmitting message. Retry: 4
+2025-11-30T23:28:19 [SEND]: Sent message: 0|wassup
+2025-11-30T23:28:24 [TIMEOUT]: Timeout! Retransmitting message. Retry: 5
+2025-11-30T23:28:24 [SEND]: Sent message: 0|wassup
+2025-11-30T23:28:29 [TIMEOUT]: Timeout! Retransmitting message. Retry: 6
+2025-11-30T23:28:29 [DROP]: Max retry limit reached
+2025-11-30T23:47:49 [SEND]: Sent message: 0|hi
+2025-11-30T23:47:51 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-11-30T23:47:51 [SEND]: Sent message: 0|hi
+2025-11-30T23:47:52 [RECEIVE]: Received ack: 0
+2025-11-30T23:49:41 [SEND]: Sent message: 1|hi
+2025-11-30T23:49:43 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-11-30T23:49:43 [SEND]: Sent message: 1|hi
+2025-11-30T23:49:43 [RECEIVE]: Received ack: 1
+2025-11-30T23:50:20 [SEND]: Sent message: 2|hi
+2025-11-30T23:50:20 [RECEIVE]: Received ack: 2
+2025-11-30T23:50:46 [SEND]: Sent message: 3|hello
+2025-11-30T23:50:48 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-11-30T23:50:48 [SEND]: Sent message: 3|hello
+2025-11-30T23:50:48 [RECEIVE]: Received ack: 3
+2025-11-30T23:51:21 [SEND]: Sent message: 4|another one babbyy
+2025-11-30T23:51:23 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-11-30T23:51:23 [SEND]: Sent message: 4|another one babbyy
+2025-11-30T23:51:25 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-11-30T23:51:25 [SEND]: Sent message: 4|another one babbyy
+2025-11-30T23:51:27 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-11-30T23:51:27 [SEND]: Sent message: 4|another one babbyy
+2025-11-30T23:51:29 [TIMEOUT]: Timeout! Retransmitting message. Retry: 4
+2025-11-30T23:51:29 [SEND]: Sent message: 4|another one babbyy
+2025-11-30T23:51:29 [RECEIVE]: Received ack: 4
+2025-11-30T23:52:39 [SEND]: Sent message: 5|hellooo
+2025-11-30T23:52:39 [RECEIVE]: Received ack: 5
+2025-11-30T23:52:48 [SEND]: Sent message: 6|unusual
+2025-11-30T23:52:50 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-11-30T23:52:50 [SEND]: Sent message: 6|unusual
+2025-11-30T23:52:52 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-11-30T23:52:52 [SEND]: Sent message: 6|unusual
+2025-11-30T23:52:54 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-11-30T23:52:54 [SEND]: Sent message: 6|unusual
+2025-11-30T23:52:56 [TIMEOUT]: Timeout! Retransmitting message. Retry: 4
+2025-11-30T23:52:56 [SEND]: Sent message: 6|unusual
+2025-11-30T23:52:58 [TIMEOUT]: Timeout! Retransmitting message. Retry: 5
+2025-11-30T23:52:58 [SEND]: Sent message: 6|unusual
+2025-11-30T23:53:00 [TIMEOUT]: Timeout! Retransmitting message. Retry: 6
+2025-11-30T23:53:00 [DROP]: Max retry limit reached
+2025-11-30T23:53:35 [SEND]: Sent message: 6|hi
+2025-11-30T23:53:37 [RECEIVE]: Received ack: 6
+2025-11-30T23:53:45 [SEND]: Sent message: 7|hi
+2025-11-30T23:53:47 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-11-30T23:53:47 [SEND]: Sent message: 7|hi
+2025-11-30T23:53:49 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-11-30T23:53:49 [SEND]: Sent message: 7|hi
+2025-11-30T23:53:51 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-11-30T23:53:51 [SEND]: Sent message: 7|hi
+2025-11-30T23:53:53 [TIMEOUT]: Timeout! Retransmitting message. Retry: 4
+2025-11-30T23:53:53 [SEND]: Sent message: 7|hi
+2025-11-30T23:53:55 [TIMEOUT]: Timeout! Retransmitting message. Retry: 5
+2025-11-30T23:53:55 [SEND]: Sent message: 7|hi
+2025-11-30T23:53:57 [TIMEOUT]: Timeout! Retransmitting message. Retry: 6
+2025-11-30T23:53:57 [DROP]: Max retry limit reached
+2025-11-30T23:55:54 [SEND]: Sent message: 7|hi
+2025-11-30T23:55:54 [RECEIVE]: Received ack: 0
+2025-11-30T23:55:54 [RETRY]: Packet with SEQ: 7 does not have matching ACK. Retry count: 1
+2025-11-30T23:55:54 [SEND]: Sent message: 7|hi
+2025-11-30T23:55:56 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-11-30T23:55:56 [SEND]: Sent message: 7|hi
+2025-11-30T23:55:58 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-11-30T23:55:58 [SEND]: Sent message: 7|hi
+2025-11-30T23:56:00 [TIMEOUT]: Timeout! Retransmitting message. Retry: 4
+2025-11-30T23:56:00 [SEND]: Sent message: 7|hi
+2025-11-30T23:56:02 [TIMEOUT]: Timeout! Retransmitting message. Retry: 5
+2025-11-30T23:56:02 [SEND]: Sent message: 7|hi
+2025-11-30T23:56:04 [RECEIVE]: Received ack: 0
+2025-11-30T23:56:04 [RETRY]: Packet with SEQ: 7 does not have matching ACK. Retry count: 6
+2025-11-30T23:56:04 [DROP]: Max retry limit reached
+2025-11-30T23:58:09 [SEND]: Sent message: 7|hi
+2025-11-30T23:58:09 [RECEIVE]: Received ack: 7
+2025-11-30T23:58:13 [SEND]: Sent message: 8|hi
+2025-11-30T23:58:15 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-11-30T23:58:15 [SEND]: Sent message: 8|hi
+2025-11-30T23:58:17 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-11-30T23:58:17 [SEND]: Sent message: 8|hi
+2025-11-30T23:58:19 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-11-30T23:58:19 [SEND]: Sent message: 8|hi
+2025-11-30T23:58:19 [RECEIVE]: Received ack: 0
+2025-11-30T23:58:19 [RETRY]: Packet with SEQ: 8 does not have matching ACK. Retry count: 4
+2025-11-30T23:58:19 [SEND]: Sent message: 8|hi
+2025-11-30T23:58:21 [TIMEOUT]: Timeout! Retransmitting message. Retry: 5
+2025-11-30T23:58:21 [SEND]: Sent message: 8|hi
+2025-11-30T23:58:23 [TIMEOUT]: Timeout! Retransmitting message. Retry: 6
+2025-11-30T23:58:23 [DROP]: Max retry limit reached
+2025-12-01T00:00:31 [SEND]: Sent message: 8|hi
+2025-12-01T00:00:31 [RECEIVE]: Received ack: 8
+2025-12-01T00:00:42 [SEND]: Sent message: 9|hi
+2025-12-01T00:00:44 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-12-01T00:00:44 [SEND]: Sent message: 9|hi
+2025-12-01T00:00:46 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-12-01T00:00:46 [SEND]: Sent message: 9|hi
+2025-12-01T00:00:48 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-12-01T00:00:48 [SEND]: Sent message: 9|hi
+2025-12-01T00:00:50 [TIMEOUT]: Timeout! Retransmitting message. Retry: 4
+2025-12-01T00:00:50 [SEND]: Sent message: 9|hi
+2025-12-01T00:00:52 [TIMEOUT]: Timeout! Retransmitting message. Retry: 5
+2025-12-01T00:00:52 [SEND]: Sent message: 9|hi
+2025-12-01T00:00:54 [TIMEOUT]: Timeout! Retransmitting message. Retry: 6
+2025-12-01T00:00:54 [DROP]: Max retry limit reached
+2025-12-01T00:02:26 [SEND]: Sent message: 9|hi
+2025-12-01T00:02:26 [RECEIVE]: Received ack: 9
+2025-12-01T00:02:29 [SEND]: Sent message: 10|hi
+2025-12-01T00:02:31 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-12-01T00:02:31 [SEND]: Sent message: 10|hi
+2025-12-01T00:02:33 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-12-01T00:02:33 [SEND]: Sent message: 10|hi
+2025-12-01T00:02:35 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-12-01T00:02:35 [SEND]: Sent message: 10|hi
+2025-12-01T00:02:37 [TIMEOUT]: Timeout! Retransmitting message. Retry: 4
+2025-12-01T00:02:37 [SEND]: Sent message: 10|hi
+2025-12-01T00:02:39 [TIMEOUT]: Timeout! Retransmitting message. Retry: 5
+2025-12-01T00:02:39 [SEND]: Sent message: 10|hi
+2025-12-01T00:02:41 [TIMEOUT]: Timeout! Retransmitting message. Retry: 6
+2025-12-01T00:02:41 [DROP]: Max retry limit reached
+2025-12-01T00:29:03 [SEND]: Sent message: 10|hi
+2025-12-01T00:29:03 [RECEIVE]: Received ack: 0
+2025-12-01T00:29:03 [RETRY]: Packet with SEQ: 10 does not have matching ACK. Retry count: 1
+2025-12-01T00:29:03 [SEND]: Sent message: 10|hi
+2025-12-01T00:29:05 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-12-01T00:29:05 [SEND]: Sent message: 10|hi
+2025-12-01T00:29:07 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-12-01T00:29:07 [SEND]: Sent message: 10|hi
+2025-12-01T00:29:09 [TIMEOUT]: Timeout! Retransmitting message. Retry: 4
+2025-12-01T00:29:09 [SEND]: Sent message: 10|hi
+2025-12-01T00:29:11 [TIMEOUT]: Timeout! Retransmitting message. Retry: 5
+2025-12-01T00:29:11 [SEND]: Sent message: 10|hi
+2025-12-01T00:29:13 [TIMEOUT]: Timeout! Retransmitting message. Retry: 6
+2025-12-01T00:29:13 [DROP]: Max retry limit reached
+2025-12-01T00:30:12 [SEND]: Sent message: 10|hi
+2025-12-01T00:30:14 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-12-01T00:30:14 [SEND]: Sent message: 10|hi
+2025-12-01T00:30:16 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-12-01T00:30:16 [SEND]: Sent message: 10|hi
+2025-12-01T00:30:18 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-12-01T00:30:18 [SEND]: Sent message: 10|hi
+2025-12-01T00:30:20 [TIMEOUT]: Timeout! Retransmitting message. Retry: 4
+2025-12-01T00:30:20 [SEND]: Sent message: 10|hi
+2025-12-01T00:30:22 [TIMEOUT]: Timeout! Retransmitting message. Retry: 5
+2025-12-01T00:30:22 [SEND]: Sent message: 10|hi
+2025-12-01T00:30:24 [TIMEOUT]: Timeout! Retransmitting message. Retry: 6
+2025-12-01T00:30:24 [DROP]: Max retry limit reached
+2025-12-01T00:33:18 [SEND]: Sent message: 10|hi
+2025-12-01T00:33:20 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-12-01T00:33:20 [SEND]: Sent message: 10|hi
+2025-12-01T00:33:22 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-12-01T00:33:22 [SEND]: Sent message: 10|hi
+2025-12-01T00:33:24 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-12-01T00:33:24 [SEND]: Sent message: 10|hi
+2025-12-01T00:33:26 [TIMEOUT]: Timeout! Retransmitting message. Retry: 4
+2025-12-01T00:33:26 [SEND]: Sent message: 10|hi
+2025-12-01T00:33:28 [TIMEOUT]: Timeout! Retransmitting message. Retry: 5
+2025-12-01T00:33:28 [SEND]: Sent message: 10|hi
+2025-12-01T00:33:30 [TIMEOUT]: Timeout! Retransmitting message. Retry: 6
+2025-12-01T00:33:30 [DROP]: Max retry limit reached
+2025-12-01T00:36:11 [SEND]: Sent message: 0|hi
+2025-12-01T00:36:12 [RECEIVE]: Received ack: 0
+2025-12-01T00:36:18 [SEND]: Sent message: 1|AHHHH
+2025-12-01T00:36:18 [RECEIVE]: Received ack: 1
+2025-12-01T00:36:29 [SEND]: Sent message: 2|hello
+2025-12-01T00:36:34 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-12-01T00:36:34 [SEND]: Sent message: 2|hello
+2025-12-01T00:36:35 [RECEIVE]: Received ack: 2
+2025-12-01T00:36:45 [SEND]: Sent message: 3|holy shit
+2025-12-01T00:36:45 [RECEIVE]: Received ack: 3
+2025-12-01T00:36:50 [SEND]: Sent message: 4|please this is amaznig
+2025-12-01T00:36:56 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-12-01T00:36:56 [SEND]: Sent message: 4|please this is amaznig
+2025-12-01T00:37:01 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-12-01T00:37:01 [SEND]: Sent message: 4|please this is amaznig
+2025-12-01T00:37:06 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-12-01T00:37:06 [SEND]: Sent message: 4|please this is amaznig
+2025-12-01T00:37:11 [TIMEOUT]: Timeout! Retransmitting message. Retry: 4
+2025-12-01T00:37:11 [SEND]: Sent message: 4|please this is amaznig
+2025-12-01T00:37:16 [TIMEOUT]: Timeout! Retransmitting message. Retry: 5
+2025-12-01T00:37:16 [SEND]: Sent message: 4|please this is amaznig
+2025-12-01T00:37:21 [TIMEOUT]: Timeout! Retransmitting message. Retry: 6
+2025-12-01T00:37:21 [DROP]: Max retry limit reached
+2025-12-01T18:51:35 [SEND]: Sent message: 0|we are charlie kiiiirk
+2025-12-01T18:51:40 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-12-01T18:51:40 [SEND]: Sent message: 0|we are charlie kiiiirk
+2025-12-01T18:51:45 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-12-01T18:51:45 [SEND]: Sent message: 0|we are charlie kiiiirk
+2025-12-01T18:51:46 [RECEIVE]: Received ack: 0
+2025-12-01T18:52:26 [SEND]: Sent message: 0|move it
+2025-12-01T18:52:31 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-12-01T18:52:31 [SEND]: Sent message: 0|move it
+2025-12-01T18:52:36 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-12-01T18:52:36 [SEND]: Sent message: 0|move it
+2025-12-01T18:52:41 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-12-01T18:52:41 [SEND]: Sent message: 0|move it
+2025-12-01T18:52:46 [TIMEOUT]: Timeout! Retransmitting message. Retry: 4
+2025-12-01T18:52:46 [SEND]: Sent message: 0|move it
+2025-12-01T18:52:51 [TIMEOUT]: Timeout! Retransmitting message. Retry: 5
+2025-12-01T18:52:51 [SEND]: Sent message: 0|move it
+2025-12-01T18:52:56 [TIMEOUT]: Timeout! Retransmitting message. Retry: 6
+2025-12-01T18:52:56 [DROP]: Max retry limit reached
+2025-12-01T18:53:08 [SEND]: Sent message: 0|hi
+2025-12-01T18:53:13 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-12-01T18:53:13 [SEND]: Sent message: 0|hi
+2025-12-01T18:53:18 [TIMEOUT]: Timeout! Retransmitting message. Retry: 2
+2025-12-01T18:53:18 [SEND]: Sent message: 0|hi
+2025-12-01T18:53:23 [TIMEOUT]: Timeout! Retransmitting message. Retry: 3
+2025-12-01T18:53:23 [SEND]: Sent message: 0|hi
+2025-12-01T18:53:28 [TIMEOUT]: Timeout! Retransmitting message. Retry: 4
+2025-12-01T18:53:28 [SEND]: Sent message: 0|hi
+2025-12-01T18:53:33 [TIMEOUT]: Timeout! Retransmitting message. Retry: 5
+2025-12-01T18:53:33 [SEND]: Sent message: 0|hi
+2025-12-01T18:53:38 [TIMEOUT]: Timeout! Retransmitting message. Retry: 6
+2025-12-01T18:53:38 [DROP]: Max retry limit reached
+2025-12-01T18:54:12 [SEND]: Sent message: 0|ah
+2025-12-01T18:54:17 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-12-01T18:54:17 [SEND]: Sent message: 0|ah
+2025-12-01T18:54:17 [RECEIVE]: Received ack: 0
+2025-12-01T18:54:28 [SEND]: Sent message: 1|tets
+2025-12-01T18:54:33 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-12-01T18:54:33 [SEND]: Sent message: 1|tets
+2025-12-01T18:54:33 [RECEIVE]: Received ack: 1
+2025-12-01T18:54:41 [SEND]: Sent message: 2|delay
+2025-12-01T18:54:41 [RECEIVE]: Received ack: 2
+2025-12-01T18:54:45 [SEND]: Sent message: 3|delay2
+2025-12-01T18:54:45 [RECEIVE]: Received ack: 3
+2025-12-01T18:54:51 [SEND]: Sent message: 4|what
+2025-12-01T18:54:52 [RECEIVE]: Received ack: 4
+2025-12-01T18:54:56 [SEND]: Sent message: 5|its too fast
+2025-12-01T18:54:56 [RECEIVE]: Received ack: 5
+2025-12-01T18:54:57 [SEND]: Sent message: 6|please
+2025-12-01T18:54:57 [RECEIVE]: Received ack: 6
+2025-12-01T18:54:59 [SEND]: Sent message: 7|DELAAY
+2025-12-01T18:55:00 [RECEIVE]: Received ack: 7
+2025-12-01T18:55:03 [SEND]: Sent message: 8|here come DELAY
+2025-12-01T18:55:03 [RECEIVE]: Received ack: 8
+2025-12-01T18:55:14 [SEND]: Sent message: 9|how is there no delay
+2025-12-01T18:55:14 [RECEIVE]: Received ack: 9
+2025-12-01T18:55:18 [SEND]: Sent message: 10|a
+2025-12-01T18:55:18 [RECEIVE]: Received ack: 10
+2025-12-01T18:55:19 [SEND]: Sent message: 11|a
+2025-12-01T18:55:24 [TIMEOUT]: Timeout! Retransmitting message. Retry: 1
+2025-12-01T18:55:24 [SEND]: Sent message: 11|a
+2025-12-01T18:55:24 [RECEIVE]: Received ack: 11

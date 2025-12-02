@@ -47,24 +47,28 @@ static int create_socket(int domain, int type, int protocol);
 static void bind_socket(int sockfd, struct sockaddr_storage *addr,
                         in_port_t port);
 static void read_message(int sockfd, char *buffer, size_t buffer_size,
-                         ssize_t *bytes_received,
-                         struct sockaddr_storage *client_addr,
+                         ssize_t *bytes_received, struct sockaddr_storage *addr,
                          socklen_t *addr_len);
-static void read_server_message(int sockfd, char *buffer, size_t buffer_size,
-                                ssize_t *bytes_received);
+// static void read_server_message(int sockfd, char *buffer, size_t buffer_size,
+//                                 ssize_t *bytes_received);
 // static void handle_packet(char *buffer, char *payload, long *seq);
 static void send_message(int sockfd, const char *message,
                          struct sockaddr_storage *addr, socklen_t addr_len);
 static int return_random(int max);
 static void sleep_milliseconds(int ms);
 static int simulate_drop(int denominator, int drop_prob);
-static void simulate_delay(int denominator, int delay_min, int delay_max,
-                           int delay_prob);
-static int simulate_traffic(int denominator, int delay_min, int delay_max,
-                            int delay_prob, int drop_prob);
+static int simulate_delay(int denominator, int delay_min, int delay_max,
+                          int delay_prob);
 static void setup_signal_handler(void);
 static void sigint_handler(int signum);
 static void close_socket(int sockfd);
+static void get_timestamp(char *buf, size_t n);
+static void log_init(FILE **log_file, const char *filename);
+static void log_message(FILE *log_file, const char *event,
+                        const char *direction, const char *msg);
+static void log_close(FILE *log_file);
+static int same_addr(const struct sockaddr_storage *a,
+                     const struct sockaddr_storage *b);
 
 enum {
   UNKNOWN_OPTION_MESSAGE_LEN = 24,
@@ -74,6 +78,7 @@ enum {
   DENOMINATOR = 100,
   MILLISECONDS = 1000,
   NANOSECONDS = 1000000L,
+  LOG_SIZE = 2048,
 };
 
 static const struct option long_options[] = {
@@ -97,19 +102,64 @@ static const struct option long_options[] = {
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
 static volatile sig_atomic_t exit_flag = 0;
 
-int main(int argc, char *argv[]) {
-  int sockfd;
+static void print_sockaddr(struct sockaddr_storage *addr, const char *label) {
+  char ipstr[INET6_ADDRSTRLEN];
+  void *src = NULL;
+  uint16_t port;
 
+  if (addr == NULL) {
+    fprintf(stderr, "%s: (null address)\n", label);
+    return;
+  }
+
+  if (addr->ss_family == AF_INET) {
+    struct sockaddr_in *a4 = (struct sockaddr_in *)addr;
+    src = (void *)&a4->sin_addr;
+    port = ntohs(a4->sin_port);
+
+    if (inet_ntop(AF_INET, src, ipstr, sizeof(ipstr)) == NULL) {
+      strcpy(ipstr, "invalid-ipv4");
+    }
+
+    fprintf(stderr, "%s: IPv4 %s:%u\n", label, ipstr, port);
+  } else if (addr->ss_family == AF_INET6) {
+    struct sockaddr_in6 *a6 = (struct sockaddr_in6 *)addr;
+    src = (void *)&a6->sin6_addr;
+    port = ntohs(a6->sin6_port);
+
+    if (inet_ntop(AF_INET6, src, ipstr, sizeof(ipstr)) == NULL) {
+      strcpy(ipstr, "invalid-ipv6");
+    }
+
+    fprintf(stderr, "%s: IPv6 [%s]:%u\n", label, ipstr, port);
+  } else {
+    fprintf(stderr, "%s: Unknown address family: %d\n", label, addr->ss_family);
+  }
+}
+
+int main(int argc, char *argv[]) {
   Arguments args = {0};
 
+  int sockfd;
+
+  int client_known;
   struct sockaddr_storage server_addr;
   socklen_t server_addr_len;
   struct sockaddr_storage client_addr;
   socklen_t client_addr_len;
+  struct sockaddr_storage src_addr;
+  socklen_t src_addr_len;
 
   struct sockaddr_storage addr;
 
   unsigned int seed;
+  FILE *log_file;
+
+  log_file = NULL;
+  client_known = 0;
+  client_addr.ss_family = AF_UNSPEC;
+  server_addr.ss_family = AF_UNSPEC;
+  src_addr.ss_family = AF_UNSPEC;
 
   parse_arguments(argc, argv, &args);
   handle_arguments(argv[0], &args);
@@ -122,64 +172,164 @@ int main(int argc, char *argv[]) {
   sockfd = create_socket(addr.ss_family, SOCK_DGRAM, 0);
   bind_socket(sockfd, &addr, args.port);
   setup_signal_handler();
+  log_init(&log_file, "proxy.log");
 
   // set up rand()
   seed = (unsigned int)(time(NULL) ^ getpid());
   srand(seed);
 
-  char client_message[BUFFER_SIZE];
-  char server_message[BUFFER_SIZE];
+  char message[BUFFER_SIZE];
 
   while (!exit_flag) {
     ssize_t bytes_received;
+    char log_buffer[LOG_SIZE];
+    int delay;
 
-    memset(client_message, 0, BUFFER_SIZE);
-    memset(server_message, 0, BUFFER_SIZE);
+    src_addr_len = sizeof(src_addr);
 
-    client_addr_len = sizeof(struct sockaddr_storage);
+    read_message(sockfd, message, BUFFER_SIZE, &bytes_received, &src_addr,
+                 &src_addr_len);
 
-    read_message(sockfd, client_message, BUFFER_SIZE, &bytes_received,
-                 &client_addr, &client_addr_len);
-    printf("Read message from Client: %s\n", client_message);
-
-    if (simulate_traffic(DENOMINATOR, args.client_cfg.min_delay,
-                         args.client_cfg.max_delay, args.client_cfg.delay_prob,
-                         args.client_cfg.drop_prob)) {
-      printf("Dropped message from client: %s\n\n", client_message);
-      continue;
+    if (!client_known) {
+      memcpy(&client_addr, &src_addr, sizeof(struct sockaddr_storage));
+      client_addr_len = src_addr_len;
+      client_known = 1;
+      printf("CLIENT\n\n");
+      print_sockaddr(&client_addr, "CLIENT");
     }
 
-    send_message(sockfd, client_message, &server_addr, server_addr_len);
-    printf("Sent message to Server: %s\n", client_message);
+    if (same_addr(&src_addr, &server_addr)) {
+      snprintf(log_buffer, sizeof(log_buffer), "Read message from Server: %s",
+               message);
+      log_message(log_file, "RECIEVE", "proxy<-server", log_buffer);
 
-    read_server_message(sockfd, server_message, BUFFER_SIZE, &bytes_received);
-    printf("Read message from Server: %s\n", server_message);
+      delay =
+          simulate_delay(DENOMINATOR, args.server_cfg.min_delay,
+                         args.server_cfg.max_delay, args.server_cfg.delay_prob);
+      if (delay > 0) {
+        snprintf(log_buffer, sizeof(log_buffer),
+                 "Delayed server message for %d ms", delay);
+        log_message(log_file, "DELAY", "client<-proxy", log_buffer);
+      }
 
-    if (simulate_traffic(DENOMINATOR, args.server_cfg.min_delay,
-                         args.server_cfg.max_delay, args.server_cfg.delay_prob,
-                         args.server_cfg.drop_prob)) {
-      printf("Dropped message from server: %s\n\n", server_message);
+      if (simulate_drop(DENOMINATOR, args.server_cfg.drop_prob)) {
+        snprintf(log_buffer, sizeof(log_buffer), "Dropped server message : %s",
+                 message);
+        log_message(log_file, "DROP", "client<-proxy", log_buffer);
+        continue;
+      }
 
-      continue;
+      send_message(sockfd, message, &client_addr, client_addr_len);
+      snprintf(log_buffer, sizeof(log_buffer), "Sent message to client: %s",
+               message);
+      log_message(log_file, "SEND", "client<-proxy", log_buffer);
+    } else {
+      snprintf(log_buffer, sizeof(log_buffer), "Read message from Client: %s",
+               message);
+      log_message(log_file, "RECEIVE", "client->proxy", log_buffer);
+
+      delay =
+          simulate_delay(DENOMINATOR, args.client_cfg.min_delay,
+                         args.client_cfg.max_delay, args.client_cfg.delay_prob);
+      if (delay > 0) {
+        snprintf(log_buffer, sizeof(log_buffer),
+                 "Delayed client message for %d ms", delay);
+        log_message(log_file, "DELAY", "proxy->server", log_buffer);
+      }
+
+      if (simulate_drop(DENOMINATOR, args.client_cfg.drop_prob)) {
+        snprintf(log_buffer, sizeof(log_buffer), "Dropped Client message: %s",
+                 message);
+        log_message(log_file, "DROP", "proxy->server", log_buffer);
+        continue;
+      }
+
+      send_message(sockfd, message, &server_addr, server_addr_len);
+      snprintf(log_buffer, sizeof(log_buffer), "Sent message to Server: %s",
+               message);
+      log_message(log_file, "SEND", "proxy->server", log_buffer);
     }
-
-    send_message(sockfd, server_message, &client_addr, client_addr_len);
-    printf("Sent message to client: %s\n\n", server_message);
   }
 
   close_socket(sockfd);
+  log_close(log_file);
   return EXIT_SUCCESS;
 }
 
-static int simulate_traffic(int denominator, int delay_min, int delay_max,
-                            int delay_prob, int drop_prob) {
-  simulate_delay(denominator, delay_min, delay_max, delay_prob);
+static int same_addr(const struct sockaddr_storage *a,
+                     const struct sockaddr_storage *b) {
+  if (a == NULL || b == NULL) {
+    return 0;
+  }
 
-  return simulate_drop(denominator, drop_prob);
+  if (a->ss_family != AF_INET && a->ss_family != AF_INET6) {
+    return 0;
+  }
+
+  if (b->ss_family != AF_INET && b->ss_family != AF_INET6) {
+    return 0;
+  }
+
+  if (a->ss_family == AF_INET) {
+    const struct sockaddr_in *ia = (const struct sockaddr_in *)a;
+    const struct sockaddr_in *ib = (const struct sockaddr_in *)b;
+
+    return (ia->sin_port == ib->sin_port) &&
+           (ia->sin_addr.s_addr == ib->sin_addr.s_addr);
+  }
+
+  if (a->ss_family == AF_INET6) {
+    const struct sockaddr_in6 *ia6 = (const struct sockaddr_in6 *)a;
+    const struct sockaddr_in6 *ib6 = (const struct sockaddr_in6 *)b;
+
+    return (ia6->sin6_port == ib6->sin6_port) &&
+           (memcmp(&ia6->sin6_addr, &ib6->sin6_addr, sizeof(struct in6_addr)) ==
+            0);
+  }
+
+  return 0;
 }
 
-static void simulate_delay(int denominator, int delay_min, int delay_max,
-                           int delay_prob) {
+static void log_init(FILE **log_file, const char *filename) {
+  *log_file = fopen(filename, "ae");
+  if (*log_file == NULL) {
+    perror("fopen");
+    exit(EXIT_FAILURE);
+  }
+}
+
+static void log_message(FILE *log_file, const char *event,
+                        const char *direction, const char *msg) {
+  char timestamp[ACK_SIZE];
+  get_timestamp(timestamp, sizeof(timestamp));
+
+  // log file
+  fprintf(log_file, "%s [%s] (%s): %s\n", timestamp, event, direction, msg);
+  fflush(log_file);
+
+  // stderr output
+  fprintf(stderr, "%s [%s] (%s): %s\n", timestamp, event, direction, msg);
+  fflush(stderr);
+}
+
+static void log_close(FILE *log_file) {
+  if (log_file != NULL) {
+    fclose(log_file);
+  }
+}
+
+static void get_timestamp(char *buf, size_t n) {
+  struct timespec ts;
+  struct tm tm_info;
+
+  clock_gettime(CLOCK_REALTIME, &ts);
+  localtime_r(&ts.tv_sec, &tm_info);
+
+  strftime(buf, n, "%Y-%m-%dT%H:%M:%S", &tm_info);
+}
+
+static int simulate_delay(int denominator, int delay_min, int delay_max,
+                          int delay_prob) {
   int delay_chance;
   int delay_range;
   int delay;
@@ -188,7 +338,7 @@ static void simulate_delay(int denominator, int delay_min, int delay_max,
   delay_chance = return_random(denominator);
 
   if (delay_chance > delay_prob) {
-    return;
+    return 0;
   }
 
   delay_range = delay_max - delay_min;
@@ -197,6 +347,7 @@ static void simulate_delay(int denominator, int delay_min, int delay_max,
   sleep_val = delay + delay_min - 1;
 
   sleep_milliseconds(sleep_val);
+  return delay + delay_min - 1;
 }
 
 static void sleep_milliseconds(int ms) {
@@ -530,13 +681,13 @@ static void bind_socket(int sockfd, struct sockaddr_storage *addr,
 }
 
 static void read_message(int sockfd, char *buffer, size_t buffer_size,
-                         ssize_t *bytes_received,
-                         struct sockaddr_storage *client_addr,
+                         ssize_t *bytes_received, struct sockaddr_storage *addr,
                          socklen_t *addr_len) {
   size_t n;
+  memset(buffer, 0, BUFFER_SIZE);
 
   *bytes_received = recvfrom(sockfd, buffer, buffer_size - 1, 0,
-                             (struct sockaddr *)client_addr, addr_len);
+                             (struct sockaddr *)addr, addr_len);
 
   if (*bytes_received < 0) {
     perror("recvfrom");
@@ -553,26 +704,27 @@ static void read_message(int sockfd, char *buffer, size_t buffer_size,
   buffer[n] = '\0';
 }
 
-static void read_server_message(int sockfd, char *buffer, size_t buffer_size,
-                                ssize_t *bytes_received) {
-  size_t n;
+// static void read_server_message(int sockfd, char *buffer, size_t buffer_size,
+//                                 ssize_t *bytes_received) {
+//   size_t n;
 
-  *bytes_received = recvfrom(sockfd, buffer, buffer_size - 1, 0, NULL, NULL);
+//   memset(buffer, 0, BUFFER_SIZE);
+//   *bytes_received = recvfrom(sockfd, buffer, buffer_size - 1, 0, NULL, NULL);
 
-  if (*bytes_received < 0) {
-    perror("recvfrom");
-    close_socket(sockfd);
-    exit(EXIT_FAILURE);
-  }
+//   if (*bytes_received < 0) {
+//     perror("recvfrom");
+//     close_socket(sockfd);
+//     exit(EXIT_FAILURE);
+//   }
 
-  n = (size_t)*bytes_received;
+//   n = (size_t)*bytes_received;
 
-  if (n >= buffer_size) {
-    n = buffer_size - 1;
-  }
+//   if (n >= buffer_size) {
+//     n = buffer_size - 1;
+//   }
 
-  buffer[n] = '\0';
-}
+//   buffer[n] = '\0';
+// }
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"

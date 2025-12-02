@@ -9,6 +9,7 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <time.h>
 #include <unistd.h>
 
 static void parse_arguments(int argc, char *argv[], char **ip_address,
@@ -32,12 +33,17 @@ static void send_message(int sockfd, const char *message,
 static void setup_signal_handler(void);
 static void sigint_handler(int signum);
 static void close_socket(int sockfd);
+static void get_timestamp(char *buf, size_t n);
+static void log_init(FILE **log_file, const char *filename);
+static void log_message(FILE *log_file, const char *event, const char *msg);
+static void log_close(FILE *log_file);
 
 enum {
   UNKNOWN_OPTION_MESSAGE_LEN = 24,
   ACK_SIZE = 256,
   BUFFER_SIZE = 1024,
-  BASE_TEN = 10
+  BASE_TEN = 10,
+  LOG_SIZE = 2048,
 };
 
 static const struct option long_options[] = {
@@ -62,8 +68,11 @@ int main(int argc, char *argv[]) {
   char buffer[BUFFER_SIZE];
   ssize_t bytes_received;
 
+  FILE *log_file;
+
   address = NULL;
   port_str = NULL;
+  log_file = NULL;
 
   parse_arguments(argc, argv, &address, &port_str);
   handle_arguments(argv[0], address, port_str, &port);
@@ -74,19 +83,24 @@ int main(int argc, char *argv[]) {
   bind_socket(sockfd, &addr, port);
 
   setup_signal_handler();
+  log_init(&log_file, "server.log");
+
   while (!exit_flag) {
     long seq;
     char payload[BUFFER_SIZE];
     char ack[ACK_SIZE];
     char ack_message[BUFFER_SIZE];
+    char log_buffer[LOG_SIZE];
     int long_parsed;
 
     read_message(sockfd, buffer, BUFFER_SIZE, &bytes_received, &client_addr,
                  &client_addr_len);
-
     handle_packet(buffer, payload, &seq);
 
-    printf("SEQ: %ld, PAYLOAD: %s\n", seq, payload);
+    snprintf(log_buffer, sizeof(log_buffer),
+             "Received message from proxy. SEQ: %ld, PAYLOAD: %s", seq,
+             payload);
+    log_message(log_file, "RECEIVE", log_buffer);
 
     long_parsed = snprintf(ack, sizeof(ack), "%ld", seq);
 
@@ -100,9 +114,13 @@ int main(int argc, char *argv[]) {
     strlcat(ack_message, "|", BUFFER_SIZE);
     strlcat(ack_message, ack, BUFFER_SIZE);
     send_message(sockfd, ack_message, &client_addr, client_addr_len);
+    snprintf(log_buffer, sizeof(log_buffer), "Sent message to proxy: %s",
+             ack_message);
+    log_message(log_file, "SEND", log_buffer);
   }
 
   close_socket(sockfd);
+  log_close(log_file);
   return EXIT_SUCCESS;
 }
 
@@ -118,8 +136,43 @@ static void send_message(int sockfd, const char *message,
     perror("sendto");
     exit(EXIT_FAILURE);
   }
+}
 
-  printf("Sent %zu bytes: \"%s\"\n\n", (size_t)bytes_sent, message);
+static void log_init(FILE **log_file, const char *filename) {
+  *log_file = fopen(filename, "ae");
+  if (*log_file == NULL) {
+    perror("fopen");
+    exit(EXIT_FAILURE);
+  }
+}
+
+static void log_message(FILE *log_file, const char *event, const char *msg) {
+  char timestamp[LOG_SIZE];
+  get_timestamp(timestamp, sizeof(timestamp));
+
+  // log file
+  fprintf(log_file, "%s [%s]: %s\n", timestamp, event, msg);
+  fflush(log_file);
+
+  // stderr output
+  fprintf(stderr, "%s [%s]: %s\n", timestamp, event, msg);
+  fflush(stderr);
+}
+
+static void log_close(FILE *log_file) {
+  if (log_file != NULL) {
+    fclose(log_file);
+  }
+}
+
+static void get_timestamp(char *buf, size_t n) {
+  struct timespec ts;
+  struct tm tm_info;
+
+  clock_gettime(CLOCK_REALTIME, &ts);
+  localtime_r(&ts.tv_sec, &tm_info);
+
+  strftime(buf, n, "%Y-%m-%dT%H:%M:%S", &tm_info);
 }
 
 static void parse_arguments(int argc, char *argv[], char **ip_address,

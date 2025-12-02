@@ -11,6 +11,7 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <time.h>
 #include <unistd.h>
 
 static void parse_arguments(int argc, char *argv[], char **address,
@@ -38,12 +39,17 @@ static void handle_packet(char *buffer, long *seq);
 static void setup_signal_handler(void);
 static void sigint_handler(int signum);
 static void close_socket(int sockfd);
+static void get_timestamp(char *buf, size_t n);
+static void log_init(FILE **log_file, const char *filename);
+static void log_message(FILE *log_file, const char *event, const char *msg);
+static void log_close(FILE *log_file);
 
 enum {
   UNKNOWN_OPTION_BUFFER_SIZE = 24,
   BASE_TEN = 10,
   BUFFER_SIZE = 1024,
   SEQ_LEN = 256,
+  LOG_SIZE = 128,
 };
 
 static const struct option long_options[] = {
@@ -76,10 +82,13 @@ int main(int argc, char *argv[]) {
   char input_message[BUFFER_SIZE];
   char final_message[BUFFER_SIZE];
 
+  FILE *log_file;
+
   address = NULL;
   port_str = NULL;
   timeout_str = NULL;
   max_retry_str = NULL;
+  log_file = NULL;
   retry_count = 0;
   seq_number = 0;
   timeout = 0;
@@ -93,15 +102,17 @@ int main(int argc, char *argv[]) {
   get_server_address(&addr, port);
   sockfd = create_socket(addr.ss_family, SOCK_DGRAM, 0);
   setup_signal_handler();
+  log_init(&log_file, "client.log");
 
   while (!exit_flag) {
+    char log_buffer[LOG_SIZE];
     ssize_t bytes_received;
 
     long ack;
     int status;
 
     if (retry_count > max_retry) {
-      fprintf(stderr, "Max retry limit reached. Dropping packet.\n\n");
+      log_message(log_file, "DROP", "Max retry limit reached");
       retry_count = 0;
     }
 
@@ -118,12 +129,16 @@ int main(int argc, char *argv[]) {
     }
 
     send_message(sockfd, final_message, &addr, addr_len);
+    snprintf(log_buffer, sizeof(log_buffer), "Sent message: %s", final_message);
+    log_message(log_file, "SEND", log_buffer);
 
     status = start_timeout(sockfd, timeout);
 
     if (status == 0) {
       retry_count++;
-      printf("\nTimeout! Retransmitting message. Retry: %d\n", retry_count);
+      snprintf(log_buffer, sizeof(log_buffer),
+               "Timeout! Retransmitting message. Retry: %d", retry_count);
+      log_message(log_file, "TIMEOUT", log_buffer);
       continue;
     }
 
@@ -132,13 +147,18 @@ int main(int argc, char *argv[]) {
 
       read_message(sockfd, ack_buffer, BUFFER_SIZE, &bytes_received);
       handle_packet(ack_buffer, &ack);
-      printf("Received ack: %ld\n", ack);
+
+      snprintf(log_buffer, sizeof(log_buffer), "Received ack: %ld", ack);
+      log_message(log_file, "RECEIVE", log_buffer);
 
       if (seq_number != ack) {
         retry_count++;
-        printf("Packet with SEQ: %ld does not have matching ACK. Retry count: "
-               "%d\n",
-               seq_number, retry_count);
+        snprintf(
+            log_buffer, sizeof(log_buffer),
+            "Packet with SEQ: %ld does not have matching ACK. Retry count: "
+            "%d",
+            seq_number, retry_count);
+        log_message(log_file, "RETRY", log_buffer);
         continue;
       }
 
@@ -152,8 +172,46 @@ int main(int argc, char *argv[]) {
   }
 
   close_socket(sockfd);
+  log_close(log_file);
 
   return EXIT_SUCCESS;
+}
+
+static void log_init(FILE **log_file, const char *filename) {
+  *log_file = fopen(filename, "ae");
+  if (*log_file == NULL) {
+    perror("fopen");
+    exit(EXIT_FAILURE);
+  }
+}
+
+static void log_message(FILE *log_file, const char *event, const char *msg) {
+  char timestamp[LOG_SIZE];
+  get_timestamp(timestamp, sizeof(timestamp));
+
+  // log file
+  fprintf(log_file, "%s [%s]: %s\n", timestamp, event, msg);
+  fflush(log_file);
+
+  // stderr output
+  fprintf(stderr, "%s [%s]: %s\n", timestamp, event, msg);
+  fflush(stderr);
+}
+
+static void log_close(FILE *log_file) {
+  if (log_file != NULL) {
+    fclose(log_file);
+  }
+}
+
+static void get_timestamp(char *buf, size_t n) {
+  struct timespec ts;
+  struct tm tm_info;
+
+  clock_gettime(CLOCK_REALTIME, &ts);
+  localtime_r(&ts.tv_sec, &tm_info);
+
+  strftime(buf, n, "%Y-%m-%dT%H:%M:%S", &tm_info);
 }
 
 static void structure_message(char *message, size_t message_len,
@@ -185,8 +243,6 @@ static void send_message(int sockfd, const char *message,
     perror("sendto");
     exit(EXIT_FAILURE);
   }
-
-  printf("Sent %zu bytes: \"%s\"\n", (size_t)bytes_sent, message);
 }
 
 static void read_message(int sockfd, char *buffer, size_t buffer_size,
