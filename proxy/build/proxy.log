@@ -1,127 +1,334 @@
-2025-12-01T22:01:22 [RECEIVE] (client): Read message from client: 0|q
-2025-12-01T22:01:22 [DELAY] (client): Delayed client message for 155 ms
-2025-12-01T22:01:22 [DROP] (client): Dropped client message: 0|q
-2025-12-01T22:01:24 [RECEIVE] (client): Read message from client: 0|q
-2025-12-01T22:01:24 [SEND] (server): Sent client message to server: 0|q
-2025-12-01T22:01:24 [RECEIVE] (server): Read message from server: 0|0
-2025-12-01T22:01:24 [DROP] (server): Dropped server message : 0|0
-2025-12-01T22:01:26 [RECEIVE] (client): Read message from client: 0|q
-2025-12-01T22:01:26 [SEND] (server): Sent client message to server: 0|q
-2025-12-01T22:01:26 [RECEIVE] (server): Read message from server: 0|0
-2025-12-01T22:01:26 [SEND] (client): Sent server message to client: 0|0
-2025-12-01T22:01:26 [RECEIVE] (client): Read message from client: 1|w
-2025-12-01T22:01:26 [DELAY] (client): Delayed client message for 187 ms
-2025-12-01T22:01:26 [SEND] (server): Sent client message to server: 1|w
-2025-12-01T22:01:26 [RECEIVE] (server): Read message from server: 1|1
-2025-12-01T22:01:26 [SEND] (client): Sent server message to client: 1|1
-2025-12-01T22:01:26 [RECEIVE] (client): Read message from client: 2|e
-2025-12-01T22:01:26 [SEND] (server): Sent client message to server: 2|e
-2025-12-01T22:01:26 [RECEIVE] (server): Read message from server: 2|2
-2025-12-01T22:01:26 [SEND] (client): Sent server message to client: 2|2
-2025-12-01T22:01:26 [RECEIVE] (client): Read message from client: 3|r
-2025-12-01T22:01:26 [SEND] (server): Sent client message to server: 3|r
-2025-12-01T22:01:26 [RECEIVE] (server): Read message from server: 3|3
-2025-12-01T22:01:26 [SEND] (client): Sent server message to client: 3|3
-2025-12-01T22:01:26 [RECEIVE] (client): Read message from client: 4|t
-2025-12-01T22:01:26 [SEND] (server): Sent client message to server: 4|t
-2025-12-01T22:01:26 [RECEIVE] (server): Read message from server: 4|4
-2025-12-01T22:01:26 [SEND] (client): Sent server message to client: 4|4
-2025-12-01T22:01:26 [RECEIVE] (client): Read message from client: 5|y
-2025-12-01T22:01:26 [SEND] (server): Sent client message to server: 5|y
-2025-12-01T22:01:26 [RECEIVE] (server): Read message from server: 5|5
-2025-12-01T22:01:26 [SEND] (client): Sent server message to client: 5|5
-2025-12-01T22:01:26 [RECEIVE] (client): Read message from client: 6|u
-2025-12-01T22:01:26 [SEND] (server): Sent client message to server: 6|u
-2025-12-01T22:01:26 [RECEIVE] (server): Read message from server: 6|6
-2025-12-01T22:01:26 [SEND] (client): Sent server message to client: 6|6
-2025-12-01T22:01:26 [RECEIVE] (client): Read message from client: 7|i
-2025-12-01T22:01:26 [DELAY] (client): Delayed client message for 135 ms
-2025-12-01T22:01:26 [SEND] (server): Sent client message to server: 7|i
-2025-12-01T22:01:26 [RECEIVE] (server): Read message from server: 7|7
-2025-12-01T22:01:26 [SEND] (client): Sent server message to client: 7|7
-2025-12-01T22:01:26 [RECEIVE] (client): Read message from client: 8|o
-2025-12-01T22:01:26 [SEND] (server): Sent client message to server: 8|o
-2025-12-01T22:01:26 [RECEIVE] (server): Read message from server: 8|8
-2025-12-01T22:01:26 [SEND] (client): Sent server message to client: 8|8
-2025-12-01T22:01:26 [RECEIVE] (client): Read message from client: 9|p
-2025-12-01T22:01:26 [SEND] (server): Sent client message to server: 9|p
-2025-12-01T22:01:26 [RECEIVE] (server): Read message from server: 9|9
-2025-12-01T22:01:26 [SEND] (client): Sent server message to client: 9|9
-2025-12-01T22:01:26 [RECEIVE] (client): Read message from client: 10|l
-2025-12-01T22:01:26 [SEND] (server): Sent client message to server: 10|l
-2025-12-01T22:01:26 [RECEIVE] (server): Read message from server: 10|10
-2025-12-01T22:01:26 [SEND] (client): Sent server message to client: 10|10
-2025-12-01T22:01:26 [RECEIVE] (client): Read message from client: 11|k
-2025-12-01T22:01:26 [DELAY] (client): Delayed client message for 135 ms
-2025-12-01T22:01:26 [SEND] (server): Sent client message to server: 11|k
-2025-12-01T22:01:26 [RECEIVE] (server): Read message from server: 11|11
-2025-12-01T22:01:26 [SEND] (client): Sent server message to client: 11|11
-2025-12-01T22:01:27 [RECEIVE] (client): Read message from client: 12|j
-2025-12-01T22:01:27 [DROP] (client): Dropped client message: 12|j
-2025-12-01T22:01:29 [RECEIVE] (client): Read message from client: 12|j
-2025-12-01T22:01:29 [SEND] (server): Sent client message to server: 12|j
-2025-12-01T22:01:29 [RECEIVE] (server): Read message from server: 12|12
-2025-12-01T22:01:29 [SEND] (client): Sent server message to client: 12|12
-2025-12-01T22:01:29 [RECEIVE] (client): Read message from client: 13|h
-2025-12-01T22:01:29 [SEND] (server): Sent client message to server: 13|h
-2025-12-01T22:01:29 [RECEIVE] (server): Read message from server: 13|13
-2025-12-01T22:01:29 [DROP] (server): Dropped server message : 13|13
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 13|h
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 13|h
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 13|13
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 13|13
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 14|g
-2025-12-01T22:01:31 [DELAY] (client): Delayed client message for 185 ms
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 14|g
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 14|14
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 14|14
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 15|f
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 15|f
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 15|15
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 15|15
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 16|d
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 16|d
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 16|16
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 16|16
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 17|s
-2025-12-01T22:01:31 [DELAY] (client): Delayed client message for 132 ms
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 17|s
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 17|17
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 17|17
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 18|a
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 18|a
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 18|18
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 18|18
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 19|z
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 19|z
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 19|19
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 19|19
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 20|x
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 20|x
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 20|20
-2025-12-01T22:01:31 [DELAY] (server): Delayed server message for 172 ms
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 20|20
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 21|c
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 21|c
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 21|21
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 21|21
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 22|v
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 22|v
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 22|22
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 22|22
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 23|b
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 23|b
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 23|23
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 23|23
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 24|n
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 24|n
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 24|24
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 24|24
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 25|m
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 25|m
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 25|25
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 25|25
-2025-12-01T22:01:31 [RECEIVE] (client): Read message from client: 26|AHDJKJASHDKAJSDHA
-2025-12-01T22:01:31 [SEND] (server): Sent client message to server: 26|AHDJKJASHDKAJSDHA
-2025-12-01T22:01:31 [RECEIVE] (server): Read message from server: 26|26
-2025-12-01T22:01:31 [SEND] (client): Sent server message to client: 26|26
+2025-12-02T20:03:36 [RECEIVE] (client): Read message from client: 1|hello
+2025-12-02T20:03:36 [SEND] (server): Sent client message to server: 1|hello
+2025-12-02T20:03:36 [RECEIVE] (server): Read message from server: 1|1
+2025-12-02T20:03:36 [DELAY] (server): Delayed server message for 209 ms
+2025-12-02T20:03:36 [DROP] (server): Dropped server message : 1|1
+2025-12-02T20:03:41 [RECEIVE] (client): Read message from client: 1|hello
+2025-12-02T20:03:41 [DELAY] (client): Delayed client message for 153 ms
+2025-12-02T20:03:41 [SEND] (server): Sent client message to server: 1|hello
+2025-12-02T20:03:41 [RECEIVE] (server): Read message from server: 1|1
+2025-12-02T20:03:41 [SEND] (client): Sent server message to client: 1|1
+2025-12-02T20:05:46 [RECEIVE] (client): Read message from client: 2|hi
+2025-12-02T20:05:46 [DELAY] (client): Delayed client message for 139 ms
+2025-12-02T20:05:46 [SEND] (server): Sent client message to server: 2|hi
+2025-12-02T20:05:46 [RECEIVE] (server): Read message from server: 2|2
+2025-12-02T20:05:46 [SEND] (client): Sent server message to client: 2|2
+2025-12-02T20:05:48 [RECEIVE] (client): Read message from client: 3|wassup
+2025-12-02T20:05:48 [SEND] (server): Sent client message to server: 3|wassup
+2025-12-02T20:05:48 [RECEIVE] (server): Read message from server: 3|3
+2025-12-02T20:05:48 [SEND] (client): Sent server message to client: 3|3
+2025-12-02T20:05:50 [RECEIVE] (client): Read message from client: 4|wmh
+2025-12-02T20:05:50 [DELAY] (client): Delayed client message for 141 ms
+2025-12-02T20:05:50 [SEND] (server): Sent client message to server: 4|wmh
+2025-12-02T20:05:50 [RECEIVE] (server): Read message from server: 4|4
+2025-12-02T20:05:50 [DROP] (server): Dropped server message : 4|4
+2025-12-02T20:05:55 [RECEIVE] (client): Read message from client: 4|wmh
+2025-12-02T20:05:55 [SEND] (server): Sent client message to server: 4|wmh
+2025-12-02T20:05:55 [RECEIVE] (server): Read message from server: 4|4
+2025-12-02T20:05:55 [DELAY] (server): Delayed server message for 255 ms
+2025-12-02T20:05:55 [SEND] (client): Sent server message to client: 4|4
+2025-12-02T20:21:58 [RECEIVE] (client): Read message from client: 0|hello
+2025-12-02T20:21:58 [SEND] (server): Sent client message to server: 0|hello
+2025-12-02T20:22:03 [RECEIVE] (client): Read message from client: 0|hello
+2025-12-02T20:22:03 [SEND] (server): Sent client message to server: 0|hello
+2025-12-02T20:22:03 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:22:03 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:26:40 [RECEIVE] (client): Read message from client: 0|hi
+2025-12-02T20:26:40 [SEND] (server): Sent client message to server: 0|hi
+2025-12-02T20:26:45 [RECEIVE] (client): Read message from client: 0|hi
+2025-12-02T20:26:45 [DROP] (client): Dropped client message: 0|hi
+2025-12-02T20:26:50 [RECEIVE] (client): Read message from client: 0|hi
+2025-12-02T20:26:50 [DROP] (client): Dropped client message: 0|hi
+2025-12-02T20:26:55 [RECEIVE] (client): Read message from client: 0|hi
+2025-12-02T20:26:55 [SEND] (server): Sent client message to server: 0|hi
+2025-12-02T20:26:55 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:26:55 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:39:31 [RECEIVE] (client): Read message from client: 0|hi
+2025-12-02T20:39:31 [SEND] (server): Sent client message to server: 0|hi
+2025-12-02T20:39:36 [RECEIVE] (client): Read message from client: 0|hi
+2025-12-02T20:39:36 [SEND] (server): Sent client message to server: 0|hi
+2025-12-02T20:39:36 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:39:36 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:44:59 [RECEIVE] (client): Read message from client: 1|hi
+2025-12-02T20:44:59 [DELAY] (client): Delayed client message for 165 ms
+2025-12-02T20:44:59 [SEND] (server): Sent client message to server: 1|hi
+2025-12-02T20:44:59 [RECEIVE] (server): Read message from server: 1|1
+2025-12-02T20:44:59 [SEND] (client): Sent server message to client: 1|1
+2025-12-02T20:45:13 [RECEIVE] (client): Read message from client: 0|hi
+2025-12-02T20:45:13 [DELAY] (client): Delayed client message for 150 ms
+2025-12-02T20:45:13 [SEND] (server): Sent client message to server: 0|hi
+2025-12-02T20:45:18 [RECEIVE] (client): Read message from client: 0|hi
+2025-12-02T20:45:18 [SEND] (server): Sent client message to server: 0|hi
+2025-12-02T20:45:18 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:45:18 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:51:22 [RECEIVE] (client): Read message from client: 0|hi
+2025-12-02T20:51:22 [SEND] (server): Sent client message to server: 0|hi
+2025-12-02T20:51:27 [RECEIVE] (client): Read message from client: 0|hi
+2025-12-02T20:51:27 [SEND] (server): Sent client message to server: 0|hi
+2025-12-02T20:51:27 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:51:27 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:52:46 [RECEIVE] (client): Read message from client: 0|no drop no delay
+2025-12-02T20:52:46 [SEND] (server): Sent client message to server: 0|no drop no delay
+2025-12-02T20:52:51 [RECEIVE] (client): Read message from client: 0|no drop no delay
+2025-12-02T20:52:51 [SEND] (server): Sent client message to server: 0|no drop no delay
+2025-12-02T20:52:51 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:52:51 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:52:53 [RECEIVE] (client): Read message from client: 1|hello
+2025-12-02T20:52:53 [SEND] (server): Sent client message to server: 1|hello
+2025-12-02T20:52:53 [RECEIVE] (server): Read message from server: 1|1
+2025-12-02T20:52:53 [SEND] (client): Sent server message to client: 1|1
+2025-12-02T20:52:54 [RECEIVE] (client): Read message from client: 2|hi
+2025-12-02T20:52:54 [SEND] (server): Sent client message to server: 2|hi
+2025-12-02T20:52:54 [RECEIVE] (server): Read message from server: 2|2
+2025-12-02T20:52:54 [SEND] (client): Sent server message to client: 2|2
+2025-12-02T20:53:14 [RECEIVE] (client): Read message from client: 0|hi
+2025-12-02T20:53:14 [SEND] (server): Sent client message to server: 0|hi
+2025-12-02T20:53:35 [RECEIVE] (client): Read message from client: 0|hello
+2025-12-02T20:53:35 [SEND] (server): Sent client message to server: 0|hello
+2025-12-02T20:53:35 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:53:35 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:53:40 [RECEIVE] (client): Read message from client: 1|hi
+2025-12-02T20:53:40 [SEND] (server): Sent client message to server: 1|hi
+2025-12-02T20:53:40 [RECEIVE] (server): Read message from server: 1|1
+2025-12-02T20:53:40 [SEND] (client): Sent server message to client: 1|1
+2025-12-02T20:53:41 [RECEIVE] (client): Read message from client: 2|this
+2025-12-02T20:53:41 [SEND] (server): Sent client message to server: 2|this
+2025-12-02T20:53:41 [RECEIVE] (server): Read message from server: 2|2
+2025-12-02T20:53:41 [SEND] (client): Sent server message to client: 2|2
+2025-12-02T20:53:42 [RECEIVE] (client): Read message from client: 3|works
+2025-12-02T20:53:42 [SEND] (server): Sent client message to server: 3|works
+2025-12-02T20:53:42 [RECEIVE] (server): Read message from server: 3|3
+2025-12-02T20:53:42 [SEND] (client): Sent server message to client: 3|3
+2025-12-02T20:53:43 [RECEIVE] (client): Read message from client: 4|with
+2025-12-02T20:53:43 [SEND] (server): Sent client message to server: 4|with
+2025-12-02T20:53:43 [RECEIVE] (server): Read message from server: 4|4
+2025-12-02T20:53:43 [SEND] (client): Sent server message to client: 4|4
+2025-12-02T20:53:43 [RECEIVE] (client): Read message from client: 5|no
+2025-12-02T20:53:43 [SEND] (server): Sent client message to server: 5|no
+2025-12-02T20:53:43 [RECEIVE] (server): Read message from server: 5|5
+2025-12-02T20:53:43 [SEND] (client): Sent server message to client: 5|5
+2025-12-02T20:53:44 [RECEIVE] (client): Read message from client: 6|delay
+2025-12-02T20:53:44 [SEND] (server): Sent client message to server: 6|delay
+2025-12-02T20:53:44 [RECEIVE] (server): Read message from server: 6|6
+2025-12-02T20:53:44 [SEND] (client): Sent server message to client: 6|6
+2025-12-02T20:54:05 [RECEIVE] (client): Read message from client: 0|hello
+2025-12-02T20:54:05 [DROP] (client): Dropped client message: 0|hello
+2025-12-02T20:54:10 [RECEIVE] (client): Read message from client: 0|hello
+2025-12-02T20:54:10 [SEND] (server): Sent client message to server: 0|hello
+2025-12-02T20:54:10 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:54:10 [DROP] (server): Dropped server message : 0|0
+2025-12-02T20:54:15 [RECEIVE] (client): Read message from client: 0|hello
+2025-12-02T20:54:15 [SEND] (server): Sent client message to server: 0|hello
+2025-12-02T20:54:15 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:54:15 [DELAY] (server): Delayed server message for 230 ms
+2025-12-02T20:54:15 [DROP] (server): Dropped server message : 0|0
+2025-12-02T20:54:20 [RECEIVE] (client): Read message from client: 0|hello
+2025-12-02T20:54:20 [SEND] (server): Sent client message to server: 0|hello
+2025-12-02T20:54:20 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:54:20 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:54:46 [RECEIVE] (client): Read message from client: 0|hello
+2025-12-02T20:54:46 [DELAY] (client): Delayed client message for 116 ms
+2025-12-02T20:54:46 [DROP] (client): Dropped client message: 0|hello
+2025-12-02T20:54:51 [RECEIVE] (client): Read message from client: 0|hello
+2025-12-02T20:54:51 [DELAY] (client): Delayed client message for 110 ms
+2025-12-02T20:54:51 [DROP] (client): Dropped client message: 0|hello
+2025-12-02T20:54:56 [RECEIVE] (client): Read message from client: 0|hello
+2025-12-02T20:54:56 [DROP] (client): Dropped client message: 0|hello
+2025-12-02T20:55:01 [RECEIVE] (client): Read message from client: 0|hello
+2025-12-02T20:55:01 [DELAY] (client): Delayed client message for 178 ms
+2025-12-02T20:55:01 [SEND] (server): Sent client message to server: 0|hello
+2025-12-02T20:55:06 [RECEIVE] (client): Read message from client: 0|hello
+2025-12-02T20:55:06 [SEND] (server): Sent client message to server: 0|hello
+2025-12-02T20:55:06 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:55:06 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:55:32 [RECEIVE] (client): Read message from client: 0|drop
+2025-12-02T20:55:32 [DROP] (client): Dropped client message: 0|drop
+2025-12-02T20:55:33 [RECEIVE] (client): Read message from client: 0|drop
+2025-12-02T20:55:33 [DROP] (client): Dropped client message: 0|drop
+2025-12-02T20:55:34 [RECEIVE] (client): Read message from client: 0|drop
+2025-12-02T20:55:34 [DELAY] (client): Delayed client message for 139 ms
+2025-12-02T20:55:34 [DROP] (client): Dropped client message: 0|drop
+2025-12-02T20:55:35 [RECEIVE] (client): Read message from client: 0|drop
+2025-12-02T20:55:35 [DROP] (client): Dropped client message: 0|drop
+2025-12-02T20:55:36 [RECEIVE] (client): Read message from client: 0|drop
+2025-12-02T20:55:36 [DELAY] (client): Delayed client message for 173 ms
+2025-12-02T20:55:36 [DROP] (client): Dropped client message: 0|drop
+2025-12-02T20:55:37 [RECEIVE] (client): Read message from client: 0|drop
+2025-12-02T20:55:37 [DELAY] (client): Delayed client message for 174 ms
+2025-12-02T20:55:37 [DROP] (client): Dropped client message: 0|drop
+2025-12-02T20:56:04 [RECEIVE] (client): Read message from client: 0|timeout delay
+2025-12-02T20:56:05 [DELAY] (client): Delayed client message for 186 ms
+2025-12-02T20:56:05 [SEND] (server): Sent client message to server: 0|timeout delay
+2025-12-02T20:56:05 [RECEIVE] (client): Read message from client: 0|timeout delay
+2025-12-02T20:56:06 [DELAY] (client): Delayed client message for 148 ms
+2025-12-02T20:56:06 [SEND] (server): Sent client message to server: 0|timeout delay
+2025-12-02T20:56:06 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:56:06 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:56:10 [RECEIVE] (client): Read message from client: 1|delay
+2025-12-02T20:56:10 [DELAY] (client): Delayed client message for 154 ms
+2025-12-02T20:56:10 [SEND] (server): Sent client message to server: 1|delay
+2025-12-02T20:56:10 [RECEIVE] (server): Read message from server: 1|1
+2025-12-02T20:56:10 [SEND] (client): Sent server message to client: 1|1
+2025-12-02T20:56:16 [RECEIVE] (client): Read message from client: 2|delay
+2025-12-02T20:56:16 [DELAY] (client): Delayed client message for 163 ms
+2025-12-02T20:56:16 [SEND] (server): Sent client message to server: 2|delay
+2025-12-02T20:56:16 [RECEIVE] (server): Read message from server: 2|2
+2025-12-02T20:56:16 [SEND] (client): Sent server message to client: 2|2
+2025-12-02T20:56:56 [RECEIVE] (client): Read message from client: 0|hi
+2025-12-02T20:56:56 [DELAY] (client): Delayed client message for 137 ms
+2025-12-02T20:56:56 [SEND] (server): Sent client message to server: 0|hi
+2025-12-02T20:56:57 [RECEIVE] (client): Read message from client: 0|hi
+2025-12-02T20:56:57 [DELAY] (client): Delayed client message for 199 ms
+2025-12-02T20:56:57 [SEND] (server): Sent client message to server: 0|hi
+2025-12-02T20:56:57 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:56:57 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:57:06 [RECEIVE] (client): Read message from client: 0|a
+2025-12-02T20:57:06 [DELAY] (client): Delayed client message for 192 ms
+2025-12-02T20:57:06 [SEND] (server): Sent client message to server: 0|a
+2025-12-02T20:57:25 [RECEIVE] (client): Read message from client: 0|hello
+2025-12-02T20:57:26 [DELAY] (client): Delayed client message for 155 ms
+2025-12-02T20:57:26 [SEND] (server): Sent client message to server: 0|hello
+2025-12-02T20:57:26 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:57:26 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:57:27 [RECEIVE] (client): Read message from client: 1|this
+2025-12-02T20:57:27 [DELAY] (client): Delayed client message for 172 ms
+2025-12-02T20:57:27 [SEND] (server): Sent client message to server: 1|this
+2025-12-02T20:57:27 [RECEIVE] (server): Read message from server: 1|1
+2025-12-02T20:57:27 [SEND] (client): Sent server message to client: 1|1
+2025-12-02T20:57:27 [RECEIVE] (client): Read message from client: 2|works
+2025-12-02T20:57:28 [DELAY] (client): Delayed client message for 165 ms
+2025-12-02T20:57:28 [SEND] (server): Sent client message to server: 2|works
+2025-12-02T20:57:28 [RECEIVE] (server): Read message from server: 2|2
+2025-12-02T20:57:28 [SEND] (client): Sent server message to client: 2|2
+2025-12-02T20:57:28 [RECEIVE] (client): Read message from client: 3|pre
+2025-12-02T20:57:28 [DELAY] (client): Delayed client message for 110 ms
+2025-12-02T20:57:28 [SEND] (server): Sent client message to server: 3|pre
+2025-12-02T20:57:28 [RECEIVE] (server): Read message from server: 3|3
+2025-12-02T20:57:28 [SEND] (client): Sent server message to client: 3|3
+2025-12-02T20:57:29 [RECEIVE] (client): Read message from client: 4|well
+2025-12-02T20:57:29 [DELAY] (client): Delayed client message for 146 ms
+2025-12-02T20:57:29 [SEND] (server): Sent client message to server: 4|well
+2025-12-02T20:57:29 [RECEIVE] (server): Read message from server: 4|4
+2025-12-02T20:57:29 [SEND] (client): Sent server message to client: 4|4
+2025-12-02T20:57:59 [RECEIVE] (client): Read message from client: 0|delay
+2025-12-02T20:57:59 [SEND] (server): Sent client message to server: 0|delay
+2025-12-02T20:58:00 [RECEIVE] (client): Read message from client: 0|delay
+2025-12-02T20:58:00 [SEND] (server): Sent client message to server: 0|delay
+2025-12-02T20:58:00 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:58:00 [DELAY] (server): Delayed server message for 150 ms
+2025-12-02T20:58:00 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:58:02 [RECEIVE] (client): Read message from client: 1|in
+2025-12-02T20:58:02 [SEND] (server): Sent client message to server: 1|in
+2025-12-02T20:58:02 [RECEIVE] (server): Read message from server: 1|1
+2025-12-02T20:58:02 [SEND] (client): Sent server message to client: 1|1
+2025-12-02T20:58:05 [RECEIVE] (client): Read message from client: 2|server
+2025-12-02T20:58:05 [SEND] (server): Sent client message to server: 2|server
+2025-12-02T20:58:05 [RECEIVE] (server): Read message from server: 2|2
+2025-12-02T20:58:05 [DELAY] (server): Delayed server message for 293 ms
+2025-12-02T20:58:05 [DROP] (server): Dropped server message : 2|2
+2025-12-02T20:58:06 [RECEIVE] (client): Read message from client: 2|server
+2025-12-02T20:58:06 [SEND] (server): Sent client message to server: 2|server
+2025-12-02T20:58:06 [RECEIVE] (server): Read message from server: 2|2
+2025-12-02T20:58:06 [SEND] (client): Sent server message to client: 2|2
+2025-12-02T20:58:30 [RECEIVE] (client): Read message from client: 0|client
+2025-12-02T20:58:31 [DELAY] (client): Delayed client message for 148 ms
+2025-12-02T20:58:31 [DROP] (client): Dropped client message: 0|client
+2025-12-02T20:58:31 [RECEIVE] (client): Read message from client: 0|client
+2025-12-02T20:58:31 [SEND] (server): Sent client message to server: 0|client
+2025-12-02T20:58:32 [RECEIVE] (client): Read message from client: 0|client
+2025-12-02T20:58:33 [DELAY] (client): Delayed client message for 148 ms
+2025-12-02T20:58:33 [DROP] (client): Dropped client message: 0|client
+2025-12-02T20:58:33 [RECEIVE] (client): Read message from client: 0|client
+2025-12-02T20:58:33 [SEND] (server): Sent client message to server: 0|client
+2025-12-02T20:58:33 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:58:33 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:58:35 [RECEIVE] (client): Read message from client: 1|ddrops
+2025-12-02T20:58:35 [SEND] (server): Sent client message to server: 1|ddrops
+2025-12-02T20:58:35 [RECEIVE] (server): Read message from server: 1|1
+2025-12-02T20:58:35 [SEND] (client): Sent server message to client: 1|1
+2025-12-02T20:58:40 [RECEIVE] (client): Read message from client: 2|a
+2025-12-02T20:58:40 [DROP] (client): Dropped client message: 2|a
+2025-12-02T20:58:41 [RECEIVE] (client): Read message from client: 2|a
+2025-12-02T20:58:41 [DELAY] (client): Delayed client message for 154 ms
+2025-12-02T20:58:41 [SEND] (server): Sent client message to server: 2|a
+2025-12-02T20:58:41 [RECEIVE] (server): Read message from server: 2|2
+2025-12-02T20:58:41 [SEND] (client): Sent server message to client: 2|2
+2025-12-02T20:58:43 [RECEIVE] (client): Read message from client: 3|e
+2025-12-02T20:58:43 [DELAY] (client): Delayed client message for 167 ms
+2025-12-02T20:58:43 [SEND] (server): Sent client message to server: 3|e
+2025-12-02T20:58:43 [RECEIVE] (server): Read message from server: 3|3
+2025-12-02T20:58:43 [SEND] (client): Sent server message to client: 3|3
+2025-12-02T20:59:00 [RECEIVE] (client): Read message from client: 0|timeout
+2025-12-02T20:59:00 [DROP] (client): Dropped client message: 0|timeout
+2025-12-02T20:59:01 [RECEIVE] (client): Read message from client: 0|timeout
+2025-12-02T20:59:01 [DELAY] (client): Delayed client message for 138 ms
+2025-12-02T20:59:01 [DROP] (client): Dropped client message: 0|timeout
+2025-12-02T20:59:02 [RECEIVE] (client): Read message from client: 0|timeout
+2025-12-02T20:59:02 [DELAY] (client): Delayed client message for 198 ms
+2025-12-02T20:59:02 [DROP] (client): Dropped client message: 0|timeout
+2025-12-02T20:59:03 [RECEIVE] (client): Read message from client: 0|timeout
+2025-12-02T20:59:03 [DROP] (client): Dropped client message: 0|timeout
+2025-12-02T20:59:04 [RECEIVE] (client): Read message from client: 0|timeout
+2025-12-02T20:59:04 [DELAY] (client): Delayed client message for 194 ms
+2025-12-02T20:59:04 [DROP] (client): Dropped client message: 0|timeout
+2025-12-02T20:59:05 [RECEIVE] (client): Read message from client: 0|timeout
+2025-12-02T20:59:05 [DELAY] (client): Delayed client message for 196 ms
+2025-12-02T20:59:05 [DROP] (client): Dropped client message: 0|timeout
+2025-12-02T20:59:31 [RECEIVE] (client): Read message from client: 0|timeout
+2025-12-02T20:59:34 [DELAY] (client): Delayed client message for 2639 ms
+2025-12-02T20:59:34 [SEND] (server): Sent client message to server: 0|timeout
+2025-12-02T20:59:34 [RECEIVE] (client): Read message from client: 0|timeout
+2025-12-02T20:59:36 [DELAY] (client): Delayed client message for 2436 ms
+2025-12-02T20:59:36 [SEND] (server): Sent client message to server: 0|timeout
+2025-12-02T20:59:36 [RECEIVE] (client): Read message from client: 0|timeout
+2025-12-02T20:59:39 [DELAY] (client): Delayed client message for 2851 ms
+2025-12-02T20:59:39 [SEND] (server): Sent client message to server: 0|timeout
+2025-12-02T20:59:39 [RECEIVE] (client): Read message from client: 0|timeout
+2025-12-02T20:59:42 [DELAY] (client): Delayed client message for 2764 ms
+2025-12-02T20:59:42 [SEND] (server): Sent client message to server: 0|timeout
+2025-12-02T20:59:42 [RECEIVE] (client): Read message from client: 0|timeout
+2025-12-02T20:59:44 [DELAY] (client): Delayed client message for 2288 ms
+2025-12-02T20:59:44 [SEND] (server): Sent client message to server: 0|timeout
+2025-12-02T20:59:44 [RECEIVE] (client): Read message from client: 0|timeout
+2025-12-02T20:59:46 [DELAY] (client): Delayed client message for 2044 ms
+2025-12-02T20:59:46 [SEND] (server): Sent client message to server: 0|timeout
+2025-12-02T20:59:46 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:59:46 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:59:46 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:59:46 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:59:46 [RECEIVE] (client): Read message from client: 0|delay
+2025-12-02T20:59:49 [DELAY] (client): Delayed client message for 2735 ms
+2025-12-02T20:59:49 [SEND] (server): Sent client message to server: 0|delay
+2025-12-02T20:59:49 [RECEIVE] (client): Read message from client: 0|delay
+2025-12-02T20:59:52 [DELAY] (client): Delayed client message for 2766 ms
+2025-12-02T20:59:52 [SEND] (server): Sent client message to server: 0|delay
+2025-12-02T20:59:52 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:59:52 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:59:52 [RECEIVE] (client): Read message from client: 0|delay
+2025-12-02T20:59:54 [DELAY] (client): Delayed client message for 2101 ms
+2025-12-02T20:59:54 [SEND] (server): Sent client message to server: 0|delay
+2025-12-02T20:59:54 [RECEIVE] (client): Read message from client: 0|delay
+2025-12-02T20:59:56 [DELAY] (client): Delayed client message for 2614 ms
+2025-12-02T20:59:56 [SEND] (server): Sent client message to server: 0|delay
+2025-12-02T20:59:56 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T20:59:56 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T20:59:56 [RECEIVE] (client): Read message from client: 0|delay
+2025-12-02T20:59:58 [DELAY] (client): Delayed client message for 2029 ms
+2025-12-02T20:59:58 [SEND] (server): Sent client message to server: 0|delay
+2025-12-02T20:59:58 [RECEIVE] (client): Read message from client: 0|delay
+2025-12-02T21:00:01 [DELAY] (client): Delayed client message for 2122 ms
+2025-12-02T21:00:01 [SEND] (server): Sent client message to server: 0|delay
+2025-12-02T21:00:01 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T21:00:01 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T21:00:01 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T21:00:01 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T21:00:01 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T21:00:01 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T21:00:01 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T21:00:01 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T21:00:01 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T21:00:01 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T21:00:01 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T21:00:01 [SEND] (client): Sent server message to client: 0|0
+2025-12-02T21:00:01 [RECEIVE] (server): Read message from server: 0|0
+2025-12-02T21:00:01 [SEND] (client): Sent server message to client: 0|0

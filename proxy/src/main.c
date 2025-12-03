@@ -38,10 +38,8 @@ static void handle_arguments(const char *binary_name, const Arguments *args);
 static in_port_t parse_port(const char *binary_name, const char *port_str);
 _Noreturn static void usage(const char *program_name, int exit_code,
                             const char *message);
-static void convert_address(const char *address, struct sockaddr_storage *addr);
-static void convert_server_address(const char *address,
-                                   struct sockaddr_storage *addr,
-                                   socklen_t *addr_len);
+static void convert_address(const char *address, struct sockaddr_storage *addr,
+                            socklen_t *addr_len);
 static void get_server_address(struct sockaddr_storage *addr, in_port_t port);
 static int create_socket(int domain, int type, int protocol);
 static void bind_socket(int sockfd, struct sockaddr_storage *addr,
@@ -49,9 +47,6 @@ static void bind_socket(int sockfd, struct sockaddr_storage *addr,
 static void read_message(int sockfd, char *buffer, size_t buffer_size,
                          ssize_t *bytes_received, struct sockaddr_storage *addr,
                          socklen_t *addr_len);
-// static void read_server_message(int sockfd, char *buffer, size_t buffer_size,
-//                                 ssize_t *bytes_received);
-// static void handle_packet(char *buffer, char *payload, long *seq);
 static void send_message(int sockfd, const char *message,
                          struct sockaddr_storage *addr, socklen_t addr_len);
 static int return_random(int max);
@@ -69,6 +64,8 @@ static void log_message(FILE *log_file, const char *event,
 static void log_close(FILE *log_file);
 static int same_addr(const struct sockaddr_storage *a,
                      const struct sockaddr_storage *b);
+static int parse_int(const char *binary_name, const char *str,
+                     const char *field);
 
 enum {
   UNKNOWN_OPTION_MESSAGE_LEN = 24,
@@ -116,6 +113,7 @@ int main(int argc, char *argv[]) {
   socklen_t src_addr_len;
 
   struct sockaddr_storage addr;
+  socklen_t addr_len;
 
   unsigned int seed;
   FILE *log_file;
@@ -128,10 +126,8 @@ int main(int argc, char *argv[]) {
 
   parse_arguments(argc, argv, &args);
   handle_arguments(argv[0], &args);
-  convert_address(args.ip_address, &addr);
-
-  convert_server_address(args.server_ip_address, &server_addr,
-                         &server_addr_len);
+  convert_address(args.ip_address, &addr, &addr_len);
+  convert_address(args.server_ip_address, &server_addr, &server_addr_len);
   get_server_address(&server_addr, args.server_port);
 
   sockfd = create_socket(addr.ss_family, SOCK_DGRAM, 0);
@@ -151,7 +147,6 @@ int main(int argc, char *argv[]) {
     int delay;
 
     src_addr_len = sizeof(src_addr);
-
     read_message(sockfd, message, BUFFER_SIZE, &bytes_received, &src_addr,
                  &src_addr_len);
 
@@ -217,162 +212,6 @@ int main(int argc, char *argv[]) {
   close_socket(sockfd);
   log_close(log_file);
   return EXIT_SUCCESS;
-}
-
-static int same_addr(const struct sockaddr_storage *a,
-                     const struct sockaddr_storage *b) {
-  if (a == NULL || b == NULL) {
-    return 0;
-  }
-
-  if (a->ss_family != AF_INET && a->ss_family != AF_INET6) {
-    return 0;
-  }
-
-  if (b->ss_family != AF_INET && b->ss_family != AF_INET6) {
-    return 0;
-  }
-
-  if (a->ss_family == AF_INET) {
-    const struct sockaddr_in *ia = (const struct sockaddr_in *)a;
-    const struct sockaddr_in *ib = (const struct sockaddr_in *)b;
-
-    return (ia->sin_port == ib->sin_port) &&
-           (ia->sin_addr.s_addr == ib->sin_addr.s_addr);
-  }
-
-  if (a->ss_family == AF_INET6) {
-    const struct sockaddr_in6 *ia6 = (const struct sockaddr_in6 *)a;
-    const struct sockaddr_in6 *ib6 = (const struct sockaddr_in6 *)b;
-
-    return (ia6->sin6_port == ib6->sin6_port) &&
-           (memcmp(&ia6->sin6_addr, &ib6->sin6_addr, sizeof(struct in6_addr)) ==
-            0);
-  }
-
-  return 0;
-}
-
-static void log_init(FILE **log_file, const char *filename) {
-  *log_file = fopen(filename, "ae");
-  if (*log_file == NULL) {
-    perror("fopen");
-    exit(EXIT_FAILURE);
-  }
-}
-
-static void log_message(FILE *log_file, const char *event,
-                        const char *direction, const char *msg) {
-  char timestamp[ACK_SIZE];
-  get_timestamp(timestamp, sizeof(timestamp));
-
-  // log file
-  fprintf(log_file, "%s [%s] (%s): %s\n", timestamp, event, direction, msg);
-  fflush(log_file);
-
-  // stderr output
-  fprintf(stderr, "%s [%s] (%s): %s\n", timestamp, event, direction, msg);
-  fflush(stderr);
-}
-
-static void log_close(FILE *log_file) {
-  if (log_file != NULL) {
-    fclose(log_file);
-  }
-}
-
-static void get_timestamp(char *buf, size_t n) {
-  struct timespec ts;
-  struct tm tm_info;
-
-  clock_gettime(CLOCK_REALTIME, &ts);
-  localtime_r(&ts.tv_sec, &tm_info);
-
-  strftime(buf, n, "%Y-%m-%dT%H:%M:%S", &tm_info);
-}
-
-static int simulate_delay(int denominator, int delay_min, int delay_max,
-                          int delay_prob) {
-  int delay_chance;
-  int delay_range;
-  int delay;
-  int sleep_val;
-
-  delay_chance = return_random(denominator);
-
-  if (delay_chance > delay_prob) {
-    return 0;
-  }
-
-  delay_range = delay_max - delay_min;
-  delay = return_random(delay_range);
-
-  sleep_val = delay + delay_min - 1;
-
-  sleep_milliseconds(sleep_val);
-  return delay + delay_min - 1;
-}
-
-static void sleep_milliseconds(int ms) {
-  if (ms <= 0) {
-    return;
-  }
-
-  struct timespec ts;
-  ts.tv_sec = ms / MILLISECONDS;
-  ts.tv_nsec = (long)(ms % MILLISECONDS) * NANOSECONDS;
-
-  nanosleep(&ts, NULL);
-}
-
-static int simulate_drop(int denominator, int drop_prob) {
-  int drop_chance = return_random(denominator);
-
-  if (drop_chance < 0) {
-    perror("drop_chance");
-    exit(EXIT_FAILURE);
-  }
-
-  if (drop_chance > drop_prob) {
-    return 0;
-  }
-  return 1;
-}
-
-static int return_random(int max) {
-  if (max <= 0) {
-    return -1;
-  }
-
-  return rand() % max + 1;
-}
-
-static int parse_int(const char *binary_name, const char *str,
-                     const char *field) {
-  char *endptr;
-  long value = strtol(str, &endptr, BASE_TEN);
-
-  if (*endptr != '\0') {
-    fprintf(stderr, "%s: invalid integer for %s: '%s'\n", binary_name, field,
-            str);
-    exit(EXIT_FAILURE);
-  }
-
-  return (int)value;
-}
-
-static void send_message(int sockfd, const char *message,
-                         // cppcheck-suppress constParameterPointer
-                         struct sockaddr_storage *addr, socklen_t addr_len) {
-  ssize_t bytes_sent;
-
-  bytes_sent = sendto(sockfd, message, strlen(message) + 1, 0,
-                      (struct sockaddr *)addr, addr_len);
-
-  if (bytes_sent == -1) {
-    perror("sendto");
-    exit(EXIT_FAILURE);
-  }
 }
 
 static void parse_arguments(int argc, char *argv[], Arguments *args) {
@@ -532,25 +371,8 @@ _Noreturn static void usage(const char *program_name, int exit_code,
   exit(exit_code);
 }
 
-static void convert_address(const char *address,
-                            struct sockaddr_storage *addr) {
-  memset(addr, 0, sizeof(*addr));
-
-  if (inet_pton(AF_INET, address, &(((struct sockaddr_in *)addr)->sin_addr)) ==
-      1) {
-    addr->ss_family = AF_INET;
-  } else if (inet_pton(AF_INET6, address,
-                       &(((struct sockaddr_in6 *)addr)->sin6_addr)) == 1) {
-    addr->ss_family = AF_INET6;
-  } else {
-    fprintf(stderr, "%s is not an IPv4 or an IPv6 address\n", address);
-    exit(EXIT_FAILURE);
-  }
-}
-
-static void convert_server_address(const char *address,
-                                   struct sockaddr_storage *addr,
-                                   socklen_t *addr_len) {
+static void convert_address(const char *address, struct sockaddr_storage *addr,
+                            socklen_t *addr_len) {
   memset(addr, 0, sizeof(*addr));
 
   if (inet_pton(AF_INET, address, &(((struct sockaddr_in *)addr)->sin_addr)) ==
@@ -647,7 +469,7 @@ static void read_message(int sockfd, char *buffer, size_t buffer_size,
                          ssize_t *bytes_received, struct sockaddr_storage *addr,
                          socklen_t *addr_len) {
   size_t n;
-  memset(buffer, 0, BUFFER_SIZE);
+  memset(buffer, 0, *addr_len);
 
   *bytes_received = recvfrom(sockfd, buffer, buffer_size - 1, 0,
                              (struct sockaddr *)addr, addr_len);
@@ -667,27 +489,168 @@ static void read_message(int sockfd, char *buffer, size_t buffer_size,
   buffer[n] = '\0';
 }
 
-// static void read_server_message(int sockfd, char *buffer, size_t buffer_size,
-//                                 ssize_t *bytes_received) {
-//   size_t n;
+static void send_message(int sockfd, const char *message,
+                         // cppcheck-suppress constParameterPointer
+                         struct sockaddr_storage *addr, socklen_t addr_len) {
+  ssize_t bytes_sent;
 
-//   memset(buffer, 0, BUFFER_SIZE);
-//   *bytes_received = recvfrom(sockfd, buffer, buffer_size - 1, 0, NULL, NULL);
+  bytes_sent = sendto(sockfd, message, strlen(message) + 1, 0,
+                      (struct sockaddr *)addr, addr_len);
 
-//   if (*bytes_received < 0) {
-//     perror("recvfrom");
-//     close_socket(sockfd);
-//     exit(EXIT_FAILURE);
-//   }
+  if (bytes_sent == -1) {
+    perror("sendto");
+    exit(EXIT_FAILURE);
+  }
+}
 
-//   n = (size_t)*bytes_received;
+static int same_addr(const struct sockaddr_storage *a,
+                     const struct sockaddr_storage *b) {
+  if (a == NULL || b == NULL) {
+    return 0;
+  }
 
-//   if (n >= buffer_size) {
-//     n = buffer_size - 1;
-//   }
+  if (a->ss_family != AF_INET && a->ss_family != AF_INET6) {
+    return 0;
+  }
 
-//   buffer[n] = '\0';
-// }
+  if (b->ss_family != AF_INET && b->ss_family != AF_INET6) {
+    return 0;
+  }
+
+  if (a->ss_family == AF_INET) {
+    const struct sockaddr_in *ia = (const struct sockaddr_in *)a;
+    const struct sockaddr_in *ib = (const struct sockaddr_in *)b;
+
+    return (ia->sin_port == ib->sin_port) &&
+           (ia->sin_addr.s_addr == ib->sin_addr.s_addr);
+  }
+
+  if (a->ss_family == AF_INET6) {
+    const struct sockaddr_in6 *ia6 = (const struct sockaddr_in6 *)a;
+    const struct sockaddr_in6 *ib6 = (const struct sockaddr_in6 *)b;
+
+    return (ia6->sin6_port == ib6->sin6_port) &&
+           (memcmp(&ia6->sin6_addr, &ib6->sin6_addr, sizeof(struct in6_addr)) ==
+            0);
+  }
+
+  return 0;
+}
+
+static void log_init(FILE **log_file, const char *filename) {
+  *log_file = fopen(filename, "ae");
+  if (*log_file == NULL) {
+    perror("fopen");
+    exit(EXIT_FAILURE);
+  }
+}
+
+static void log_message(FILE *log_file, const char *event,
+                        const char *direction, const char *msg) {
+  char timestamp[ACK_SIZE];
+  get_timestamp(timestamp, sizeof(timestamp));
+
+  // log file
+  fprintf(log_file, "%s [%s] (%s): %s\n", timestamp, event, direction, msg);
+  fflush(log_file);
+
+  // stderr output
+  fprintf(stderr, "%s [%s] (%s): %s\n", timestamp, event, direction, msg);
+  fflush(stderr);
+}
+
+static void log_close(FILE *log_file) {
+  if (log_file != NULL) {
+    fclose(log_file);
+  }
+}
+
+static void get_timestamp(char *buf, size_t n) {
+  struct timespec ts;
+  struct tm tm_info;
+
+  clock_gettime(CLOCK_REALTIME, &ts);
+  localtime_r(&ts.tv_sec, &tm_info);
+
+  strftime(buf, n, "%Y-%m-%dT%H:%M:%S", &tm_info);
+}
+
+static int simulate_delay(int denominator, int delay_min, int delay_max,
+                          int delay_prob) {
+  int delay_chance;
+  int delay_range;
+  int delay;
+  int sleep_val;
+
+  delay_chance = return_random(denominator);
+
+  if (delay_chance > delay_prob) {
+    return 0;
+  }
+
+  delay_range = delay_max - delay_min;
+  delay = return_random(delay_range);
+
+  sleep_val = delay + delay_min - 1;
+
+  sleep_milliseconds(sleep_val);
+  return delay + delay_min - 1;
+}
+
+static void sleep_milliseconds(int ms) {
+  if (ms <= 0) {
+    return;
+  }
+
+  struct timespec ts;
+  ts.tv_sec = ms / MILLISECONDS;
+  ts.tv_nsec = (long)(ms % MILLISECONDS) * NANOSECONDS;
+
+  nanosleep(&ts, NULL);
+}
+
+static int simulate_drop(int denominator, int drop_prob) {
+  int drop_chance = return_random(denominator);
+
+  if (drop_chance < 0) {
+    perror("drop_chance");
+    exit(EXIT_FAILURE);
+  }
+
+  if (drop_chance > drop_prob) {
+    return 0;
+  }
+  return 1;
+}
+
+static int return_random(int max) {
+  if (max <= 0) {
+    return -1;
+  }
+
+  return rand() % max + 1;
+}
+
+static int parse_int(const char *binary_name, const char *str,
+                     const char *field) {
+  char *endptr;
+  long value = strtol(str, &endptr, BASE_TEN);
+
+  if (*endptr != '\0') {
+    fprintf(stderr, "%s: invalid integer for %s: '%s'\n", binary_name, field,
+            str);
+    exit(EXIT_FAILURE);
+  }
+
+  return (int)value;
+}
+
+static void close_socket(int sockfd) {
+  if (close(sockfd) == -1) {
+    perror("Error closing socket");
+    exit(EXIT_FAILURE);
+  }
+}
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -720,9 +683,3 @@ static void setup_signal_handler(void) {
 }
 
 #pragma GCC diagnostic pop
-static void close_socket(int sockfd) {
-  if (close(sockfd) == -1) {
-    perror("Error closing socket");
-    exit(EXIT_FAILURE);
-  }
-}

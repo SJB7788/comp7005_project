@@ -556,3 +556,393 @@
 2025-12-02T11:51:51 [SEND]: Sent message to proxy: 3|3
 2025-12-02T11:51:55 [RECEIVE]: Received message from proxy. SEQ: 4, PAYLOAD: crazy
 2025-12-02T11:51:55 [SEND]: Sent message to proxy: 4|4
+2025-12-02T18:41:30 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T18:41:30 [SEND]: Sent message: 0|0
+2025-12-02T18:41:35 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T18:41:35 [SEND]: Sent message: 0|0
+2025-12-02T18:58:01 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: hi
+2025-12-02T18:58:01 [SEND]: Sent message: 1|1
+2025-12-02T18:58:10 [RECEIVE]: Received message: SEQ: 2, PAYLOAD: okay
+2025-12-02T18:58:10 [SEND]: Sent message: 2|2
+2025-12-02T18:58:15 [RECEIVE]: Received message: SEQ: 3, PAYLOAD: and
+2025-12-02T18:58:15 [SEND]: Sent message: 3|3
+2025-12-02T18:58:17 [RECEIVE]: Received message: SEQ: 4, PAYLOAD: wassup
+2025-12-02T18:58:17 [SEND]: Sent message: 4|4
+2025-12-02T18:58:18 [RECEIVE]: Received message: SEQ: 5, PAYLOAD: i am 
+2025-12-02T18:58:18 [SEND]: Sent message: 5|5
+2025-12-02T18:58:20 [RECEIVE]: Received message: SEQ: 6, PAYLOAD: seeing thinsg
+2025-12-02T18:58:20 [SEND]: Sent message: 6|6
+2025-12-02T18:58:21 [RECEIVE]: Received message: SEQ: 7, PAYLOAD: wow
+2025-12-02T18:58:21 [SEND]: Sent message: 7|7
+2025-12-02T18:58:23 [RECEIVE]: Received message: SEQ: 8, PAYLOAD: this actually works
+2025-12-02T18:58:23 [SEND]: Sent message: 8|8
+2025-12-02T18:58:26 [RECEIVE]: Received message: SEQ: 9, PAYLOAD: that is kinda nuts
+2025-12-02T18:58:26 [SEND]: Sent message: 9|9
+2025-12-02T18:58:27 [RECEIVE]: Received message: SEQ: 10, PAYLOAD: DROP
+2025-12-02T18:58:27 [SEND]: Sent message: 10|10
+2025-12-02T18:58:29 [RECEIVE]: Received message: SEQ: 11, PAYLOAD: PLEASE DROP
+2025-12-02T18:58:29 [SEND]: Sent message: 11|11
+2025-12-02T18:58:33 [RECEIVE]: Received message: SEQ: 12, PAYLOAD: I DONT WANT MORE SUCCESSES
+2025-12-02T18:58:33 [SEND]: Sent message: 12|12
+2025-12-02T18:58:39 [RECEIVE]: Received message: SEQ: 13, PAYLOAD: PLEASE
+2025-12-02T18:58:39 [SEND]: Sent message: 13|13
+2025-12-02T18:58:42 [RECEIVE]: Received message: SEQ: 14, PAYLOAD: DAMN
+2025-12-02T18:58:42 [SEND]: Sent message: 14|14
+2025-12-02T18:58:43 [RECEIVE]: Received message: SEQ: 15, PAYLOAD: thats cool
+2025-12-02T18:58:43 [SEND]: Sent message: 15|15
+2025-12-02T19:07:01 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:07:01 [SEND]: Sent message: 0|0
+2025-12-02T19:07:06 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:07:06 [SEND]: Sent message: 0|0
+2025-12-02T19:07:16 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:07:16 [SEND]: Sent message: 0|0
+2025-12-02T19:07:21 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:07:21 [SEND]: Sent message: 0|0
+2025-12-02T19:07:26 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:07:26 [SEND]: Sent message: 0|0
+2025-12-02T19:07:31 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:07:31 [SEND]: Sent message: 0|0
+2025-12-02T19:07:36 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:07:36 [SEND]: Sent message: 0|0
+2025-12-02T19:07:41 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:07:41 [SEND]: Sent message: 0|0
+2025-12-02T19:07:46 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:07:46 [SEND]: Sent message: 0|0
+2025-12-02T19:08:14 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: was
+2025-12-02T19:08:14 [SEND]: Sent message: 0|0
+2025-12-02T19:08:19 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: was
+2025-12-02T19:08:19 [SEND]: Sent message: 0|0
+2025-12-02T19:08:19 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: hi
+2025-12-02T19:08:19 [SEND]: Sent message: 1|1
+2025-12-02T19:08:22 [RECEIVE]: Received message: SEQ: 2, PAYLOAD: okat
+2025-12-02T19:08:22 [SEND]: Sent message: 2|2
+2025-12-02T19:08:28 [RECEIVE]: Received message: SEQ: 3, PAYLOAD: q
+2025-12-02T19:08:28 [SEND]: Sent message: 3|3
+2025-12-02T19:08:28 [RECEIVE]: Received message: SEQ: 4, PAYLOAD: w
+2025-12-02T19:08:28 [SEND]: Sent message: 4|4
+2025-12-02T19:08:34 [RECEIVE]: Received message: SEQ: 4, PAYLOAD: w
+2025-12-02T19:08:34 [SEND]: Sent message: 4|4
+2025-12-02T19:08:34 [RECEIVE]: Received message: SEQ: 5, PAYLOAD: e
+2025-12-02T19:08:34 [SEND]: Sent message: 5|5
+2025-12-02T19:08:39 [RECEIVE]: Received message: SEQ: 5, PAYLOAD: e
+2025-12-02T19:08:39 [SEND]: Sent message: 5|5
+2025-12-02T19:08:39 [RECEIVE]: Received message: SEQ: 6, PAYLOAD: r
+2025-12-02T19:08:39 [SEND]: Sent message: 6|6
+2025-12-02T19:08:39 [RECEIVE]: Received message: SEQ: 7, PAYLOAD: t
+2025-12-02T19:08:39 [SEND]: Sent message: 7|7
+2025-12-02T19:08:39 [RECEIVE]: Received message: SEQ: 8, PAYLOAD: 
+2025-12-02T19:08:39 [SEND]: Sent message: 8|8
+2025-12-02T19:08:39 [RECEIVE]: Received message: SEQ: 9, PAYLOAD: y
+2025-12-02T19:08:39 [SEND]: Sent message: 9|9
+2025-12-02T19:08:39 [RECEIVE]: Received message: SEQ: 10, PAYLOAD: u
+2025-12-02T19:08:39 [SEND]: Sent message: 10|10
+2025-12-02T19:08:39 [RECEIVE]: Received message: SEQ: 11, PAYLOAD: i
+2025-12-02T19:08:39 [SEND]: Sent message: 11|11
+2025-12-02T19:10:26 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T19:10:26 [SEND]: Sent message: 0|0
+2025-12-02T19:10:31 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T19:10:31 [SEND]: Sent message: 0|0
+2025-12-02T19:10:36 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T19:10:36 [SEND]: Sent message: 0|0
+2025-12-02T19:10:41 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T19:10:41 [SEND]: Sent message: 0|0
+2025-12-02T19:10:46 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T19:10:46 [SEND]: Sent message: 0|0
+2025-12-02T19:10:51 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T19:10:51 [SEND]: Sent message: 0|0
+2025-12-02T19:11:23 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: wtf
+2025-12-02T19:11:23 [SEND]: Sent message: 0|0
+2025-12-02T19:11:28 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: wtf
+2025-12-02T19:11:28 [SEND]: Sent message: 0|0
+2025-12-02T19:11:33 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: q
+2025-12-02T19:11:33 [SEND]: Sent message: 1|1
+2025-12-02T19:11:37 [RECEIVE]: Received message: SEQ: 2, PAYLOAD: w
+2025-12-02T19:11:37 [SEND]: Sent message: 2|2
+2025-12-02T19:11:37 [RECEIVE]: Received message: SEQ: 3, PAYLOAD: e
+2025-12-02T19:11:37 [SEND]: Sent message: 3|3
+2025-12-02T19:11:37 [RECEIVE]: Received message: SEQ: 4, PAYLOAD: r
+2025-12-02T19:11:37 [SEND]: Sent message: 4|4
+2025-12-02T19:11:37 [RECEIVE]: Received message: SEQ: 5, PAYLOAD: t
+2025-12-02T19:11:37 [SEND]: Sent message: 5|5
+2025-12-02T19:11:38 [RECEIVE]: Received message: SEQ: 6, PAYLOAD: y
+2025-12-02T19:11:38 [SEND]: Sent message: 6|6
+2025-12-02T19:11:38 [RECEIVE]: Received message: SEQ: 7, PAYLOAD: u
+2025-12-02T19:11:38 [SEND]: Sent message: 7|7
+2025-12-02T19:11:39 [RECEIVE]: Received message: SEQ: 8, PAYLOAD: i
+2025-12-02T19:11:39 [SEND]: Sent message: 8|8
+2025-12-02T19:11:39 [RECEIVE]: Received message: SEQ: 9, PAYLOAD: o
+2025-12-02T19:11:39 [SEND]: Sent message: 9|9
+2025-12-02T19:11:39 [RECEIVE]: Received message: SEQ: 10, PAYLOAD: p
+2025-12-02T19:11:39 [SEND]: Sent message: 10|10
+2025-12-02T19:11:41 [RECEIVE]: Received message: SEQ: 11, PAYLOAD: a
+2025-12-02T19:11:41 [SEND]: Sent message: 11|11
+2025-12-02T19:11:41 [RECEIVE]: Received message: SEQ: 12, PAYLOAD: s
+2025-12-02T19:11:41 [SEND]: Sent message: 12|12
+2025-12-02T19:11:41 [RECEIVE]: Received message: SEQ: 13, PAYLOAD: d
+2025-12-02T19:11:41 [SEND]: Sent message: 13|13
+2025-12-02T19:11:42 [RECEIVE]: Received message: SEQ: 14, PAYLOAD: f
+2025-12-02T19:11:42 [SEND]: Sent message: 14|14
+2025-12-02T19:11:42 [RECEIVE]: Received message: SEQ: 15, PAYLOAD: g
+2025-12-02T19:11:42 [SEND]: Sent message: 15|15
+2025-12-02T19:11:47 [RECEIVE]: Received message: SEQ: 15, PAYLOAD: g
+2025-12-02T19:11:47 [SEND]: Sent message: 15|15
+2025-12-02T19:11:47 [RECEIVE]: Received message: SEQ: 16, PAYLOAD: h
+2025-12-02T19:11:47 [SEND]: Sent message: 16|16
+2025-12-02T19:11:47 [RECEIVE]: Received message: SEQ: 17, PAYLOAD: j
+2025-12-02T19:11:47 [SEND]: Sent message: 17|17
+2025-12-02T19:11:47 [RECEIVE]: Received message: SEQ: 18, PAYLOAD: k
+2025-12-02T19:11:47 [SEND]: Sent message: 18|18
+2025-12-02T19:11:47 [RECEIVE]: Received message: SEQ: 19, PAYLOAD: l
+2025-12-02T19:11:47 [SEND]: Sent message: 19|19
+2025-12-02T19:11:55 [RECEIVE]: Received message: SEQ: 20, PAYLOAD: hol up
+2025-12-02T19:11:55 [SEND]: Sent message: 20|20
+2025-12-02T19:12:02 [RECEIVE]: Received message: SEQ: 21, PAYLOAD: wat
+2025-12-02T19:12:02 [SEND]: Sent message: 21|21
+2025-12-02T19:12:08 [RECEIVE]: Received message: SEQ: 22, PAYLOAD: oka
+2025-12-02T19:12:08 [SEND]: Sent message: 22|22
+2025-12-02T19:12:15 [RECEIVE]: Received message: SEQ: 23, PAYLOAD: a
+2025-12-02T19:12:15 [SEND]: Sent message: 23|23
+2025-12-02T19:12:30 [RECEIVE]: Received message: SEQ: 24, PAYLOAD: testing
+2025-12-02T19:12:30 [SEND]: Sent message: 24|24
+2025-12-02T19:12:32 [RECEIVE]: Received message: SEQ: 25, PAYLOAD: testing
+2025-12-02T19:12:32 [SEND]: Sent message: 25|25
+2025-12-02T19:12:54 [RECEIVE]: Received message: SEQ: 26, PAYLOAD: testing
+2025-12-02T19:12:54 [SEND]: Sent message: 26|26
+2025-12-02T19:12:59 [RECEIVE]: Received message: SEQ: 27, PAYLOAD: a
+2025-12-02T19:12:59 [SEND]: Sent message: 27|27
+2025-12-02T19:13:14 [RECEIVE]: Received message: SEQ: 28, PAYLOAD: okay
+2025-12-02T19:13:14 [SEND]: Sent message: 28|28
+2025-12-02T19:13:16 [RECEIVE]: Received message: SEQ: 29, PAYLOAD: ok
+2025-12-02T19:13:16 [SEND]: Sent message: 29|29
+2025-12-02T19:13:17 [RECEIVE]: Received message: SEQ: 30, PAYLOAD: ok
+2025-12-02T19:13:17 [SEND]: Sent message: 30|30
+2025-12-02T19:13:18 [RECEIVE]: Received message: SEQ: 31, PAYLOAD: ok
+2025-12-02T19:13:18 [SEND]: Sent message: 31|31
+2025-12-02T19:13:19 [RECEIVE]: Received message: SEQ: 32, PAYLOAD: ok
+2025-12-02T19:13:19 [SEND]: Sent message: 32|32
+2025-12-02T19:13:22 [RECEIVE]: Received message: SEQ: 33, PAYLOAD: ok
+2025-12-02T19:13:22 [SEND]: Sent message: 33|33
+2025-12-02T19:13:23 [RECEIVE]: Received message: SEQ: 34, PAYLOAD: ok
+2025-12-02T19:13:23 [SEND]: Sent message: 34|34
+2025-12-02T19:13:24 [RECEIVE]: Received message: SEQ: 35, PAYLOAD: ok
+2025-12-02T19:13:24 [SEND]: Sent message: 35|35
+2025-12-02T19:13:25 [RECEIVE]: Received message: SEQ: 36, PAYLOAD: ok
+2025-12-02T19:13:25 [SEND]: Sent message: 36|36
+2025-12-02T19:13:31 [RECEIVE]: Received message: SEQ: 37, PAYLOAD: ok
+2025-12-02T19:13:31 [SEND]: Sent message: 37|37
+2025-12-02T19:15:10 [RECEIVE]: Received message: SEQ: 38, PAYLOAD: test
+2025-12-02T19:15:10 [SEND]: Sent message: 38|38
+2025-12-02T19:15:18 [RECEIVE]: Received message: SEQ: 39, PAYLOAD: okat
+2025-12-02T19:15:18 [SEND]: Sent message: 39|39
+2025-12-02T19:15:23 [RECEIVE]: Received message: SEQ: 39, PAYLOAD: okat
+2025-12-02T19:15:23 [SEND]: Sent message: 39|39
+2025-12-02T19:15:51 [RECEIVE]: Received message: SEQ: 40, PAYLOAD: t
+2025-12-02T19:15:51 [SEND]: Sent message: 40|40
+2025-12-02T19:15:58 [RECEIVE]: Received message: SEQ: 41, PAYLOAD: t
+2025-12-02T19:15:58 [SEND]: Sent message: 41|41
+2025-12-02T19:17:47 [RECEIVE]: Received message: SEQ: 42, PAYLOAD: okay
+2025-12-02T19:17:47 [SEND]: Sent message: 42|42
+2025-12-02T19:18:04 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: MOVE IT
+2025-12-02T19:18:04 [SEND]: Sent message: 0|0
+2025-12-02T19:18:10 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: MOVE IT
+2025-12-02T19:18:10 [SEND]: Sent message: 0|0
+2025-12-02T19:18:15 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: MOVE IT
+2025-12-02T19:18:15 [SEND]: Sent message: 0|0
+2025-12-02T19:18:20 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: MOVE IT
+2025-12-02T19:18:20 [SEND]: Sent message: 0|0
+2025-12-02T19:18:25 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: MOVE IT
+2025-12-02T19:18:25 [SEND]: Sent message: 0|0
+2025-12-02T19:18:30 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: MOVE IT
+2025-12-02T19:18:30 [SEND]: Sent message: 0|0
+2025-12-02T19:20:15 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: test
+2025-12-02T19:20:15 [SEND]: Sent message: 0|0
+2025-12-02T19:20:20 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: test
+2025-12-02T19:20:20 [SEND]: Sent message: 0|0
+2025-12-02T19:20:40 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:20:40 [SEND]: Sent message: 0|0
+2025-12-02T19:20:45 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:20:45 [SEND]: Sent message: 0|0
+2025-12-02T19:20:50 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:20:50 [SEND]: Sent message: 0|0
+2025-12-02T19:20:55 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:20:55 [SEND]: Sent message: 0|0
+2025-12-02T19:21:00 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:21:00 [SEND]: Sent message: 0|0
+2025-12-02T19:21:05 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:21:05 [SEND]: Sent message: 0|0
+2025-12-02T19:22:04 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: what
+2025-12-02T19:22:04 [SEND]: Sent message: 0|0
+2025-12-02T19:22:09 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: what
+2025-12-02T19:22:09 [SEND]: Sent message: 0|0
+2025-12-02T19:22:17 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: lol
+2025-12-02T19:22:17 [SEND]: Sent message: 1|1
+2025-12-02T19:29:51 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T19:29:51 [SEND]: Sent message: 0|0
+2025-12-02T19:29:56 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T19:29:56 [SEND]: Sent message: 0|0
+2025-12-02T19:31:47 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T19:31:47 [SEND]: Sent message: 0|0
+2025-12-02T19:31:57 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T19:31:57 [SEND]: Sent message: 0|0
+2025-12-02T19:32:34 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T19:32:34 [SEND]: Sent message: 0|0
+2025-12-02T19:32:39 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T19:32:39 [SEND]: Sent message: 0|0
+2025-12-02T19:54:19 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:54:19 [SEND]: Sent message: 0|0
+2025-12-02T19:54:24 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:54:24 [SEND]: Sent message: 0|0
+2025-12-02T19:54:29 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:54:29 [SEND]: Sent message: 0|0
+2025-12-02T19:54:35 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:54:35 [SEND]: Sent message: 0|0
+2025-12-02T19:54:39 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:54:39 [SEND]: Sent message: 0|0
+2025-12-02T19:54:44 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:54:44 [SEND]: Sent message: 0|0
+2025-12-02T19:56:10 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:56:10 [SEND]: Sent message: 0|0
+2025-12-02T19:56:15 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T19:56:15 [SEND]: Sent message: 0|0
+2025-12-02T19:56:19 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: nice
+2025-12-02T19:56:19 [SEND]: Sent message: 1|1
+2025-12-02T20:02:40 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T20:02:40 [SEND]: Sent message: 0|0
+2025-12-02T20:02:45 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T20:02:45 [SEND]: Sent message: 0|0
+2025-12-02T20:03:36 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: hello
+2025-12-02T20:03:36 [SEND]: Sent message: 1|1
+2025-12-02T20:03:41 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: hello
+2025-12-02T20:03:41 [SEND]: Sent message: 1|1
+2025-12-02T20:05:46 [RECEIVE]: Received message: SEQ: 2, PAYLOAD: hi
+2025-12-02T20:05:46 [SEND]: Sent message: 2|2
+2025-12-02T20:05:48 [RECEIVE]: Received message: SEQ: 3, PAYLOAD: wassup
+2025-12-02T20:05:48 [SEND]: Sent message: 3|3
+2025-12-02T20:05:50 [RECEIVE]: Received message: SEQ: 4, PAYLOAD: wmh
+2025-12-02T20:05:50 [SEND]: Sent message: 4|4
+2025-12-02T20:05:55 [RECEIVE]: Received message: SEQ: 4, PAYLOAD: wmh
+2025-12-02T20:05:55 [SEND]: Sent message: 4|4
+2025-12-02T20:21:58 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T20:21:58 [SEND]: Sent message: 0|0
+2025-12-02T20:22:03 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T20:22:03 [SEND]: Sent message: 0|0
+2025-12-02T20:26:40 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T20:26:40 [SEND]: Sent message: 0|0
+2025-12-02T20:26:55 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T20:26:55 [SEND]: Sent message: 0|0
+2025-12-02T20:39:31 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T20:39:31 [SEND]: Sent message: 0|0
+2025-12-02T20:39:36 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T20:39:36 [SEND]: Sent message: 0|0
+2025-12-02T20:44:59 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: hi
+2025-12-02T20:44:59 [SEND]: Sent message: 1|1
+2025-12-02T20:45:13 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T20:45:13 [SEND]: Sent message: 0|0
+2025-12-02T20:45:18 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T20:45:18 [SEND]: Sent message: 0|0
+2025-12-02T20:51:22 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T20:51:22 [SEND]: Sent message: 0|0
+2025-12-02T20:51:27 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T20:51:27 [SEND]: Sent message: 0|0
+2025-12-02T20:52:46 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: no drop no delay
+2025-12-02T20:52:46 [SEND]: Sent message: 0|0
+2025-12-02T20:52:51 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: no drop no delay
+2025-12-02T20:52:51 [SEND]: Sent message: 0|0
+2025-12-02T20:52:53 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: hello
+2025-12-02T20:52:53 [SEND]: Sent message: 1|1
+2025-12-02T20:52:54 [RECEIVE]: Received message: SEQ: 2, PAYLOAD: hi
+2025-12-02T20:52:54 [SEND]: Sent message: 2|2
+2025-12-02T20:53:14 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T20:53:14 [SEND]: Sent message: 0|0
+2025-12-02T20:53:35 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T20:53:35 [SEND]: Sent message: 0|0
+2025-12-02T20:53:40 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: hi
+2025-12-02T20:53:40 [SEND]: Sent message: 1|1
+2025-12-02T20:53:41 [RECEIVE]: Received message: SEQ: 2, PAYLOAD: this
+2025-12-02T20:53:41 [SEND]: Sent message: 2|2
+2025-12-02T20:53:42 [RECEIVE]: Received message: SEQ: 3, PAYLOAD: works
+2025-12-02T20:53:42 [SEND]: Sent message: 3|3
+2025-12-02T20:53:43 [RECEIVE]: Received message: SEQ: 4, PAYLOAD: with
+2025-12-02T20:53:43 [SEND]: Sent message: 4|4
+2025-12-02T20:53:43 [RECEIVE]: Received message: SEQ: 5, PAYLOAD: no
+2025-12-02T20:53:43 [SEND]: Sent message: 5|5
+2025-12-02T20:53:44 [RECEIVE]: Received message: SEQ: 6, PAYLOAD: delay
+2025-12-02T20:53:44 [SEND]: Sent message: 6|6
+2025-12-02T20:54:10 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T20:54:10 [SEND]: Sent message: 0|0
+2025-12-02T20:54:15 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T20:54:15 [SEND]: Sent message: 0|0
+2025-12-02T20:54:20 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T20:54:20 [SEND]: Sent message: 0|0
+2025-12-02T20:55:01 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T20:55:01 [SEND]: Sent message: 0|0
+2025-12-02T20:55:06 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T20:55:06 [SEND]: Sent message: 0|0
+2025-12-02T20:56:05 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: timeout delay
+2025-12-02T20:56:05 [SEND]: Sent message: 0|0
+2025-12-02T20:56:06 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: timeout delay
+2025-12-02T20:56:06 [SEND]: Sent message: 0|0
+2025-12-02T20:56:10 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: delay
+2025-12-02T20:56:10 [SEND]: Sent message: 1|1
+2025-12-02T20:56:16 [RECEIVE]: Received message: SEQ: 2, PAYLOAD: delay
+2025-12-02T20:56:16 [SEND]: Sent message: 2|2
+2025-12-02T20:56:56 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T20:56:56 [SEND]: Sent message: 0|0
+2025-12-02T20:56:57 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hi
+2025-12-02T20:56:57 [SEND]: Sent message: 0|0
+2025-12-02T20:57:06 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: a
+2025-12-02T20:57:06 [SEND]: Sent message: 0|0
+2025-12-02T20:57:26 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: hello
+2025-12-02T20:57:26 [SEND]: Sent message: 0|0
+2025-12-02T20:57:27 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: this
+2025-12-02T20:57:27 [SEND]: Sent message: 1|1
+2025-12-02T20:57:28 [RECEIVE]: Received message: SEQ: 2, PAYLOAD: works
+2025-12-02T20:57:28 [SEND]: Sent message: 2|2
+2025-12-02T20:57:28 [RECEIVE]: Received message: SEQ: 3, PAYLOAD: pre
+2025-12-02T20:57:28 [SEND]: Sent message: 3|3
+2025-12-02T20:57:29 [RECEIVE]: Received message: SEQ: 4, PAYLOAD: well
+2025-12-02T20:57:29 [SEND]: Sent message: 4|4
+2025-12-02T20:57:59 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: delay
+2025-12-02T20:57:59 [SEND]: Sent message: 0|0
+2025-12-02T20:58:00 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: delay
+2025-12-02T20:58:00 [SEND]: Sent message: 0|0
+2025-12-02T20:58:02 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: in
+2025-12-02T20:58:02 [SEND]: Sent message: 1|1
+2025-12-02T20:58:05 [RECEIVE]: Received message: SEQ: 2, PAYLOAD: server
+2025-12-02T20:58:05 [SEND]: Sent message: 2|2
+2025-12-02T20:58:06 [RECEIVE]: Received message: SEQ: 2, PAYLOAD: server
+2025-12-02T20:58:06 [SEND]: Sent message: 2|2
+2025-12-02T20:58:31 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: client
+2025-12-02T20:58:31 [SEND]: Sent message: 0|0
+2025-12-02T20:58:33 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: client
+2025-12-02T20:58:33 [SEND]: Sent message: 0|0
+2025-12-02T20:58:35 [RECEIVE]: Received message: SEQ: 1, PAYLOAD: ddrops
+2025-12-02T20:58:35 [SEND]: Sent message: 1|1
+2025-12-02T20:58:41 [RECEIVE]: Received message: SEQ: 2, PAYLOAD: a
+2025-12-02T20:58:41 [SEND]: Sent message: 2|2
+2025-12-02T20:58:43 [RECEIVE]: Received message: SEQ: 3, PAYLOAD: e
+2025-12-02T20:58:43 [SEND]: Sent message: 3|3
+2025-12-02T20:59:34 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: timeout
+2025-12-02T20:59:34 [SEND]: Sent message: 0|0
+2025-12-02T20:59:36 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: timeout
+2025-12-02T20:59:36 [SEND]: Sent message: 0|0
+2025-12-02T20:59:39 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: timeout
+2025-12-02T20:59:39 [SEND]: Sent message: 0|0
+2025-12-02T20:59:42 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: timeout
+2025-12-02T20:59:42 [SEND]: Sent message: 0|0
+2025-12-02T20:59:44 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: timeout
+2025-12-02T20:59:44 [SEND]: Sent message: 0|0
+2025-12-02T20:59:46 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: timeout
+2025-12-02T20:59:46 [SEND]: Sent message: 0|0
+2025-12-02T20:59:49 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: delay
+2025-12-02T20:59:49 [SEND]: Sent message: 0|0
+2025-12-02T20:59:52 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: delay
+2025-12-02T20:59:52 [SEND]: Sent message: 0|0
+2025-12-02T20:59:54 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: delay
+2025-12-02T20:59:54 [SEND]: Sent message: 0|0
+2025-12-02T20:59:56 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: delay
+2025-12-02T20:59:56 [SEND]: Sent message: 0|0
+2025-12-02T20:59:58 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: delay
+2025-12-02T20:59:58 [SEND]: Sent message: 0|0
+2025-12-02T21:00:01 [RECEIVE]: Received message: SEQ: 0, PAYLOAD: delay
+2025-12-02T21:00:01 [SEND]: Sent message: 0|0
